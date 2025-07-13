@@ -1291,7 +1291,7 @@ def main():
                 st.session_state.calculated_results = None
                 st.rerun()
             
-            with col2:
+    with col2:
         # Show sticky calculator results if available
         if st.session_state.calculated_results:
             results = st.session_state.calculated_results
