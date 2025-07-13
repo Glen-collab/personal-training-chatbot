@@ -339,17 +339,17 @@ def show_calorie_calculator():
     
     with col1:
         st.markdown("#### 📏 **Physical Stats**")
-        weight = st.number_input("Weight (pounds)", min_value=80, max_value=400, value=180, step=1)
+        weight = st.number_input("Weight (pounds)", min_value=80, max_value=400, value=180, step=5, format="%d")
         
         # Separate feet and inches for height
-        height_ft = st.number_input("Height - Feet", min_value=4, max_value=7, value=5, step=1)
-        height_in = st.number_input("Height - Inches", min_value=0, max_value=11, value=10, step=1)
+        height_ft = st.number_input("Height - Feet", min_value=4, max_value=7, value=5, step=1, format="%d")
+        height_in = st.number_input("Height - Inches", min_value=0, max_value=11, value=10, step=1, format="%d")
         
         st.info(f"Your height: {height_ft}'{height_in}\"")
         
     with col2:
         st.markdown("#### 👤 **Personal Info**")
-        age = st.number_input("Age", min_value=18, max_value=80, value=35, step=1)
+        age = st.number_input("Age", min_value=18, max_value=80, value=35, step=1, format="%d")
         gender = st.selectbox("Gender", ["Male", "Female"])
         
         st.markdown("#### 🏃 **Activity Level**")
@@ -849,6 +849,11 @@ def main():
                 with st.spinner("🧠 Glen is thinking..."):
                     results = search_all_knowledge_bases(prompt, data)
                     response = format_glen_response(results, prompt)
+                    
+                    # Check if response mentions calculator and set flag
+                    if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                        st.session_state.show_calculator = True
+                    
                     st.markdown(response)
             
             st.session_state.messages.append({"role": "assistant", "content": response})
@@ -869,6 +874,11 @@ def main():
                 st.session_state.messages.append({"role": "user", "content": query})
                 results = search_all_knowledge_bases(query, data)
                 response = format_glen_response(results, query)
+                
+                # Check if response mentions calculator and set flag
+                if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                    st.session_state.show_calculator = True
+                
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
     
@@ -890,6 +900,11 @@ def main():
             st.session_state.messages.append({"role": "user", "content": question})
             results = search_all_knowledge_bases(question, data)
             response = format_glen_response(results, question)
+            
+            # Check if response mentions calculator and set flag
+            if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                st.session_state.show_calculator = True
+            
             st.session_state.messages.append({"role": "assistant", "content": response})
             st.rerun()
 
