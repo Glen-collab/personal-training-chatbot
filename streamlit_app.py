@@ -636,19 +636,31 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
     return None  # No quick answer found
 
 def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
-    """Search through ALL knowledge bases for relevant content with smart response tracking"""
+    """Search through ALL knowledge bases with improved keyword matching and response tracking"""
     if not data:
         return []
     
     query_lower = query.lower()
     all_results = []
     
-    # Check if this is a motivation/mentor related query
-    motivation_keywords = ['motivation', 'motivate', 'inspire', 'mentor', 'story', 'background', 'journey', 'experience']
-    is_motivation_query = any(keyword in query_lower for keyword in motivation_keywords)
+    # Better keyword detection for specific topics
+    motivation_keywords = ['motivation', 'motivate', 'inspire', 'mentor', 'who is your motivation', 'who motivates you', 'inspirational', 'role model']
+    age_keywords = ['age', 'old', 'older', 'aging', 'what age', 'how old', 'getting older', 'metabolism', 'slow metabolism']
+    personal_keywords = ['you', 'your', 'yourself', 'tell me about', 'background', 'story', 'personal', 'who are you']
     
-    # Create a unique topic key for tracking
-    topic_key = query_lower.strip()
+    is_motivation_query = any(keyword in query_lower for keyword in motivation_keywords)
+    is_age_query = any(keyword in query_lower for keyword in age_keywords)
+    is_personal_query = any(keyword in query_lower for keyword in personal_keywords)
+    
+    # Create a more specific topic key
+    if is_motivation_query:
+        topic_key = "motivation_mentors"
+    elif is_age_query:
+        topic_key = "age_metabolism"  
+    elif is_personal_query:
+        topic_key = "personal_glen"
+    else:
+        topic_key = query_lower.strip()
     
     # Search through all book categories
     for book_category, book_data in data.items():
@@ -667,9 +679,18 @@ def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[st
             tags = section_data.get('tags', [])
             keywords = section_data.get('keywords', [])
             
-            # Check for tag and keyword matches
+            # Enhanced matching logic
             tag_match = any(tag.lower() in query_lower or query_lower in tag.lower() for tag in tags)
             keyword_match = any(keyword.lower() in query_lower or query_lower in keyword.lower() for keyword in keywords)
+            
+            # Special handling for specific query types
+            section_match = False
+            if is_motivation_query and section_name == 'personal_journey_lessons':
+                section_match = True
+            elif is_age_query and section_name == 'age_and_metabolism':
+                section_match = True
+            elif is_personal_query and section_name == 'personal_glen_stories':
+                section_match = True
             
             # Search through content items
             content_items = section_data.get('content', [])
@@ -677,20 +698,26 @@ def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[st
                 topic = item.get('topic', '')
                 response = item.get('response', '')
                 
-                # Calculate relevance
+                # Calculate relevance with better scoring
                 topic_match = query_lower in topic.lower() or any(word in topic.lower() for word in query_lower.split())
                 response_match = query_lower in response.lower() or any(word in response.lower() for word in query_lower.split())
                 
-                if tag_match or keyword_match or topic_match or response_match:
+                relevance_score = calculate_relevance(query_lower, topic, response, tags, keywords)
+                
+                # Boost relevance for section matches
+                if section_match:
+                    relevance_score += 20
+                
+                if tag_match or keyword_match or topic_match or response_match or section_match:
                     # Create unique identifier for this response
-                    response_id = f"{section_name}_{topic}_{response[:50]}"
+                    response_id = f"{section_name}_{topic.replace(' ', '_')}"
                     
                     all_results.append({
                         'book_category': book_category.replace('_book_data', '').replace('_', ' ').title(),
                         'section': section_name.replace('_', ' ').title(),
                         'topic': topic,
                         'response': response,
-                        'relevance_score': calculate_relevance(query_lower, topic, response, tags, keywords),
+                        'relevance_score': relevance_score,
                         'is_personal_story': section_name == 'personal_journey_lessons',
                         'response_id': response_id,
                         'topic_key': topic_key
@@ -699,36 +726,33 @@ def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[st
     # Sort by relevance
     all_results.sort(key=lambda x: x['relevance_score'], reverse=True)
     
-    # Filter out already used responses for this topic
-    if topic_key not in st.session_state.exhausted_topics:
-        unused_results = [r for r in all_results if r['response_id'] not in st.session_state.used_responses]
-        
-        if unused_results:
-            # Use unused results
-            results = unused_results
-        else:
-            # All responses used for this topic - mark as exhausted
-            st.session_state.exhausted_topics.add(topic_key)
-            results = []
+    # Smart response filtering based on session state
+    topic_responses_key = f"used_responses_{topic_key}"
+    if topic_responses_key not in st.session_state:
+        st.session_state[topic_responses_key] = set()
+    
+    # Filter out already used responses for this specific topic
+    unused_results = [r for r in all_results if r['response_id'] not in st.session_state[topic_responses_key]]
+    
+    if unused_results:
+        results = unused_results
     else:
-        # Topic exhausted - return empty to trigger special message
+        # All responses used for this topic - mark as exhausted
+        if topic_key not in st.session_state.exhausted_topics:
+            st.session_state.exhausted_topics.add(topic_key)
         results = []
     
-    # If this is a motivation query and we have results, randomize personal stories
+    # Randomize personal stories for motivation queries
     if is_motivation_query and results:
-        personal_stories = [r for r in results if r.get('is_personal_story', False)]
-        other_results = [r for r in results if not r.get('is_personal_story', False)]
-        
-        if personal_stories:
-            import random
-            random.shuffle(personal_stories)
-            results = personal_stories + other_results
+        import random
+        random.shuffle(results)
     
-    # Track used responses
-    for result in results[:5]:
-        st.session_state.used_responses.add(result['response_id'])
+    # Track the responses we're about to return
+    final_results = results[:5]
+    for result in final_results:
+        st.session_state[topic_responses_key].add(result['response_id'])
     
-    return results[:5]
+    return final_results
 
 def calculate_relevance(query: str, topic: str, response: str, tags: List[str], keywords: List[str]) -> float:
     """Enhanced relevance calculation"""
