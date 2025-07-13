@@ -740,6 +740,10 @@ def main():
     if categories:
         st.success(f"🧠 **Glen Intelligence Active:** {', '.join(categories)}")
     
+    # Initialize session state early
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    
     # Sidebar with enhanced program info
     with st.sidebar:
         st.markdown("## 🏋️ About Glen")
@@ -780,7 +784,7 @@ def main():
     with col1:
         # Show calorie calculator if calories mentioned in recent messages
         show_calculator = False
-        if st.session_state.messages:
+        if st.session_state.messages:  # This is now safe since we initialized it above
             recent_messages = st.session_state.messages[-2:]  # Check last 2 messages
             for msg in recent_messages:
                 if any(word in msg["content"].lower() for word in ["calories", "calorie", "bmr", "tdee", "how much eat", "how many eat"]):
@@ -790,10 +794,6 @@ def main():
         if show_calculator:
             show_calorie_calculator()
             st.markdown("---")
-        
-        # Chat interface
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
         
         # Display chat history
         for message in st.session_state.messages:
