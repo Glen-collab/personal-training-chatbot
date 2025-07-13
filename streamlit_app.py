@@ -767,24 +767,24 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
         water_answer = """**My simple hydration rule: At least 1 gallon of water daily.**
 
 **Easy to remember:**
-• **1 gallon = 128 ounces = 16 cups**
-• **Or aim for 8-10 glasses of 16oz each**
-• **Start with 16-20oz when you wake up**
+- **1 gallon = 128 ounces = 16 cups**
+- **Or aim for 8-10 glasses of 16oz each**
+- **Start with 16-20oz when you wake up**
 
 **Simple hydration tips:**
-• **Drink before you're thirsty**
-• **More if you're active** or it's hot outside
-• **Light yellow urine = you're good**
-• **Clear urine = you're drinking too much**
+- **Drink before you're thirsty**
+- **More if you're active** or it's hot outside
+- **Light yellow urine = you're good**
+- **Clear urine = you're drinking too much**
 
 **What counts:**
-• Plain water (best choice)
-• Herbal tea
-• Coffee (in moderation)
+- Plain water (best choice)
+- Herbal tea
+- Coffee (in moderation)
 
 **What doesn't help:**
-• Alcohol (actually dehydrates you)
-• High-sugar drinks
+- Alcohol (actually dehydrates you)
+- High-sugar drinks
 
 **Glen's reality check:** Don't overthink it. A gallon sounds like a lot, but spread it throughout the day and you'll feel amazing!
 
@@ -797,20 +797,20 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
         exercise_answer = """**My training philosophy: 3-4 days per week, consistently.**
 
 **For beginners:**
-• **3 days/week** - Perfect starting point
-• **Every other day** - Allows recovery
-• **Full body workouts** - Hit everything
+- **3 days/week** - Perfect starting point
+- **Every other day** - Allows recovery
+- **Full body workouts** - Hit everything
 
 **For experienced:**
-• **4-5 days/week** - Upper/lower splits work great
-• **Listen to your body** - Recovery is when you grow
-• **Quality over quantity** - 45 minutes beats 2 hours
+- **4-5 days/week** - Upper/lower splits work great
+- **Listen to your body** - Recovery is when you grow
+- **Quality over quantity** - 45 minutes beats 2 hours
 
 **What matters most:**
-• **Show up consistently** (I train at 3:30am!)
-• **Progressive overload** - Gradually increase difficulty
-• **Compound movements** - Squats, deadlifts, rows
-• **Find exercises you enjoy** - You'll stick with them
+- **Show up consistently** (I train at 3:30am!)
+- **Progressive overload** - Gradually increase difficulty
+- **Compound movements** - Squats, deadlifts, rows
+- **Find exercises you enjoy** - You'll stick with them
 
 **My reality check:** The best workout is the one you'll actually do. Start where you are, be consistent, and build from there.
 
@@ -823,22 +823,22 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
         weightloss_answer = """**Realistic weight loss: 1-2 pounds per week.**
 
 **My timeline expectations:**
-• **Week 1-2:** 3-5 pounds (mostly water weight)
-• **Week 3-12:** 1-2 pounds consistently
-• **12 weeks total:** 15-25 pounds realistically
+- **Week 1-2:** 3-5 pounds (mostly water weight)
+- **Week 3-12:** 1-2 pounds consistently
+- **12 weeks total:** 15-25 pounds realistically
 
 **What affects your rate:**
-• **Starting weight** - Heavier people lose faster initially
-• **Age and gender** - Men typically lose faster
-• **Activity level** - More movement = faster results
-• **Consistency** - This is the biggest factor
+- **Starting weight** - Heavier people lose faster initially
+- **Age and gender** - Men typically lose faster
+- **Activity level** - More movement = faster results
+- **Consistency** - This is the biggest factor
 
 **Glen's reality check:**
 Don't chase the scale daily. Focus on:
-• **How your clothes fit**
-• **Energy levels**
-• **Strength improvements**
-• **Progress photos**
+- **How your clothes fit**
+- **Energy levels**
+- **Strength improvements**
+- **Progress photos**
 
 **Remember:** You didn't gain it overnight, you won't lose it overnight. But stick with my system for 12 weeks and you'll be amazed at the transformation!
 
@@ -851,22 +851,22 @@ Don't chase the scale daily. Focus on:
         mealtiming_answer = """**My meal timing and planning approach: Eat every 3-4 hours with strategic planning.**
 
 **Simple weekly schedule that works:**
-• **Breakfast:** Within 1 hour of waking (7-8am)
-• **Lunch:** 4-5 hours later (12-1pm)
-• **Dinner:** 4-5 hours after lunch (5-6pm)
-• **Snacks:** Protein-based between meals if needed
+- **Breakfast:** Within 1 hour of waking (7-8am)
+- **Lunch:** 4-5 hours later (12-1pm)
+- **Dinner:** 4-5 hours after lunch (5-6pm)
+- **Snacks:** Protein-based between meals if needed
 
 **Weekly meal planning strategy:**
-• **Sunday prep:** Plan and prep for the entire week
-• **Batch cook proteins:** Chicken, turkey, eggs for multiple meals
-• **Pre-cut vegetables:** Ready to grab throughout the week
-• **Plan around your schedule:** Know your busy days ahead of time
+- **Sunday prep:** Plan and prep for the entire week
+- **Batch cook proteins:** Chicken, turkey, eggs for multiple meals
+- **Pre-cut vegetables:** Ready to grab throughout the week
+- **Plan around your schedule:** Know your busy days ahead of time
 
 **What matters most:**
-• **Protein at every meal** - Non-negotiable foundation
-• **Don't skip meals** - Leads to overeating and poor choices later
-• **Last meal 2-3 hours before bed** - Better sleep and recovery
-• **Consistency over perfection** - Same eating windows daily
+- **Protein at every meal** - Non-negotiable foundation
+- **Don't skip meals** - Leads to overeating and poor choices later
+- **Last meal 2-3 hours before bed** - Better sleep and recovery
+- **Consistency over perfection** - Same eating windows daily
 
 **My personal approach:**
 I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevents those blood sugar crashes that lead to grabbing whatever's convenient (usually junk).
