@@ -931,23 +931,26 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     if quick_answer:
         return quick_answer
     
-    # If no quick answer, proceed with knowledge base search results
-    if not results:
-        # Check if this topic has been exhausted
-        topic_key = query.lower().strip()
-        if topic_key in st.session_state.exhausted_topics:
-            # Topic exhausted - give Glen's "enough already" message
-            exhausted_responses = [
-                "Alright, alright! I think you've gotten all my wisdom on this topic. Time to shit or get off the pot - pick a different question or actually DO something with what I've told you!",
-                "Hey, we've covered this ground pretty thoroughly! How about we talk about something else, or better yet, go apply what you've learned? Action beats analysis paralysis every time!",
-                "I've given you everything I've got on this one! Time to stop clicking buttons and start lifting weights. What else can I help you with?",
-                "You've officially exhausted my knowledge bank on this topic! That means it's time to stop researching and start doing. What's your next move going to be?",
-                "Okay, you've definitely gotten your money's worth on this subject! Time to take action instead of asking the same question fifty different ways. What else is on your mind?"
-            ]
-            
-            import random
-            return f"{random.choice(exhausted_responses)}\n\n**Let me ask you this:** What's holding you back from actually implementing what you've learned? I've got strategies to get you moving!"
+    # Check if topic is exhausted
+    query_lower = query.lower()
+    intent = analyze_query_intent(query)
+    topic_key = intent["type"]
+    
+    if topic_key in st.session_state.exhausted_topics:
+        # Topic exhausted - give Glen's "enough already" message
+        exhausted_responses = [
+            "Alright, alright! I think you've gotten all my wisdom on this topic. Time to shit or get off the pot - pick a different question or actually DO something with what I've told you!",
+            "Hey, we've covered this ground pretty thoroughly! How about we talk about something else, or better yet, go apply what you've learned? Action beats analysis paralysis every time!",
+            "I've given you everything I've got on this one! Time to stop clicking buttons and start lifting weights. What else can I help you with?",
+            "You've officially exhausted my knowledge bank on this topic! That means it's time to stop researching and start doing. What's your next move going to be?",
+            "Okay, you've definitely gotten your money's worth on this subject! Time to take action instead of asking the same question fifty different ways. What else is on your mind?"
+        ]
         
+        import random
+        return f"{random.choice(exhausted_responses)}\n\n**Let me ask you this:** What's holding you back from actually implementing what you've learned? I've got strategies to get you moving!"
+    
+    # If no results, proceed with encouraging response
+    if not results:
         # Standard "let's tackle this" response for new topics
         encouraging_responses = [
             "Let's tackle this together! Even if that specific topic isn't in my current materials, I've helped thousands of people with similar challenges.",
@@ -992,7 +995,7 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
         
         return response
     
-    # Start with a personal greeting
+    # We have results - format them properly with rotating openings
     personal_openings = [
         "In my experience working with thousands of clients...",
         "From my 25+ years in this field, here's what I know...",
@@ -1003,19 +1006,29 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     
     response = f"**{random.choice(personal_openings)}**\n\n"
     
-    # Add the main content
+    # Add the MAIN content - this should change each time
     main_result = results[0]
     enhanced_response = add_glen_personality(main_result['response'])
     
+    # Just show the main topic and response - no extra sections that stay the same
     response += f"### 🎯 {main_result['topic']}\n\n{enhanced_response}\n\n"
     
-    # Add related insights if available
+    # Only add related insights if we have multiple DIFFERENT results
     if len(results) > 1:
-        response += "### 📌 Related Insights:\n\n"
-        for result in results[1:3]:  # Show up to 2 more related results
-            category_emoji = "🧠" if "psychology" in result['book_category'].lower() else "💪" if "fitness" in result['book_category'].lower() else "🥗"
-            enhanced_related = add_glen_personality(result['response'])
-            response += f"**{category_emoji} {result['topic']}**\n\n{enhanced_related}\n\n"
+        # Check if the additional results are actually different
+        different_results = []
+        main_topic = main_result['topic']
+        for result in results[1:3]:
+            if result['topic'] != main_topic and result['response'] != main_result['response']:
+                different_results.append(result)
+        
+        # Only show related insights if we have genuinely different content
+        if different_results:
+            response += "### 📌 Related Insights:\n\n"
+            for result in different_results:
+                category_emoji = "🧠" if "personal_journey" in result.get('section', '').lower() else "💪" if "training" in result.get('section', '').lower() else "🥗"
+                enhanced_related = add_glen_personality(result['response'])
+                response += f"**{category_emoji} {result['topic']}**\n\n{enhanced_related}\n\n"
     
     # Add personal signature
     signatures = [
