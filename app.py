@@ -517,17 +517,17 @@ def get_quick_answer(query: str) -> str:
 • **Vegetables**: 5-10g per cup (micronutrients, low calorie)
 • **Fruit**: 15-20g per piece (natural sugars, vitamins)
 
-**My experience:** After 25+ years, I’ve seen clients thrive on this carb range. It’s enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don’t fall for it!
+**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
 
 **Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
 
-**Let me ask you:** Are you struggling with energy crashes, or is carb confusion (what to eat, when) your biggest issue? I’ve got strategies for both!
+**Let me ask you:** Are you struggling with energy crashes, or is carb confusion (what to eat, when) your biggest issue? I've got strategies for both!
 
 *Run the calorie calculator again for updated numbers if your weight or activity changes!*"""
         else:
             # Fallback if no calculator results
             st.session_state.show_calculator = True
-            return """**Carbs depend on your body and goals, so let’s get specific!**
+            return """**Carbs depend on your body and goals, so let's get specific!**
 
 **My general rule:** Aim for 1-1.5g carbs per pound of body weight daily.
 • **Example**: 180 lbs = 180-270g carbs
@@ -545,232 +545,16 @@ def get_quick_answer(query: str) -> str:
 • Vegetables like broccoli, spinach (low-calorie, nutrient-dense).
 • Fruits like bananas, apples (natural sugars).
 
-**Glen’s take:** I’ve coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters—eat most carbs around workouts.
+**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters—eat most carbs around workouts.
 
-**Next step:** Use my **Calorie Calculator** below to get your exact carb target based on your weight and activity level. It’ll give you a precise number!
+**Next step:** Use my **Calorie Calculator** below to get your exact carb target based on your weight and activity level. It'll give you a precise number!
 
-**Quick question:** Are you cutting carbs too low and feeling tired, or overwhelmed by carb choices? Let me know what’s tripping you up!"""
+**Quick question:** Are you cutting carbs too low and feeling tired, or overwhelmed by carb choices? Let me know what's tripping you up!"""
 
     # Calorie/eating questions - broader detection
     if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "how much should i eat", "what should i eat", "bmr", "tdee", "how much food"]):
         # Set a flag to show calculator
         st.session_state.show_calculator = True
-        return """**Let me give you YOUR exact calorie numbers!**
-
-Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Check out my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
-
-**My quick guidelines while you calculate:**
-• **Men:** Usually 2,200-2,800 calories for weight loss
-• **Women:** Usually 1,800-2,200 calories for weight loss  
-• **Protein:** Always 1g per pound bodyweight
-
-**But your EXACT numbers matter more than averages!**
-
-Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for a complete meal plan built around your specific calorie target.
-
-*After 25+ years of coaching, I've learned that personalized numbers get personalized results!*
-
-**👇 Use the calculator below to get your exact numbers! 👇**
-
-**One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I've got targeted solutions for real-life obstacles!"""
-
-# Protein questions
-if any(word in query_lower for word in ["protein", "how much protein", "best protein", "high protein", "what protein", "good protein"]):
-    if not st.session_state.get("protein_strikes"):
-        st.session_state["protein_strikes"] = 0
-
-    responses = [
-        """**My protein rule is simple: 1g per pound of body weight.**  
-That means if you weigh 180 lbs → you need about **180g protein/day**.
-
-**Top protein sources I recommend:**  
-• Chicken breast (25g per 4oz)  
-• Greek yogurt (15–20g per cup)  
-• Protein powder (20–30g per scoop)  
-• Eggs (6g each)  
-• Ground turkey (22g per 4oz)  
-• Cottage cheese, tuna, lean beef, shrimp — take your pick.
-
-**Why it matters:**  
-• Builds and maintains lean muscle  
-• Keeps you full  
-• Boosts your metabolism  
-• Supports recovery
-
-**Glen’s personal take:** I rotate between grilled chicken, 93% lean ground turkey, protein shakes, and eggs. Simple, clean, and works like a charm.
-
-Let me ask — do you already eat any of those, or do we need to customize based on your preferences?""",
-
-        """Got it — not a fan of chicken or turkey? Totally fine.  
-Let’s try some alternatives:
-
-• Greek yogurt (plain or flavored)  
-• Whey or plant-based protein shakes  
-• Lean beef (90%+ lean)  
-• Eggs and egg whites  
-• Seafood — salmon, tuna, shrimp  
-• Tempeh or tofu if you’re plant-based
-
-Protein isn’t one-size-fits-all. We’ve got options.  
-What *do* you like? Or are we playing the "No, not that either" game? 😉""",
-
-        """Okay, let’s be honest — you don’t like chicken, turkey, eggs, yogurt, fish, beef, or tofu?  
-At this point, I have to ask... do you like *any* food that isn’t bread or cereal?
-
-Let’s try this:  
-**Make a list of 3 foods you DO like**, and I’ll tell you how to make them higher in protein.
-
-And remember — **variety is the spice of life**, but **discipline is what gets you results**. When I’m focused on a goal, I rotate between:
-
-• Grilled chicken  
-• Ground turkey  
-• Egg whites  
-• Lean steak  
-• Vanilla whey isolate shakes (easy, zero prep)
-
-It’s not about loving every meal. It’s about getting results. 💪""",
-
-        """Alright, we’ve played the protein elimination game long enough 😂  
-You don’t like anything I’ve listed — so let me flip it:
-
-**What *do* you like that has more than 10g of protein per serving?**  
-No, cereal and peanut butter don’t count.
-
-Here’s the deal:  
-• If you're serious about your goals, you'll find 2–3 protein sources and lock in.  
-• If you're just window shopping fitness, keep playing the "not that one" game. 😏
-
-**Choose results, not excuses.** I'm here to help when you're ready to commit.""",
-    ]
-
-    strike = st.session_state["protein_strikes"]
-    st.session_state["protein_strikes"] += 1
-
-    if strike >= len(responses):
-        strike = len(responses) - 1  # cap at final snarky response
-        
-    return responses[strike]
-
-# Water/hydration questions - simplified
-if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
-    return """**My simple hydration rule: At least 1 gallon of water daily.**
-
-**Easy to remember:**
-• **1 gallon = 128 ounces = 16 cups**
-• **Or aim for 8-10 glasses of 16oz each**
-• **Start with 16-20oz when you wake up**
-
-**Simple hydration tips:**
-• **Drink before you're thirsty**
-• **More if you're active** or it's hot outside
-• **Light yellow urine = you're good**
-• **Clear urine = you're drinking too much**
-
-**What counts:**
-• Plain water (best choice)
-• Herbal tea
-• Coffee (in moderation)
-
-**What doesn't help:**
-• Alcohol (actually dehydrates you)
-• High-sugar drinks
-
-**Glen's reality check:** Don't overthink it. A gallon sounds like a lot, but spread it throughout the day and you'll feel amazing!
-
-*Good hydration supports everything - energy, recovery, fat loss, and performance!*
-
-**Follow-up question for you:** Are you currently trying to lose weight, or are you more focused on building muscle and strength? I can give you more specific advice based on your goals!"""
-
-    # Exercise/workout frequency
-    if any(word in query_lower for word in ["exercise", "workout", "train", "how often", "how many times"]):
-        return """**My training philosophy: 3-4 days per week, consistently.**
-
-**For beginners:**
-• **3 days/week** - Perfect starting point
-• **Every other day** - Allows recovery
-• **Full body workouts** - Hit everything
-
-**For experienced:**
-• **4-5 days/week** - Upper/lower splits work great
-• **Listen to your body** - Recovery is when you grow
-• **Quality over quantity** - 45 minutes beats 2 hours
-
-**What matters most:**
-• **Show up consistently** (I train at 3:30am!)
-• **Progressive overload** - Gradually increase difficulty
-• **Compound movements** - Squats, deadlifts, rows
-• **Find exercises you enjoy** - You'll stick with them
-
-**My reality check:** The best workout is the one you'll actually do. Start where you are, be consistent, and build from there.
-
-*Consistency beats perfection every single time.*
-
-**Tell me:** What's your biggest obstacle to working out consistently - time, motivation, or not knowing what to do? I've helped thousands overcome each of these!"""
-
-    # Weight loss timeline
-    if any(word in query_lower for word in ["lose weight", "weight loss", "how long", "how fast"]):
-        return """**Realistic weight loss: 1-2 pounds per week.**
-
-**My timeline expectations:**
-• **Week 1-2:** 3-5 pounds (mostly water weight)
-• **Week 3-12:** 1-2 pounds consistently
-• **12 weeks total:** 15-25 pounds realistically
-
-**What affects your rate:**
-• **Starting weight** - Heavier people lose faster initially
-• **Age and gender** - Men typically lose faster
-• **Activity level** - More movement = faster results
-• **Consistency** - This is the biggest factor
-
-**Glen's reality check:**
-Don't chase the scale daily. Focus on:
-• **How your clothes fit**
-• **Energy levels**
-• **Strength improvements**
-• **Progress photos**
-
-**Remember:** You didn't gain it overnight, you won't lose it overnight. But stick with my system for 12 weeks and you'll be amazed at the transformation!
-
-*I've seen this work for thousands of people over 25+ years.*
-
-**I'm curious:** What's been your biggest struggle with weight loss in the past - staying motivated, finding time, or dealing with stress eating? I've got specific strategies for each challenge!"""
-
-    # Meal timing
-    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat", "when should i eat"]):
-        return """**My meal timing and planning approach: Eat every 3-4 hours with strategic planning.**
-
-**Simple weekly schedule that works:**
-• **Breakfast:** Within 1 hour of waking (7-8am)
-• **Lunch:** 4-5 hours later (12-1pm)
-• **Dinner:** 4-5 hours after lunch (5-6pm)
-• **Snacks:** Protein-based between meals if needed
-
-**Weekly meal planning strategy:**
-• **Sunday prep:** Plan and prep for the entire week
-• **Batch cook proteins:** Chicken, turkey, eggs for multiple meals
-• **Pre-cut vegetables:** Ready to grab throughout the week
-• **Plan around your schedule:** Know your busy days ahead of time
-
-**What matters most:**
-• **Protein at every meal** - Non-negotiable foundation
-• **Don't skip meals** - Leads to overeating and poor choices later
-• **Last meal 2-3 hours before bed** - Better sleep and recovery
-• **Consistency over perfection** - Same eating windows daily
-
-**My personal approach:**
-I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevents those blood sugar crashes that lead to grabbing whatever's convenient (usually junk).
-
-**Weekly planning prevents disaster:** When you fail to plan your meals, you plan to fail. I've seen this pattern thousands of times - successful people plan their week on Sunday.
-
-**Let me ask you this:** Do you struggle more with planning your meals for the week, or actually sticking to the plan once you make it? I've got specific solutions for both challenges!"""
-
-    return None  # No quick answer found
-    
-    # Calorie/eating questions - broader detection
-    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "how much should i eat", "what should i eat", "bmr", "tdee", "how much food"]):
-        # Set a flag to show calculator
-        st.session_state.show_calculator = True
-        
         return """**Let me give you YOUR exact calorie numbers!**
 
 Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Check out my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
@@ -791,29 +575,81 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 **One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I've got targeted solutions for real-life obstacles!"""
 
     # Protein questions
-    if any(word in query_lower for word in ["protein", "how much protein"]):
-        return """**My protein rule is simple: 1 gram per pound of body weight.**
+    if any(word in query_lower for word in ["protein", "how much protein", "best protein", "high protein", "what protein", "good protein"]):
+        if not st.session_state.get("protein_strikes"):
+            st.session_state["protein_strikes"] = 0
 
-**So if you weigh 180 pounds = 180g protein daily**
+        responses = [
+            """**My protein rule is simple: 1g per pound of body weight.**  
+That means if you weigh 180 lbs → you need about **180g protein/day**.
 
-**Why protein is king:**
-• Builds and maintains muscle
-• Boosts metabolism (burns calories to digest)
-• Keeps you full longer
-• Prevents blood sugar crashes
+**Top protein sources I recommend:**  
+• Chicken breast (25g per 4oz)  
+• Greek yogurt (15–20g per cup)  
+• Protein powder (20–30g per scoop)  
+• Eggs (6g each)  
+• Ground turkey (22g per 4oz)  
+• Cottage cheese, tuna, lean beef, shrimp — take your pick.
 
-**Easy protein sources:**
-• **Chicken breast:** 25g per 4oz
-• **Eggs:** 6g per egg
-• **Greek yogurt:** 15-20g per cup
-• **Protein powder:** 20-30g per scoop
-• **Ground turkey:** 22g per 4oz
+**Why it matters:**  
+• Builds and maintains lean muscle  
+• Keeps you full  
+• Boosts your metabolism  
+• Supports recovery
 
-**My personal take:** I've had blood work done multiple times - high protein is safe and effective. Don't let anyone scare you away from adequate protein!
+**Glen's personal take:** I rotate between grilled chicken, 93% lean ground turkey, protein shakes, and eggs. Simple, clean, and works like a charm.
 
-*This approach has worked for thousands of my clients over 25+ years.*
+Let me ask — do you already eat any of those, or do we need to customize based on your preferences?""",
 
-**Quick question for you:** What's your biggest challenge with getting enough protein - is it meal prep time, cost, or just not knowing what to eat? I've got specific solutions for each!"""
+            """Got it — not a fan of chicken or turkey? Totally fine.  
+Let's try some alternatives:
+
+• Greek yogurt (plain or flavored)  
+• Whey or plant-based protein shakes  
+• Lean beef (90%+ lean)  
+• Eggs and egg whites  
+• Seafood — salmon, tuna, shrimp  
+• Tempeh or tofu if you're plant-based
+
+Protein isn't one-size-fits-all. We've got options.  
+What *do* you like? Or are we playing the "No, not that either" game? 😉""",
+
+            """Okay, let's be honest — you don't like chicken, turkey, eggs, yogurt, fish, beef, or tofu?  
+At this point, I have to ask... do you like *any* food that isn't bread or cereal?
+
+Let's try this:  
+**Make a list of 3 foods you DO like**, and I'll tell you how to make them higher in protein.
+
+And remember — **variety is the spice of life**, but **discipline is what gets you results**. When I'm focused on a goal, I rotate between:
+
+• Grilled chicken  
+• Ground turkey  
+• Egg whites  
+• Lean steak  
+• Vanilla whey isolate shakes (easy, zero prep)
+
+It's not about loving every meal. It's about getting results. 💪""",
+
+            """Alright, we've played the protein elimination game long enough 😂  
+You don't like anything I've listed — so let me flip it:
+
+**What *do* you like that has more than 10g of protein per serving?**  
+No, cereal and peanut butter don't count.
+
+Here's the deal:  
+• If you're serious about your goals, you'll find 2–3 protein sources and lock in.  
+• If you're just window shopping fitness, keep playing the "not that one" game. 😏
+
+**Choose results, not excuses.** I'm here to help when you're ready to commit.""",
+        ]
+
+        strike = st.session_state["protein_strikes"]
+        st.session_state["protein_strikes"] += 1
+
+        if strike >= len(responses):
+            strike = len(responses) - 1  # cap at final snarky response
+            
+        return responses[strike]
 
     # Water/hydration questions - simplified
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
@@ -1462,77 +1298,4 @@ def main():
         
         quick_buttons = [
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
-            ("🧠 Motivation", "How can you help me stay motivated?"),
-            ("🥗 Nutrition", "What should I know about protein and nutrition?"),
-            ("🔥 Get Moving", "I need to stop analyzing and start doing!")
-        ]
-        
-        for label, query in quick_buttons:
-            if st.button(label, key=f"quick_{label}"):
-                # Clear previous messages for fresh start
-                st.session_state.messages = []
-                st.session_state.show_calculator = False
-                
-                # Simple counter for this specific button
-                counter_key = f"button_clicks_{label}"
-                if counter_key not in st.session_state:
-                    st.session_state[counter_key] = 0
-                st.session_state[counter_key] += 1
-                click_number = st.session_state[counter_key]
-                
-                # Log button click
-                logger.debug(f"Button clicked: {label}, Query: {query}, Click number: {click_number}")
-                
-                # Get content using search_all_knowledge_bases
-                results = search_all_knowledge_bases(query, data, click_number)
-                
-                if results:
-                    logger.debug(f"Found content - Topic: {results[0].get('topic', 'NONE')}, Section: {results[0].get('section', 'NONE')}, Response ID: {results[0].get('response_id', 'NONE')}")
-                else:
-                    logger.debug("NO CONTENT RETURNED!")
-                
-                response = format_glen_response(results, query)
-                
-                # Check if response mentions calculator
-                if "calculator below" in response.lower() or "use the calculator" in response.lower():
-                    st.session_state.show_calculator = True
-                
-                # Add to messages
-                st.session_state.messages.append({"role": "user", "content": query})
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.rerun()
-    
-    # Example questions section
-    st.markdown("### 💡 Popular Questions")
-    example_questions = [
-        "How many calories should I eat daily?",
-        "How much protein do I need?", 
-        "How often should I exercise?",
-        "How much water should I drink?",
-        "How fast can I lose weight?",
-        "When should I eat and plan my meals?"
-    ]
-    
-    cols = st.columns(3)
-    for i, question in enumerate(example_questions):
-        col = cols[i % 3]
-        if col.button(question, key=f"example_{i}"):
-            # Clear previous messages for fresh start
-            st.session_state.messages = []
-            
-            # Reset calculator for new topics
-            st.session_state.show_calculator = False
-            
-            st.session_state.messages.append({"role": "user", "content": question})
-            results = search_all_knowledge_bases(question, data)
-            response = format_glen_response(results, question)
-            
-            # Check if response mentions calculator and set flag
-            if "calculator below" in response.lower() or "use the calculator" in response.lower():
-                st.session_state.show_calculator = True
-            
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            st.rerun()
-
-if __name__ == "__main__":
-    main()
+            ("🧠 Motivation
