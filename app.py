@@ -4,10 +4,11 @@ import re
 from typing import List, Dict, Any
 import base64
 from pathlib import Path
+import random
 
 # Page config
 st.set_page_config(
-    page_title="Strong Again Fitness Chatbot",
+    page_title="Glen Intelligence - Your Personal Fitness Coach",
     page_icon="💪",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -108,7 +109,7 @@ def load_custom_css():
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     
-    /* Progress indicators */
+    /* Program stats */
     .program-stats {
         background: rgba(255,255,255,0.1);
         border-radius: 10px;
@@ -135,6 +136,13 @@ def load_custom_css():
         color: white;
     }
     
+    /* Glen's personality indicators */
+    .glen-response {
+        border-left: 4px solid #FF6B6B;
+        padding-left: 1rem;
+        margin: 1rem 0;
+    }
+    
     /* Responsive design */
     @media (max-width: 768px) {
         .main-header h1 {
@@ -152,7 +160,6 @@ def load_custom_css():
 
 def load_logo_from_github():
     """Load logo from GitHub repository"""
-    # Common logo filenames to check
     logo_files = [
         "logo.png", "logo.jpg", "logo.jpeg", "logo.gif",
         "Logo.png", "Logo.jpg", "Logo.jpeg", "Logo.gif",
@@ -176,15 +183,14 @@ def display_header_with_logo():
     """Display custom header with logo"""
     st.markdown("""
     <div class="main-header">
-        <h1>💪 STRONG AGAIN</h1>
-        <p>Glen's Proven 12-Week Transformation System</p>
+        <h1>💪 GLEN INTELLIGENCE</h1>
+        <p>Your Personal Fitness, Nutrition & Psychology Coach</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Load and display logo
     logo_base64, logo_filename = load_logo_from_github()
     if logo_base64:
-        # Determine image type from filename
         file_extension = logo_filename.split('.')[-1].lower()
         if file_extension in ['jpg', 'jpeg']:
             mime_type = 'image/jpeg'
@@ -193,37 +199,40 @@ def display_header_with_logo():
         elif file_extension == 'gif':
             mime_type = 'image/gif'
         else:
-            mime_type = 'image/png'  # default
+            mime_type = 'image/png'
         
         st.markdown(f'''
         <div class="logo-container">
-            <img src="data:{mime_type};base64,{logo_base64}" class="logo" alt="Strong Again Logo">
+            <img src="data:{mime_type};base64,{logo_base64}" class="logo" alt="Glen's Logo">
         </div>
         ''', unsafe_allow_html=True)
     else:
-        # Display message about logo
-        st.info("💡 To add your logo, upload an image file named 'logo.png', 'logo.jpg', or 'strong_again_logo.png' to your repository")
+        st.info("💡 To add your logo, upload an image file named 'logo.png' to your repository")
 
 def display_program_stats():
     """Display program statistics and achievements"""
     st.markdown("""
     <div class="program-stats">
         <div class="stat-item">🏆 17+ Years Training Experience</div>
-        <div class="stat-item">📚 Proven 12-Week System</div>
+        <div class="stat-item">📚 Multiple Expert Certifications</div>
         <div class="stat-item">💪 Thousands Transformed</div>
-        <div class="stat-item">🎯 Master Plan Approach</div>
+        <div class="stat-item">🧠 Psychology + Fitness Integration</div>
+        <div class="stat-item">🥇 Former Powerlifter/Strongman</div>
+        <div class="stat-item">🏢 Wisconsin Barbell Gym Owner</div>
     </div>
     """, unsafe_allow_html=True)
 
 def display_glen_quote():
-    """Display inspirational quote from Glen"""
+    """Display inspirational quotes from Glen"""
     quotes = [
-        "If you're five minutes early, you're 10 minutes late. - Marine Corps wisdom",
-        "Consistency beats perfection every time. - Glen",
-        "Protein is king for muscle repair and metabolism. - Glen's Program",
-        "Small goals prevent burnout and build momentum. - Strong Again Method"
+        "If you're five minutes early, you're 10 minutes late. - Marine Corps wisdom that drives my training",
+        "Consistency beats perfection every time. After 17 years, I've learned this is the key to lasting transformation.",
+        "Protein is king for muscle repair and metabolism. My blood tests prove it's safe and effective.",
+        "Small goals prevent burnout and build momentum. I learned this from my powerlifting days.",
+        "Food is fuel, not comfort. This mindset shift changed everything for my clients.",
+        "I train at 3:30am because consistency builds habits, and habits build character.",
+        "Your mind is your most powerful muscle. That's why I study behavioral psychology."
     ]
-    import random
     quote = random.choice(quotes)
     
     st.markdown(f"""
@@ -233,94 +242,194 @@ def display_glen_quote():
     """, unsafe_allow_html=True)
 
 @st.cache_data
-def load_fitness_data():
-    """Load the fitness knowledge base from JSON"""
+def load_all_knowledge_data():
+    """Load ALL knowledge bases from JSON files"""
+    all_data = {}
+    
+    # Try to load the main fitness file
     try:
         with open('strong_again_complete.json', 'r') as f:
-            data = json.load(f)
-        return data
+            fitness_data = json.load(f)
+            all_data.update(fitness_data)
     except FileNotFoundError:
-        st.error("JSON data file not found. Please upload 'strong_again_complete.json' to your repository.")
-        return None
-    except json.JSONDecodeError:
-        st.error("Error reading JSON file. Please check the file format.")
-        return None
+        st.warning("Main fitness JSON file not found.")
+    
+    # Try to load additional knowledge bases
+    additional_files = [
+        'behavioral_psychology_converted.json',
+        'nutrition_health_converted.json', 
+        'weight_loss_barriers_converted.json',
+        'health_nutrition_converted.json'
+    ]
+    
+    for filename in additional_files:
+        try:
+            with open(filename, 'r') as f:
+                additional_data = json.load(f)
+                all_data.update(additional_data)
+                st.success(f"✅ Loaded {filename}")
+        except FileNotFoundError:
+            continue  # Skip files that don't exist yet
+    
+    return all_data
 
-def search_knowledge_base(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
-    """Search through the knowledge base for relevant content"""
+def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
+    """Search through ALL knowledge bases for relevant content"""
     if not data:
         return []
     
     query_lower = query.lower()
     results = []
     
-    fitness_data = data.get('fitness_book_data', {})
-    
-    for section_name, section_data in fitness_data.items():
-        if section_name in ['source', 'author_context']:
+    # Search through all book categories
+    for book_category, book_data in data.items():
+        if not isinstance(book_data, dict) or 'content' not in str(book_data):
             continue
             
-        tags = section_data.get('tags', [])
-        keywords = section_data.get('keywords', [])
+        # Skip metadata
+        if book_category in ['source', 'author_context']:
+            continue
         
-        tag_match = any(tag.lower() in query_lower or query_lower in tag.lower() for tag in tags)
-        keyword_match = any(keyword.lower() in query_lower or query_lower in keyword.lower() for keyword in keywords)
-        
-        content_items = section_data.get('content', [])
-        for item in content_items:
-            topic = item.get('topic', '')
-            response = item.get('response', '')
+        # Search through all sections in this book
+        for section_name, section_data in book_data.items():
+            if section_name in ['source', 'author_context'] or not isinstance(section_data, dict):
+                continue
+                
+            tags = section_data.get('tags', [])
+            keywords = section_data.get('keywords', [])
             
-            topic_match = query_lower in topic.lower() or any(word in topic.lower() for word in query_lower.split())
-            response_match = query_lower in response.lower() or any(word in response.lower() for word in query_lower.split())
+            # Check for tag and keyword matches
+            tag_match = any(tag.lower() in query_lower or query_lower in tag.lower() for tag in tags)
+            keyword_match = any(keyword.lower() in query_lower or query_lower in keyword.lower() for keyword in keywords)
             
-            if tag_match or keyword_match or topic_match or response_match:
-                results.append({
-                    'section': section_name.replace('_', ' ').title(),
-                    'topic': topic,
-                    'response': response,
-                    'relevance_score': calculate_relevance(query_lower, topic, response, tags, keywords)
-                })
+            # Search through content items
+            content_items = section_data.get('content', [])
+            for item in content_items:
+                topic = item.get('topic', '')
+                response = item.get('response', '')
+                
+                # Calculate relevance
+                topic_match = query_lower in topic.lower() or any(word in topic.lower() for word in query_lower.split())
+                response_match = query_lower in response.lower() or any(word in response.lower() for word in query_lower.split())
+                
+                if tag_match or keyword_match or topic_match or response_match:
+                    results.append({
+                        'book_category': book_category.replace('_book_data', '').replace('_', ' ').title(),
+                        'section': section_name.replace('_', ' ').title(),
+                        'topic': topic,
+                        'response': response,
+                        'relevance_score': calculate_relevance(query_lower, topic, response, tags, keywords)
+                    })
     
+    # Sort by relevance and return top results
     results.sort(key=lambda x: x['relevance_score'], reverse=True)
-    return results[:3]
+    return results[:5]  # Return top 5 results from across all books
 
 def calculate_relevance(query: str, topic: str, response: str, tags: List[str], keywords: List[str]) -> float:
-    """Calculate relevance score for search results"""
+    """Enhanced relevance calculation"""
     score = 0.0
     query_words = query.split()
     
+    # Exact matches get highest scores
     if query in topic.lower():
-        score += 10
+        score += 15
     if query in response.lower():
-        score += 5
+        score += 10
     
+    # Word matches
     for word in query_words:
         if word in topic.lower():
-            score += 3
+            score += 5
         if word in response.lower():
-            score += 1
+            score += 2
         if any(word in tag.lower() for tag in tags):
-            score += 2
+            score += 3
         if any(word in keyword.lower() for keyword in keywords):
-            score += 2
+            score += 3
+    
+    # Bonus for psychology-related queries
+    psych_terms = ['motivation', 'mindset', 'psychology', 'behavior', 'stress', 'mental']
+    if any(term in query.lower() for term in psych_terms):
+        if any(term in ' '.join(tags).lower() for term in psych_terms):
+            score += 5
     
     return score
 
-def format_response(results: List[Dict[str, str]]) -> str:
-    """Format the search results into a coherent response"""
+def add_glen_personality(response_text: str) -> str:
+    """Add Glen's personal touch to responses"""
+    personal_intros = [
+        "In my 17 years as a trainer and gym owner, ",
+        "From my experience coaching thousands of clients, ",
+        "As a former powerlifter and strongman competitor, ",
+        "At Wisconsin Barbell Gym, I've learned that ",
+        "After studying behavioral psychology and fitness, ",
+        "In my journey from competitive lifting to coaching, "
+    ]
+    
+    personal_connectors = [
+        "\n\nI've seen this pattern with many of my clients at the gym. ",
+        "\n\nThis reminds me of when I was competing - ",
+        "\n\nI always tell my clients: ",
+        "\n\nFrom my psychology studies, I know that ",
+        "\n\nOne thing I've learned after all these years: "
+    ]
+    
+    # Add personality based on content
+    if "protein" in response_text.lower():
+        response_text += "\n\n*I've personally tested this approach and even had blood work done to verify it's safe and effective.*"
+    
+    if any(word in response_text.lower() for word in ["stress", "motivation", "mindset"]):
+        response_text += "\n\n*This is where my background in behavioral psychology really helps my clients break through mental barriers.*"
+    
+    if "training" in response_text.lower() or "exercise" in response_text.lower():
+        response_text += "\n\n*Remember, I train at 3:30am because consistency builds habits, and habits build character. Find what works for YOUR schedule.*"
+    
+    return response_text
+
+def format_glen_response(results: List[Dict[str, str]]) -> str:
+    """Format the search results as if Glen is personally responding"""
     if not results:
-        return "I don't have specific information about that topic in Glen's program right now. Could you try asking about nutrition, workouts, meal planning, motivation, or the 12-week transformation program?"
+        no_answer_responses = [
+            "I don't have specific information about that in my knowledge base right now, but I'd love to help! As someone with 17+ years in this field, I'm always learning too.",
+            "That's not something I've covered in my current materials, but it's a great question! With my background in fitness, nutrition, and psychology, I might be able to point you in the right direction.",
+            "Hmm, I don't see that topic in my current resources. But hey, after coaching thousands of clients, I've learned there's always more to discover!"
+        ]
+        base_response = random.choice(no_answer_responses)
+        
+        return f"{base_response}\n\nTry asking me about:\n• **Fitness & Training** (my powerlifting background)\n• **Nutrition & Weight Loss** (evidence-based approaches)\n• **Psychology & Motivation** (behavioral science)\n• **My 12-Week Program** (proven transformation system)\n\n*Feel free to contact me directly at Wisconsin Barbell Gym for personalized coaching!*"
     
-    response = "**Based on Glen's 'Strong Again' program:**\n\n"
+    # Start with a personal greeting
+    personal_openings = [
+        "Great question! Let me share what I know about this...",
+        "I'm glad you asked about this - it's something I work with clients on regularly.",
+        "This is exactly the kind of thing I help people with at the gym. Here's my take:",
+        "Perfect timing on this question! This comes up a lot in my coaching practice.",
+        "I love talking about this topic - it's core to what I do. Let me break it down:"
+    ]
     
-    for i, result in enumerate(results, 1):
-        if i == 1:
-            response += f"### 🎯 {result['topic']}\n\n{result['response']}\n\n"
-        else:
-            response += f"### 📌 Related: {result['topic']}\n{result['response']}\n\n"
+    response = f"**{random.choice(personal_openings)}**\n\n"
     
-    response += "---\n*💪 This advice comes from Glen's 17+ years as a gym owner, personal trainer, and former powerlifter/strongman competitor.*"
+    # Add the main content
+    main_result = results[0]
+    enhanced_response = add_glen_personality(main_result['response'])
+    
+    response += f"### 🎯 {main_result['topic']}\n\n{enhanced_response}\n\n"
+    
+    # Add related insights if available
+    if len(results) > 1:
+        response += "### 📌 Related Insights:\n\n"
+        for result in results[1:3]:  # Show up to 2 more related results
+            category_emoji = "🧠" if "psychology" in result['book_category'].lower() else "💪" if "fitness" in result['book_category'].lower() else "🥗"
+            response += f"**{category_emoji} {result['topic']}:** {result['response'][:150]}{'...' if len(result['response']) > 150 else ''}\n\n"
+    
+    # Add personal signature
+    signatures = [
+        "---\n*This comes from my 17+ years as a gym owner, personal trainer, and former competitive lifter. Every piece of advice is battle-tested with real clients.*",
+        "---\n*Hope this helps! This approach has worked for thousands of my clients at Wisconsin Barbell Gym.*",
+        "---\n*These insights combine my competition experience, training expertise, and studies in behavioral psychology.*"
+    ]
+    
+    response += random.choice(signatures)
     
     return response
 
@@ -331,31 +440,39 @@ def main():
     # Display header with logo
     display_header_with_logo()
     
-    # Load data
-    data = load_fitness_data()
+    # Load all knowledge data
+    data = load_all_knowledge_data()
     
     if not data:
+        st.error("❌ No knowledge base files found. Please upload your JSON files.")
         st.stop()
+    
+    # Show what knowledge bases are loaded
+    categories = [key.replace('_book_data', '').replace('_', ' ').title() for key in data.keys() if key.endswith('_book_data')]
+    if categories:
+        st.success(f"🧠 **Glen Intelligence Active:** {', '.join(categories)}")
     
     # Sidebar with enhanced program info
     with st.sidebar:
-        st.markdown("## 🏋️ About Glen's Program")
+        st.markdown("## 🏋️ About Glen")
         
         # Program stats
         display_program_stats()
         
-        st.markdown("### 🎯 Ask About:")
+        st.markdown("### 🎯 Ask Me About:")
         topics = [
-            "🍖 Protein and nutrition",
-            "🏋️ Weight training tips", 
-            "📋 Meal planning & prep",
-            "💭 Motivation & mindset",
-            "⏰ Time management",
-            "🎯 Goal setting (SMART)",
-            "💧 Hydration strategy",
-            "📈 Progress tracking",
-            "🔄 Carb cycling",
-            "💊 Supplements & TRT"
+            "🍖 Protein and nutrition science",
+            "🏋️ Training methodology", 
+            "📋 Meal planning strategies",
+            "🧠 Psychology & motivation",
+            "⏰ Time management for busy people",
+            "🎯 SMART goal setting",
+            "💧 Hydration protocols",
+            "📈 Progress tracking systems",
+            "🔄 Carb cycling approaches",
+            "💊 Supplement strategies",
+            "😰 Overcoming barriers & excuses",
+            "🧘 Stress management techniques"
         ]
         for topic in topics:
             st.markdown(f"• {topic}")
@@ -365,8 +482,9 @@ def main():
         
         st.markdown("---")
         st.markdown("### 📞 Connect with Glen")
-        st.markdown("🏢 Wisconsin Barbell Gym")
-        st.markdown("📧 Contact for personal training")
+        st.markdown("🏢 **Wisconsin Barbell Gym**")
+        st.markdown("📧 Personal training & coaching")
+        st.markdown("🎓 Certified in fitness & psychology")
     
     # Main chat interface
     col1, col2 = st.columns([3, 1])
@@ -382,38 +500,47 @@ def main():
                 st.markdown(message["content"])
         
         # Chat input
-        if prompt := st.chat_input("💬 Ask Glen about fitness, nutrition, or his 12-week program..."):
+        if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, psychology, or motivation..."):
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.markdown(prompt)
             
             with st.chat_message("assistant"):
-                with st.spinner("🔍 Searching Glen's program..."):
-                    results = search_knowledge_base(prompt, data)
-                    response = format_response(results)
+                with st.spinner("🧠 Glen is thinking..."):
+                    results = search_all_knowledge_bases(prompt, data)
+                    response = format_glen_response(results)
                     st.markdown(response)
             
             st.session_state.messages.append({"role": "assistant", "content": response})
     
     with col2:
         st.markdown("### 🚀 Quick Start")
-        st.markdown("**New to the program?**")
-        if st.button("📋 Get the Master Plan"):
-            st.session_state.messages.append({"role": "user", "content": "What's the master plan approach?"})
-            results = search_knowledge_base("master plan approach", data)
-            response = format_response(results)
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            st.rerun()
+        st.markdown("**New here? Try these:**")
+        
+        quick_buttons = [
+            ("💪 Master Plan", "Tell me about the 12-week master plan"),
+            ("🧠 Psychology", "How does psychology help with fitness goals?"),
+            ("🥗 Nutrition", "What should I know about protein and nutrition?"),
+            ("😤 Motivation", "I'm struggling with motivation - help!")
+        ]
+        
+        for label, query in quick_buttons:
+            if st.button(label, key=f"quick_{label}"):
+                st.session_state.messages.append({"role": "user", "content": query})
+                results = search_all_knowledge_bases(query, data)
+                response = format_glen_response(results)
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()
     
     # Example questions section
     st.markdown("### 💡 Popular Questions")
     example_questions = [
         "How much protein should I eat daily?",
-        "What's the 12-week program structure?", 
+        "What's the theory of planned behavior?", 
+        "How do I overcome weight loss barriers?",
+        "What's your training philosophy?",
         "How do I stay motivated for 12 weeks?",
-        "What should I eat for breakfast?",
-        "How do I manage time for workouts?",
-        "Tell me about carb cycling"
+        "Tell me about stress and weight loss"
     ]
     
     cols = st.columns(3)
@@ -421,8 +548,8 @@ def main():
         col = cols[i % 3]
         if col.button(question, key=f"example_{i}"):
             st.session_state.messages.append({"role": "user", "content": question})
-            results = search_knowledge_base(question, data)
-            response = format_response(results)
+            results = search_all_knowledge_bases(question, data)
+            response = format_glen_response(results)
             st.session_state.messages.append({"role": "assistant", "content": response})
             st.rerun()
 
