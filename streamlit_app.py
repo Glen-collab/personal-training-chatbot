@@ -820,7 +820,7 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 - Vegetables like broccoli, spinach (low-calorie, nutrient-dense).
 - Fruits like bananas, apples (natural sugars).
 
-**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters—eat most carbs around workouts.
+**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters-eat most carbs around workouts.
 
 **Next step:** Use my **Calorie Calculator** below to get your exact carb target based on your weight and activity level. It'll give you a precise number!
 
