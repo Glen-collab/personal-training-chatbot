@@ -1004,8 +1004,8 @@ def main():
                 # Add assistant response
                 st.session_state.messages.append({"role": "assistant", "content": response})
             
-            # Use experimental_rerun instead of rerun to avoid JS errors
-            st.experimental_rerun()
+            # Use rerun instead of experimental_rerun
+            st.rerun()
     
     with col2:
         # Show sticky calculator results if available
