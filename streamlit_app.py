@@ -762,6 +762,170 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 
 **Weekly planning prevents disaster:** When you fail to plan your meals, you plan to fail. I've seen this pattern thousands of times - successful people plan their week on Sunday.
 
+    # Carbohydrate questions
+    if any(word in query_lower for word in ["carb", "carbs", "carbohydrates", "how many carbs", "how much carbs"]):
+        # Check if calculator results exist for personalized response
+        if st.session_state.get('calculated_results'):
+            results = st.session_state.calculated_results
+            carb_grams = round(results['protein_grams'] * 1.2)  # From calculator: 1.2x protein grams
+            weight = results['weight']
+            activity = results['activity']
+            tdee = results['tdee']
+            carb_answer = f"""**My carb rule: Aim for 1.2g per pound of body weight for balanced energy, adjusted to your goals.**
+
+**For you ({weight} lbs, {activity}):**
+- **{carb_grams}g carbs daily** (based on your {results['protein_grams']}g protein target)
+- **Roughly {round(carb_grams * 4 / tdee * 100)}% of your {tdee:,} calorie TDEE**
+
+**Why this works:**
+- **Carbs fuel performance**: They power your workouts and recovery.
+- **1.2g/lb is sustainable**: Enough for energy, not so much you store fat.
+- **Adjust based on goals**:
+  - **Weight loss**: Stick to {carb_grams - 20}-{carb_grams}g, prioritize veggies.
+  - **Muscle gain**: Bump to {carb_grams + 20}-{carb_grams + 50}g, add starches.
+  - **Maintenance**: Stay at {carb_grams}g.
+
+**Best carb sources:**
+- **Oats**: 25g carbs per 1/2 cup (pre-workout energy)
+- **Sweet potatoes**: 26g per medium potato (steady energy)
+- **Brown rice**: 45g per cup (post-workout recovery)
+- **Vegetables**: 5-10g per cup (micronutrients, low calorie)
+- **Fruit**: 15-20g per piece (natural sugars, vitamins)
+
+**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
+
+**Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
+
+**Let me ask you:** Are you struggling with energy crashes, or is carb confusion (what to eat, when) your biggest issue? I've got strategies for both!
+
+*Run the calorie calculator again for updated numbers if your weight or activity changes!*"""
+        else:
+            # Fallback if no calculator results
+            st.session_state.show_calculator = True
+            carb_answer = """**Carbs depend on your body and goals, so let's get specific!**
+
+**My general rule:** Aim for 1-1.5g carbs per pound of body weight daily.
+- **Example**: 180 lbs = 180-270g carbs
+- **Weight loss**: Lean toward 1g/lb, mostly veggies.
+- **Muscle gain**: Push toward 1.5g/lb, include starches.
+- **Active folks**: Adjust up for intense training days.
+
+**Why carbs matter:**
+- Fuel workouts and recovery.
+- Prevent energy crashes.
+- Support muscle retention.
+
+**Best sources:**
+- Oats, sweet potatoes, brown rice (complex carbs).
+- Vegetables like broccoli, spinach (low-calorie, nutrient-dense).
+- Fruits like bananas, apples (natural sugars).
+
+**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters—eat most carbs around workouts.
+
+**Next step:** Use my **Calorie Calculator** below to get your exact carb target based on your weight and activity level. It'll give you a precise number!
+
+**Quick question:** Are you cutting carbs too low and feeling tired, or overwhelmed by carb choices? Let me know what's tripping you up!"""
+
+    # Calorie/eating questions - broader detection
+    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "how much should i eat", "what should i eat", "bmr", "tdee", "how much food"]):
+        # Set a flag to show calculator
+        st.session_state.show_calculator = True
+        calorie_answer = """**Let me give you YOUR exact calorie numbers!**
+
+Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Check out my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
+
+**My quick guidelines while you calculate:**
+- **Men:** Usually 2,200-2,800 calories for weight loss
+- **Women:** Usually 1,800-2,200 calories for weight loss  
+- **Protein:** Always 1g per pound bodyweight
+
+**But your EXACT numbers matter more than averages!**
+
+Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for a complete meal plan built around your specific calorie target.
+
+*After 25+ years of coaching, I've learned that personalized numbers get personalized results!*
+
+**👇 Use the calculator below to get your exact numbers! 👇**
+
+**One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I've got targeted solutions for real-life obstacles!"""
+
+    # Protein questions
+    if any(word in query_lower for word in ["protein", "how much protein", "best protein", "high protein", "what protein", "good protein"]):
+        if not st.session_state.get("protein_strikes"):
+            st.session_state["protein_strikes"] = 0
+
+        responses = [
+            """**My protein rule is simple: 1g per pound of body weight.**  
+That means if you weigh 180 lbs → you need about **180g protein/day**.
+
+**Top protein sources I recommend:**  
+- Chicken breast (25g per 4oz)  
+- Greek yogurt (15–20g per cup)  
+- Protein powder (20–30g per scoop)  
+- Eggs (6g each)  
+- Ground turkey (22g per 4oz)  
+- Cottage cheese, tuna, lean beef, shrimp — take your pick.
+
+**Why it matters:**  
+- Builds and maintains lean muscle  
+- Keeps you full  
+- Boosts your metabolism  
+- Supports recovery
+
+**Glen's personal take:** I rotate between grilled chicken, 93% lean ground turkey, protein shakes, and eggs. Simple, clean, and works like a charm.
+
+Let me ask — do you already eat any of those, or do we need to customize based on your preferences?""",
+
+            """Got it — not a fan of chicken or turkey? Totally fine.  
+Let's try some alternatives:
+
+- Greek yogurt (plain or flavored)  
+- Whey or plant-based protein shakes  
+- Lean beef (90%+ lean)  
+- Eggs and egg whites  
+- Seafood — salmon, tuna, shrimp  
+- Tempeh or tofu if you're plant-based
+
+Protein isn't one-size-fits-all. We've got options.  
+What *do* you like? Or are we playing the "No, not that either" game? 😉""",
+
+            """Okay, let's be honest — you don't like chicken, turkey, eggs, yogurt, fish, beef, or tofu?  
+At this point, I have to ask... do you like *any* food that isn't bread or cereal?
+
+Let's try this:  
+**Make a list of 3 foods you DO like**, and I'll tell you how to make them higher in protein.
+
+And remember — **variety is the spice of life**, but **discipline is what gets you results**. When I'm focused on a goal, I rotate between:
+
+- Grilled chicken  
+- Ground turkey  
+- Egg whites  
+- Lean steak  
+- Vanilla whey isolate shakes (easy, zero prep)
+
+It's not about loving every meal. It's about getting results. 💪""",
+
+            """Alright, we've played the protein elimination game long enough 😂  
+You don't like anything I've listed — so let me flip it:
+
+**What *do* you like that has more than 10g of protein per serving?**  
+No, cereal and peanut butter don't count.
+
+Here's the deal:  
+- If you're serious about your goals, you'll find 2–3 protein sources and lock in.  
+- If you're just window shopping fitness, keep playing the "not that one" game. 😏
+
+**Choose results, not excuses.** I'm here to help when you're ready to commit.""",
+        ]
+
+        strike = st.session_state["protein_strikes"]
+        st.session_state["protein_strikes"] += 1
+
+        if strike >= len(responses):
+            strike = len(responses) - 1  # cap at final snarky response
+            
+        protein_answer = responses[strike]
+
     # Water/hydration questions - simplified
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
         water_answer = """**My simple hydration rule: At least 1 gallon of water daily.**
@@ -772,21 +936,21 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 - **Start with 16-20 oz when you wake up**
 
 **Simple hydration tips:**
-- **Drink before you're thirsty**
-- **More if you're active** or it's hot outside
-- **Light yellow urine = you're good**
-- **Clear urine = you're drinking too much**
+- **Drink before you are thirsty**
+- **More if you are active** or it is hot outside
+- **Light yellow urine = you are good**
+- **Clear urine = you are drinking too much**
 
 **What counts:**
 - Plain water (best choice)
 - Herbal tea
 - Coffee (in moderation)
 
-**What doesn't help:**
+**What does not help:**
 - Alcohol (actually dehydrates you)
 - High-sugar drinks
 
-**Glen's reality check:** Don't overthink it. A gallon sounds like a lot, but spread it throughout the day and you'll feel amazing!
+**Glen's reality check:** Do not overthink it. A gallon sounds like a lot, but spread it throughout the day and you will feel amazing!
 
 *Good hydration supports everything - energy, recovery, fat loss, and performance!*
 
