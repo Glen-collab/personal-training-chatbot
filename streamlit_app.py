@@ -824,11 +824,11 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 That means if you weigh 180 lbs you need about **180 grams protein per day**.
 
 **Top protein sources I recommend:**
-- Chicken breast (25 grams per 4oz)
+- Chicken breast (25 grams per 4 oz)
 - Greek yogurt (15 to 20 grams per cup)
 - Protein powder (20 to 30 grams per scoop)
 - Eggs (6 grams each)
-- Ground turkey (22 grams per 4oz)
+- Ground turkey (22 grams per 4 oz)
 - Cottage cheese, tuna, lean beef, shrimp
 
 **Why it matters:**
