@@ -3,7 +3,7 @@ import os
 import glob
 from typing import List
 import openai
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.llms import OpenAI
@@ -75,10 +75,10 @@ class PersonalTrainingChatbot:
             st.info(f"✅ Created {len(chunks)} text chunks from all books")
             
             # Create vector store
-            self.vectorstore = Chroma.from_texts(
+            self.vectorstore = FAISS.from_texts(
                 texts=chunks,
                 embedding=self.embeddings,
-                persist_directory="./chroma_db"
+               
             )
             
             # Create Q&A chain
