@@ -635,7 +635,50 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 
     return None  # No quick answer found
 
-def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
+def analyze_query_intent(query: str) -> dict:
+    """Analyze query intent for better routing"""
+    query_lower = query.lower()
+    
+    # Analyze "how old" questions with context
+    if "how old" in query_lower:
+        if any(word in query_lower for word in ["you", "glen", "your"]):
+            # About Glen's age/background
+            return {"type": "personal_glen", "confidence": 0.9}
+        elif any(word in query_lower for word in ["i", "me", "my", "can i", "should i", "someone", "person", "people", "start", "begin"]):
+            # About age to start fitness
+            return {"type": "age_fitness", "confidence": 0.8}
+        else:
+            # General age question - default to fitness
+            return {"type": "age_fitness", "confidence": 0.6}
+    
+    # Age-related fitness questions
+    age_fitness_patterns = [
+        "what age", "too old", "getting older", "older adults", "start at", "begin at",
+        "metabolism slow", "slow metabolism", "age 40", "age 50", "age 60", "after 40",
+        "can someone", "can people", "never too late", "starting late"
+    ]
+    if any(pattern in query_lower for pattern in age_fitness_patterns):
+        return {"type": "age_fitness", "confidence": 0.8}
+    
+    # Personal Glen questions
+    personal_patterns = [
+        "who are you", "tell me about you", "your story", "your background", 
+        "what do you bench", "what do you squat", "your records", "your fighting",
+        "your hobbies", "for fun", "your family", "moose", "your dog"
+    ]
+    if any(pattern in query_lower for pattern in personal_patterns):
+        return {"type": "personal_glen", "confidence": 0.9}
+    
+    # Motivation/mentor questions
+    motivation_patterns = [
+        "who motivates you", "your motivation", "who inspires you", "mentor", "role model",
+        "inspirational", "who taught you", "learned from", "influenced you"
+    ]
+    if any(pattern in query_lower for pattern in motivation_patterns):
+        return {"type": "motivation_mentors", "confidence": 0.9}
+    
+    # Default to general search
+    return {"type": "general", "confidence": 0.3}
     """Search through ALL knowledge bases with improved keyword matching and response tracking"""
     if not data:
         return []
