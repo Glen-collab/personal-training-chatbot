@@ -453,8 +453,8 @@ def get_quick_answer(query: str) -> str:
     """Handle common softball questions with direct, practical answers"""
     query_lower = query.lower()
     
-    # Calorie questions - now with calculator
-    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "bmr", "tdee"]):
+    # Calorie/eating questions - broader detection
+    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "how much should i eat", "what should i eat", "bmr", "tdee", "how much food"]):
         # Set a flag to show calculator
         st.session_state.show_calculator = True
         
@@ -498,28 +498,31 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 *This approach has worked for thousands of my clients over 25+ years.*"""
 
-    # Water/hydration questions
-    if any(word in query_lower for word in ["water", "hydration", "drink", "fluid"]):
-        return """**My hydration formula: Half your body weight in ounces, minimum.**
+    # Water/hydration questions - simplified
+    if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
+        return """**My simple hydration rule: At least 1 gallon of water daily.**
 
-**If you weigh 200 pounds = 100 ounces (about 12 cups) daily**
+**Easy to remember:**
+• **1 gallon = 128 ounces = 16 cups**
+• **Or aim for 8-10 glasses of 16oz each**
+• **Start with 16-20oz when you wake up**
 
 **Simple hydration tips:**
-• **Start your day** with 16-20oz of water
 • **Drink before you're thirsty**
-• **More if you're active** or it's hot
-• **Monitor your urine** - light yellow is perfect
+• **More if you're active** or it's hot outside
+• **Light yellow urine = you're good**
+• **Clear urine = you're drinking too much**
 
-**What counts toward hydration:**
+**What counts:**
 • Plain water (best choice)
 • Herbal tea
 • Coffee (in moderation)
-• Water-rich foods (fruits, veggies)
 
 **What doesn't help:**
 • Alcohol (actually dehydrates you)
 • High-sugar drinks
-• Excessive caffeine
+
+**Glen's reality check:** Don't overthink it. A gallon sounds like a lot, but spread it throughout the day and you'll feel amazing!
 
 *Good hydration supports everything - energy, recovery, fat loss, and performance!*"""
 
