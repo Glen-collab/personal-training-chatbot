@@ -486,9 +486,6 @@ def show_calorie_calculator():
 def get_quick_answer(query: str) -> str:
     """Handle common softball questions with direct, practical answers"""
     query_lower = query.lower()
-def get_quick_answer(query: str) -> str:
-    """Handle common softball questions with direct, practical answers"""
-    query_lower = query.lower()
     
     # Carbohydrate questions
     if any(word in query_lower for word in ["carb", "carbs", "carbohydrates", "how many carbs", "how much carbs"]):
