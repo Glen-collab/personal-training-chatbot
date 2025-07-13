@@ -649,7 +649,7 @@ Here’s the deal:
     if strike >= len(responses):
         strike = len(responses) - 1  # cap at final snarky response
         
-        return responses[strike]
+return responses[strike]
 
 # Water/hydration questions - simplified
 if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
