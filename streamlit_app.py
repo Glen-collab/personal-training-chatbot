@@ -891,6 +891,111 @@ Choose results, not excuses. I am here to help when you are ready to commit.""",
             
         protein_answer = responses[strike]
 
+    # Exercise/workout frequency
+    if any(word in query_lower for word in ["exercise", "workout", "train", "how often", "how many times"]):
+        exercise_answer = """**My training philosophy: 3 to 4 days per week, consistently.**
+
+**For beginners:**
+- 3 days per week - Perfect starting point
+- Every other day - Allows recovery
+- Full body workouts - Hit everything
+
+**For experienced:**
+- 4 to 5 days per week - Upper/lower splits work great
+- Listen to your body - Recovery is when you grow
+- Quality over quantity - 45 minutes beats 2 hours
+
+**What matters most:**
+- Show up consistently (I train at 3:30 in the morning!)
+- Progressive overload - Gradually increase difficulty
+- Compound movements - Squats, deadlifts, rows
+- Find exercises you enjoy - You will stick with them
+
+**My reality check:** The best workout is the one you will actually do. Start where you are, be consistent, and build from there.
+
+Consistency beats perfection every single time.
+
+**Tell me:** What is your biggest obstacle to working out consistently - time, motivation, or not knowing what to do? I have helped thousands overcome each of these!"""
+
+    # Weight loss timeline
+    if any(word in query_lower for word in ["lose weight", "weight loss", "how long", "how fast"]):
+        weightloss_answer = """**Realistic weight loss: 1 to 2 pounds per week.**
+
+**My timeline expectations:**
+- Week 1 to 2: 3 to 5 pounds (mostly water weight)
+- Week 3 to 12: 1 to 2 pounds consistently
+- 12 weeks total: 15 to 25 pounds realistically
+
+**What affects your rate:**
+- Starting weight - Heavier people lose faster initially
+- Age and gender - Men typically lose faster
+- Activity level - More movement equals faster results
+- Consistency - This is the biggest factor
+
+**Reality check:**
+Do not chase the scale daily. Focus on:
+- How your clothes fit
+- Energy levels
+- Strength improvements
+- Progress photos
+
+**Remember:** You did not gain it overnight, you will not lose it overnight. But stick with my system for 12 weeks and you will be amazed at the transformation!
+
+I have seen this work for thousands of people over 25+ years.
+
+**I am curious:** What has been your biggest struggle with weight loss in the past - staying motivated, finding time, or dealing with stress eating? I have specific strategies for each challenge!"""
+
+    # Meal timing
+    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat", "when should i eat"]):
+        mealtiming_answer = """**My meal timing and planning approach: Eat every 3 to 4 hours with strategic planning.**
+
+**Simple weekly schedule that works:**
+- Breakfast: Within 1 hour of waking (7 to 8am)
+- Lunch: 4 to 5 hours later (12 to 1pm)
+- Dinner: 4 to 5 hours after lunch (5 to 6pm)
+- Snacks: Protein-based between meals if needed
+
+**Weekly meal planning strategy:**
+- Sunday prep: Plan and prep for the entire week
+- Batch cook proteins: Chicken, turkey, eggs for multiple meals
+- Pre-cut vegetables: Ready to grab throughout the week
+- Plan around your schedule: Know your busy days ahead of time
+
+**What matters most:**
+- Protein at every meal - Non-negotiable foundation
+- Do not skip meals - Leads to overeating and poor choices later
+- Last meal 2 to 3 hours before bed - Better sleep and recovery
+- Consistency over perfection - Same eating windows daily
+
+**My personal approach:**
+I eat 3 main meals plus 1 to 2 protein snacks. This keeps my energy steady and prevents those blood sugar crashes that lead to grabbing whatever is convenient (usually junk).
+
+**Weekly planning prevents disaster:** When you fail to plan your meals, you plan to fail. I have seen this pattern thousands of times - successful people plan their week on Sunday.
+
+**Let me ask you this:** Do you struggle more with planning your meals for the week, or actually sticking to the plan once you make it? I have specific solutions for both challenges!"""
+
+    # Calorie/eating questions - broader detection
+    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "how much should i eat", "what should i eat", "bmr", "tdee", "how much food"]):
+        st.session_state.show_calculator = True
+        calorie_answer = """**Let me give you YOUR exact calorie numbers!**
+
+Instead of generic advice, let us calculate your personal BMR and TDEE based on your stats. Check out my Calorie Calculator below - it will give you precise numbers for your body and activity level.
+
+**My quick guidelines while you calculate:**
+- Men: Usually 2,200 to 2,800 calories for weight loss
+- Women: Usually 1,800 to 2,200 calories for weight loss  
+- Protein: Always 1 gram per pound bodyweight
+
+**But your EXACT numbers matter more than averages!**
+
+Use the calculator below, then visit bestrongagain.com/plan-my-week/ for a complete meal plan built around your specific calorie target.
+
+After 25+ years of coaching, I have learned that personalized numbers get personalized results!
+
+**Use the calculator below to get your exact numbers!**
+
+**One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I have targeted solutions for real-life obstacles!"""
+
     # Water/hydration questions
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
         water_answer = """**My simple hydration rule: At least 1 gallon of water daily.**
@@ -922,97 +1027,6 @@ Good hydration supports everything - energy, recovery, fat loss, and performance
 **Follow-up question for you:** Are you currently trying to lose weight, or are you more focused on building muscle and strength? I can give you more specific advice based on your goals!"""
 
     # Check for answers to return
-    if 'carb_answer' in locals():
-        return carb_answer
-    if 'protein_answer' in locals():
-        return protein_answer
-    if 'water_answer' in locals():
-        return water_answer
-
-    # Exercise/workout frequency
-    if any(word in query_lower for word in ["exercise", "workout", "train", "how often", "how many times"]):
-        exercise_answer = """**My training philosophy: 3-4 days per week, consistently.**
-
-**For beginners:**
-- **3 days/week** - Perfect starting point
-- **Every other day** - Allows recovery
-- **Full body workouts** - Hit everything
-
-**For experienced:**
-- **4-5 days/week** - Upper/lower splits work great
-- **Listen to your body** - Recovery is when you grow
-- **Quality over quantity** - 45 minutes beats 2 hours
-
-**What matters most:**
-- **Show up consistently** (I train at 3:30am!)
-- **Progressive overload** - Gradually increase difficulty
-- **Compound movements** - Squats, deadlifts, rows
-- **Find exercises you enjoy** - You'll stick with them
-
-**My reality check:** The best workout is the one you'll actually do. Start where you are, be consistent, and build from there.
-
-*Consistency beats perfection every single time.*
-
-**Tell me:** What's your biggest obstacle to working out consistently - time, motivation, or not knowing what to do? I've helped thousands overcome each of these!"""
-
-    # Weight loss timeline
-    if any(word in query_lower for word in ["lose weight", "weight loss", "how long", "how fast"]):
-        weightloss_answer = """**Realistic weight loss: 1-2 pounds per week.**
-
-**My timeline expectations:**
-- **Week 1-2:** 3-5 pounds (mostly water weight)
-- **Week 3-12:** 1-2 pounds consistently
-- **12 weeks total:** 15-25 pounds realistically
-
-**What affects your rate:**
-- **Starting weight** - Heavier people lose faster initially
-- **Age and gender** - Men typically lose faster
-- **Activity level** - More movement = faster results
-- **Consistency** - This is the biggest factor
-
-**Glen's reality check:**
-Don't chase the scale daily. Focus on:
-- **How your clothes fit**
-- **Energy levels**
-- **Strength improvements**
-- **Progress photos**
-
-**Remember:** You didn't gain it overnight, you won't lose it overnight. But stick with my system for 12 weeks and you'll be amazed at the transformation!
-
-*I've seen this work for thousands of people over 25+ years.*
-
-**I'm curious:** What's been your biggest struggle with weight loss in the past - staying motivated, finding time, or dealing with stress eating? I've got specific strategies for each challenge!"""
-
-    # Meal timing
-    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat", "when should i eat"]):
-        mealtiming_answer = """**My meal timing and planning approach: Eat every 3-4 hours with strategic planning.**
-
-**Simple weekly schedule that works:**
-- **Breakfast:** Within 1 hour of waking (7-8am)
-- **Lunch:** 4-5 hours later (12-1pm)
-- **Dinner:** 4-5 hours after lunch (5-6pm)
-- **Snacks:** Protein-based between meals if needed
-
-**Weekly meal planning strategy:**
-- **Sunday prep:** Plan and prep for the entire week
-- **Batch cook proteins:** Chicken, turkey, eggs for multiple meals
-- **Pre-cut vegetables:** Ready to grab throughout the week
-- **Plan around your schedule:** Know your busy days ahead of time
-
-**What matters most:**
-- **Protein at every meal** - Non-negotiable foundation
-- **Don't skip meals** - Leads to overeating and poor choices later
-- **Last meal 2-3 hours before bed** - Better sleep and recovery
-- **Consistency over perfection** - Same eating windows daily
-
-**My personal approach:**
-I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevents those blood sugar crashes that lead to grabbing whatever's convenient (usually junk).
-
-**Weekly planning prevents disaster:** When you fail to plan your meals, you plan to fail. I've seen this pattern thousands of times - successful people plan their week on Sunday.
-
-**Let me ask you this:** Do you struggle more with planning your meals for the week, or actually sticking to the plan once you make it? I've got specific solutions for both challenges!"""
-
-    # Check if we have any answers to return
     if 'carb_answer' in locals():
         return carb_answer
     if 'calorie_answer' in locals():
