@@ -5,7 +5,7 @@ from typing import List
 import openai
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
 
@@ -76,8 +76,8 @@ class PersonalTrainingChatbot:
             
             # Create vector store
             self.vectorstore = FAISS.from_texts(
-                texts=chunks,
-                embedding=self.embeddings,
+             texts=chunks,
+             embedding=self.embeddings
                
             )
             
