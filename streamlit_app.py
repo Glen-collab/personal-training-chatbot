@@ -950,9 +950,9 @@ I have seen this work for thousands of people over 25+ years.
         mealtiming_answer = """**My meal timing and planning approach: Eat every 3 to 4 hours with strategic planning.**
 
 **Simple weekly schedule that works:**
-- Breakfast: Within 1 hour of waking (7 to 8am)
-- Lunch: 4 to 5 hours later (12 to 1pm)
-- Dinner: 4 to 5 hours after lunch (5 to 6pm)
+- Breakfast: Within 1 hour of waking (7 to 8 am)
+- Lunch: 4 to 5 hours later (12 to 1 pm)
+- Dinner: 4 to 5 hours after lunch (5 to 6 pm)
 - Snacks: Protein-based between meals if needed
 
 **Weekly meal planning strategy:**
