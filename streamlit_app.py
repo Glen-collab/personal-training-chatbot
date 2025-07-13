@@ -242,17 +242,21 @@ def display_glen_quote():
     """, unsafe_allow_html=True)
 
 @st.cache_data
-def load_all_knowledge_data():
+def load_fitness_data():
     """Load ALL knowledge bases from JSON files"""
     all_data = {}
     
     # Try to load the main fitness file
     try:
-        with open('strong_again_complete.json', 'r') as f:
+        with open('strong_again_complete.json', 'r', encoding='utf-8') as f:
             fitness_data = json.load(f)
             all_data.update(fitness_data)
     except FileNotFoundError:
         st.warning("Main fitness JSON file not found.")
+    except json.JSONDecodeError as e:
+        st.error(f"Error decoding JSON: {e}")
+    except UnicodeDecodeError as e:
+        st.error(f"Unicode error in JSON file: {e}")
     
     # Try to load additional knowledge bases
     additional_files = [
@@ -264,12 +268,16 @@ def load_all_knowledge_data():
     
     for filename in additional_files:
         try:
-            with open(filename, 'r') as f:
+            with open(filename, 'r', encoding='utf-8') as f:
                 additional_data = json.load(f)
                 all_data.update(additional_data)
                 st.success(f"✅ Loaded {filename}")
         except FileNotFoundError:
-            continue  # Skip files that don't exist yet
+            continue  # Skip files that don't exist
+        except json.JSONDecodeError as e:
+            st.error(f"Error decoding JSON in {filename}: {e}")
+        except UnicodeDecodeError as e:
+            st.error(f"Unicode error in {filename}: {e}")
     
     return all_data
 
