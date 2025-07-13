@@ -605,27 +605,33 @@ Don't chase the scale daily. Focus on:
 **I'm curious:** What's been your biggest struggle with weight loss in the past - staying motivated, finding time, or dealing with stress eating? I've got specific strategies for each challenge!"""
 
     # Meal timing
-    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat"]):
-        return """**My meal timing approach: Eat every 3-4 hours.**
+    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat", "when should i eat"]):
+        return """**My meal timing and planning approach: Eat every 3-4 hours with strategic planning.**
 
-**Simple schedule that works:**
-• **Breakfast:** Within 1 hour of waking
-• **Lunch:** 4-5 hours later
-• **Dinner:** 4-5 hours after lunch
-• **Snacks:** If needed between meals
+**Simple weekly schedule that works:**
+• **Breakfast:** Within 1 hour of waking (7-8am)
+• **Lunch:** 4-5 hours later (12-1pm)
+• **Dinner:** 4-5 hours after lunch (5-6pm)
+• **Snacks:** Protein-based between meals if needed
+
+**Weekly meal planning strategy:**
+• **Sunday prep:** Plan and prep for the entire week
+• **Batch cook proteins:** Chicken, turkey, eggs for multiple meals
+• **Pre-cut vegetables:** Ready to grab throughout the week
+• **Plan around your schedule:** Know your busy days ahead of time
 
 **What matters most:**
-• **Protein at every meal** - Non-negotiable
-• **Don't skip meals** - Leads to overeating later
-• **Last meal 2-3 hours before bed** - Better sleep
-• **Listen to your hunger** - Don't eat just because it's "time"
+• **Protein at every meal** - Non-negotiable foundation
+• **Don't skip meals** - Leads to overeating and poor choices later
+• **Last meal 2-3 hours before bed** - Better sleep and recovery
+• **Consistency over perfection** - Same eating windows daily
 
 **My personal approach:**
-I eat 3 main meals + 1-2 protein snacks. Keeps my energy steady and prevents those blood sugar crashes that lead to poor food choices.
+I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevents those blood sugar crashes that lead to grabbing whatever's convenient (usually junk).
 
-**Bottom line:** Consistency with meal timing helps regulate your metabolism and prevents impulsive eating decisions.
+**Weekly planning prevents disaster:** When you fail to plan your meals, you plan to fail. I've seen this pattern thousands of times - successful people plan their week on Sunday.
 
-*Find a schedule that fits your life and stick with it!*"""
+**Let me ask you this:** Do you struggle more with planning your meals for the week, or actually sticking to the plan once you make it? I've got specific solutions for both challenges!"""
 
     return None  # No quick answer found
 
@@ -965,38 +971,41 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # Display chat history first
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-        
-        # Show calorie calculator immediately after relevant response
+        # Show calorie calculator first if needed
         if st.session_state.show_calculator:
             show_calorie_calculator()
             st.markdown("---")
         
+        # Display chat history
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+        
         # Chat input at the bottom
-        if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, or motivation..."):
-            # Clear previous messages for fresh start - MOVED TO TOP
+        prompt = st.chat_input("💬 Ask Glen anything about fitness, nutrition, or motivation...")
+        
+        if prompt:
+            # Clear previous messages for fresh start
             st.session_state.messages = []
             st.session_state.show_calculator = False
             
             # Add new user message
             st.session_state.messages.append({"role": "user", "content": prompt})
             
-            # Generate response
-            results = search_all_knowledge_bases(prompt, data)
-            response = format_glen_response(results, prompt)
+            # Process the response
+            with st.spinner("🧠 Glen is thinking..."):
+                results = search_all_knowledge_bases(prompt, data)
+                response = format_glen_response(results, prompt)
+                
+                # Check if response mentions calculator and set flag
+                if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                    st.session_state.show_calculator = True
+                
+                # Add assistant response
+                st.session_state.messages.append({"role": "assistant", "content": response})
             
-            # Check if response mentions calculator and set flag
-            if "calculator below" in response.lower() or "use the calculator" in response.lower():
-                st.session_state.show_calculator = True
-            
-            # Add assistant response
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            
-            # Force refresh to show new content
-            st.rerun()
+            # Use experimental_rerun instead of rerun to avoid JS errors
+            st.experimental_rerun()
     
     with col2:
         # Show sticky calculator results if available
@@ -1055,7 +1064,7 @@ def main():
         "How often should I exercise?",
         "How much water should I drink?",
         "How fast can I lose weight?",
-        "When should I eat my meals?"
+        "When should I eat and plan my meals?"
     ]
     
     cols = st.columns(3)
