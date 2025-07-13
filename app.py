@@ -184,7 +184,7 @@ def display_header_with_logo():
     st.markdown("""
     <div class="main-header">
         <h1>💪 GLEN INTELLIGENCE</h1>
-        <p>Your Personal Fitness, Nutrition & Psychology Coach</p>
+        <p>Your Personal Fitness, Nutrition & Motivational Coach</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -965,7 +965,7 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # Display chat history
+        # Display chat history first
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
@@ -975,35 +975,28 @@ def main():
             show_calorie_calculator()
             st.markdown("---")
         
-        # Chat input
-        if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, psychology, or motivation..."):
-            # Clear previous messages for fresh start
+        # Chat input at the bottom
+        if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, or motivation..."):
+            # Clear previous messages for fresh start - MOVED TO TOP
             st.session_state.messages = []
-            
-            # Reset calculator flag for new questions
             st.session_state.show_calculator = False
             
+            # Add new user message
             st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
             
-            with st.chat_message("assistant"):
-                with st.spinner("🧠 Glen is thinking..."):
-                    results = search_all_knowledge_bases(prompt, data)
-                    response = format_glen_response(results, prompt)
-                    
-                    # Check if response mentions calculator and set flag
-                    if "calculator below" in response.lower() or "use the calculator" in response.lower():
-                        st.session_state.show_calculator = True
-                    
-                    st.markdown(response)
+            # Generate response
+            results = search_all_knowledge_bases(prompt, data)
+            response = format_glen_response(results, prompt)
             
+            # Check if response mentions calculator and set flag
+            if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                st.session_state.show_calculator = True
+            
+            # Add assistant response
             st.session_state.messages.append({"role": "assistant", "content": response})
             
-            # Show calculator immediately if triggered
-            if st.session_state.show_calculator:
-                show_calorie_calculator()
-                st.markdown("---")
+            # Force refresh to show new content
+            st.rerun()
     
     with col2:
         # Show sticky calculator results if available
@@ -1030,7 +1023,7 @@ def main():
         
         quick_buttons = [
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
-            ("🧠 Psychology", "How does psychology help with fitness goals?"),
+            ("🧠 Motivation", "How can you help me stay motivated?"),
             ("🥗 Nutrition", "What should I know about protein and nutrition?"),
             ("😤 Motivation", "I'm struggling with motivation - help!")
         ]
