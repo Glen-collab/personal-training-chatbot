@@ -473,7 +473,9 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 *After 25+ years of coaching, I've learned that personalized numbers get personalized results!*
 
-**👇 Use the calculator below to get your exact numbers! 👇**"""
+**👇 Use the calculator below to get your exact numbers! 👇**
+
+**One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I've got targeted solutions for real-life obstacles!"""
 
     # Protein questions
     if any(word in query_lower for word in ["protein", "how much protein"]):
@@ -496,7 +498,9 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 **My personal take:** I've had blood work done multiple times - high protein is safe and effective. Don't let anyone scare you away from adequate protein!
 
-*This approach has worked for thousands of my clients over 25+ years.*"""
+*This approach has worked for thousands of my clients over 25+ years.*
+
+**Quick question for you:** What's your biggest challenge with getting enough protein - is it meal prep time, cost, or just not knowing what to eat? I've got specific solutions for each!"""
 
     # Water/hydration questions - simplified
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
@@ -524,7 +528,9 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 **Glen's reality check:** Don't overthink it. A gallon sounds like a lot, but spread it throughout the day and you'll feel amazing!
 
-*Good hydration supports everything - energy, recovery, fat loss, and performance!*"""
+*Good hydration supports everything - energy, recovery, fat loss, and performance!*
+
+**Follow-up question for you:** Are you currently trying to lose weight, or are you more focused on building muscle and strength? I can give you more specific advice based on your goals!"""
 
     # Exercise/workout frequency
     if any(word in query_lower for word in ["exercise", "workout", "train", "how often", "how many times"]):
@@ -548,7 +554,9 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 **My reality check:** The best workout is the one you'll actually do. Start where you are, be consistent, and build from there.
 
-*Consistency beats perfection every single time.*"""
+*Consistency beats perfection every single time.*
+
+**Tell me:** What's your biggest obstacle to working out consistently - time, motivation, or not knowing what to do? I've helped thousands overcome each of these!"""
 
     # Weight loss timeline
     if any(word in query_lower for word in ["lose weight", "weight loss", "how long", "how fast"]):
@@ -574,7 +582,9 @@ Don't chase the scale daily. Focus on:
 
 **Remember:** You didn't gain it overnight, you won't lose it overnight. But stick with my system for 12 weeks and you'll be amazed at the transformation!
 
-*I've seen this work for thousands of people over 25+ years.*"""
+*I've seen this work for thousands of people over 25+ years.*
+
+**I'm curious:** What's been your biggest struggle with weight loss in the past - staying motivated, finding time, or dealing with stress eating? I've got specific strategies for each challenge!"""
 
     # Meal timing
     if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat"]):
@@ -683,6 +693,82 @@ def calculate_relevance(query: str, topic: str, response: str, tags: List[str], 
     
     return score
 
+def add_strategic_followup(response_text: str, query: str) -> str:
+    """Add strategic follow-up questions to keep the conversation flowing"""
+    query_lower = query.lower()
+    
+    # Don't add follow-ups to responses that already have questions
+    if "?" in response_text[-100:]:  # Check last 100 characters
+        return response_text
+    
+    # Topic-specific follow-up questions
+    followup_questions = []
+    
+    # Nutrition/Diet related
+    if any(word in query_lower for word in ["eat", "food", "nutrition", "diet", "meal", "calories", "protein"]):
+        followup_questions = [
+            "What's your biggest nutrition challenge right now - meal prep, eating out too much, or late-night snacking?",
+            "Are you dealing with stress eating, or do you struggle more with finding time to cook healthy meals?",
+            "What's been your biggest obstacle to eating consistently - busy schedule, family preferences, or knowing what to cook?",
+            "Do you find it harder to stick to your nutrition on weekdays with work stress, or weekends with social events?",
+            "What derails your healthy eating most - work deadlines, family chaos, or just getting bored with the same foods?"
+        ]
+    
+    # Exercise/Training related
+    elif any(word in query_lower for word in ["workout", "exercise", "train", "gym", "fitness", "muscle", "strength"]):
+        followup_questions = [
+            "What's your biggest barrier to consistent workouts - time constraints, motivation, or not knowing what to do?",
+            "Do you struggle more with finding time to exercise, or staying motivated when you do have time?",
+            "What's been your biggest challenge with fitness - sticking to a routine, seeing results, or dealing with injuries?",
+            "Are you more frustrated by lack of progress, or by not being able to stay consistent with your workouts?",
+            "What stops you from working out most often - energy levels, time management, or just not enjoying it?"
+        ]
+    
+    # Weight loss related
+    elif any(word in query_lower for word in ["weight", "lose", "fat", "pounds", "scale"]):
+        followup_questions = [
+            "What's been your biggest weight loss obstacle - staying motivated, dealing with plateaus, or managing stress eating?",
+            "Do you struggle more with the diet side or the exercise side of weight loss?",
+            "What derails your weight loss efforts most - social situations, work stress, or family responsibilities?",
+            "Are you dealing with emotional eating, or do you struggle more with consistency and routine?",
+            "What's your biggest frustration - slow progress, lack of energy, or feeling overwhelmed by all the conflicting advice?"
+        ]
+    
+    # Motivation/Psychology related
+    elif any(word in query_lower for word in ["motivation", "mindset", "stress", "habit", "goal", "struggle"]):
+        followup_questions = [
+            "What's the biggest thing that kills your motivation - setbacks, comparing yourself to others, or feeling overwhelmed?",
+            "Do you struggle more with starting new habits, or maintaining them once you get going?",
+            "What's your biggest source of stress that impacts your health goals - work, family, or financial pressures?",
+            "Are you dealing with perfectionism that holds you back, or more with inconsistency and starting over?",
+            "What's been your pattern with past goals - starting strong then fading, or never quite getting started?"
+        ]
+    
+    # Hydration/Water related
+    elif any(word in query_lower for word in ["water", "drink", "hydration"]):
+        followup_questions = [
+            "What's your biggest hydration challenge - remembering to drink water, or just not liking the taste of plain water?",
+            "Do you struggle more with drinking enough during busy workdays, or maintaining hydration during workouts?",
+            "Are you trying to lose weight, build muscle, or just feel more energetic throughout the day?"
+        ]
+    
+    # General/Other topics
+    else:
+        followup_questions = [
+            "What's your main health and fitness goal right now - losing weight, building strength, or just feeling better overall?",
+            "What's been your biggest challenge in reaching your fitness goals - time, motivation, or knowing what to do?",
+            "Are you dealing more with nutrition struggles, workout consistency, or motivation and mindset issues?",
+            "What aspect of your health journey frustrates you most - slow progress, lack of time, or conflicting information?",
+            "Do you struggle more with getting started on healthy habits, or maintaining them once you begin?"
+        ]
+    
+    # Select a random follow-up question
+    import random
+    followup = random.choice(followup_questions)
+    
+    # Add the follow-up in Glen's conversational style
+    return f"{response_text}\n\n**Let me ask you this:** {followup} I've got specific strategies for whatever you're dealing with!"
+
 def add_glen_personality(response_text: str) -> str:
     """Add Glen's personal touch to responses"""
     personal_intros = [
@@ -766,6 +852,9 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     ]
     
     response += random.choice(signatures)
+    
+    # Add strategic follow-up question
+    response = add_strategic_followup(response, query)
     
     return response
 
