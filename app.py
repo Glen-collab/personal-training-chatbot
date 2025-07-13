@@ -1296,6 +1296,6 @@ def main():
         st.markdown("### 🚀 Quick Start")
         st.markdown("**New here? Try these:**")
         
-        quick_buttons = [
+        quick_buttons = []
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
             ("🧠 Motivation", "How can you help me stay motivated?")
