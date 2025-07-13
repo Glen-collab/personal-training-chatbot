@@ -802,7 +802,7 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
         else:
             # Fallback if no calculator results
             st.session_state.show_calculator = True
-            carb_answer = """**Carbs depend on your body and goals, so get specific!**"""
+            carb_answer = """**Carbs depend on your body and goals, so get specific!**
 
 **My general rule:** Aim for 1-1.5g carbs per pound of body weight daily.
 - **Example**: 180 lbs = 180-270g carbs
