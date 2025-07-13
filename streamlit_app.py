@@ -771,26 +771,26 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
             weight = results['weight']
             activity = results['activity']
             tdee = results['tdee']
-            carb_answer = f"""**My carb rule: Aim for 1.2g per pound of body weight for balanced energy, adjusted to your goals.**
+            carb_answer = f"""**My carb rule: Aim for 1.2 g per pound of body weight for balanced energy, adjusted to your goals.**
 
 **For you ({weight} lbs, {activity}):**
-- **{carb_grams}g carbs daily** (based on your {results['protein_grams']}g protein target)
+- **{carb_grams} g carbs daily** (based on your {results['protein_grams']} g protein target)
 - **Roughly {round(carb_grams * 4 / tdee * 100)}% of your {tdee:,} calorie TDEE**
 
 **Why this works:**
 - **Carbs fuel performance**: They power your workouts and recovery.
-- **1.2g/lb is sustainable**: Enough for energy, not so much you store fat.
+- **1.2 g/lb is sustainable**: Enough for energy, not so much you store fat.
 - **Adjust based on goals**:
-  - **Weight loss**: Stick to {carb_grams - 20}-{carb_grams}g, prioritize veggies.
-  - **Muscle gain**: Bump to {carb_grams + 20}-{carb_grams + 50}g, add starches.
-  - **Maintenance**: Stay at {carb_grams}g.
+  - **Weight loss**: Stick to {carb_grams - 20}-{carb_grams} g, prioritize veggies.
+  - **Muscle gain**: Bump to {carb_grams + 20}-{carb_grams + 50} g, add starches.
+  - **Maintenance**: Stay at {carb_grams} g.
 
 **Best carb sources:**
-- **Oats**: 25g carbs per 1/2 cup (pre-workout energy)
-- **Sweet potatoes**: 26g per medium potato (steady energy)
-- **Brown rice**: 45g per cup (post-workout recovery)
-- **Vegetables**: 5-10g per cup (micronutrients, low calorie)
-- **Fruit**: 15-20g per piece (natural sugars, vitamins)
+- **Oats**: 25 g carbs per 1/2 cup (pre-workout energy)
+- **Sweet potatoes**: 26 g per medium potato (steady energy)
+- **Brown rice**: 45 g per cup (post-workout recovery)
+- **Vegetables**: 5-10 g per cup (micronutrients, low calorie)
+- **Fruit**: 15-20 g per piece (natural sugars, vitamins)
 
 **My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
 
