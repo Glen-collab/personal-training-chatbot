@@ -420,7 +420,8 @@ def format_glen_response(results: List[Dict[str, str]]) -> str:
         response += "### 📌 Related Insights:\n\n"
         for result in results[1:3]:  # Show up to 2 more related results
             category_emoji = "🧠" if "psychology" in result['book_category'].lower() else "💪" if "fitness" in result['book_category'].lower() else "🥗"
-            response += f"**{category_emoji} {result['topic']}:** {result['response'][:150]}{'...' if len(result['response']) > 150 else ''}\n\n"
+            enhanced_related = add_glen_personality(result['response'])
+            response += f"**{category_emoji} {result['topic']}**\n\n{enhanced_related}\n\n"
     
     # Add personal signature
     signatures = [
