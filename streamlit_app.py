@@ -517,7 +517,7 @@ def get_quick_answer(query: str) -> str:
 • **Vegetables**: 5-10g per cup (micronutrients, low calorie)
 • **Fruit**: 15-20g per piece (natural sugars, vitamins)
 
-**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
+**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy - don't fall for it!
 
 **Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
 
@@ -792,7 +792,7 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 - **Vegetables**: 5-10 g per cup (micronutrients, low calorie)
 - **Fruit**: 15-20 g per piece (natural sugars, vitamins)
 
-**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy-do not fall for it!
+**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
 
 **Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
 
