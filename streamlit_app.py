@@ -923,7 +923,67 @@ def add_glen_personality(response_text: str) -> str:
     
     return response_text
 
-def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
+def format_glen_response(content: Dict[str, Any], query: str = "") -> str:
+    """Format content as Glen's response - simplified"""
+    
+    # First check for quick answers
+    quick_answer = get_quick_answer(query)
+    if quick_answer:
+        return quick_answer
+    
+    # Check if content is exhausted
+    if content and content.get('is_exhausted', False):
+        exhausted_responses = [
+            "Alright, alright! I think you've gotten all my wisdom on this topic. Time to shit or get off the pot - pick a different question or actually DO something with what I've told you!",
+            "Hey, we've covered this ground pretty thoroughly! How about we talk about something else, or better yet, go apply what you've learned? Action beats analysis paralysis every time!",
+            "I've given you everything I've got on this one! Time to stop clicking buttons and start lifting weights. What else can I help you with?",
+            "You've officially exhausted my knowledge bank on this topic! That means it's time to stop researching and start doing. What's your next move going to be?",
+            "Okay, you've definitely gotten your money's worth on this subject! Time to take action instead of asking the same question fifty different ways. What else is on your mind?"
+        ]
+        
+        import random
+        return f"{random.choice(exhausted_responses)}\n\n**Let me ask you this:** What's holding you back from actually implementing what you've learned? I've got strategies to get you moving!"
+    
+    # No content found
+    if not content:
+        encouraging_responses = [
+            "Let's tackle this together! Even if that specific topic isn't in my current materials, I've helped thousands of people with similar challenges.",
+            "Great question! While I might not have that exact info loaded right now, my 25+ years of experience tells me we can definitely figure this out.",
+            "I love that you're asking the tough questions! That's exactly the mindset that leads to real transformation."
+        ]
+        
+        import random
+        base_response = random.choice(encouraging_responses)
+        return f"{base_response}\n\n**Let me ask you this:** What's your biggest challenge right now - time, motivation, or knowing what to do? I've got specific strategies for whatever you're dealing with!"
+    
+    # Format the response with rotating openings
+    personal_openings = [
+        "In my experience working with thousands of clients...",
+        "From my 25+ years in this field, here's what I know...",
+        "Based on my background as a trainer and former competitor...",
+        "After helping people transform for over two decades...",
+        "From my time owning Wisconsin Barbell Gym, I've learned..."
+    ]
+    
+    import random
+    opening = random.choice(personal_openings)
+    
+    response = f"**{opening}**\n\n"
+    response += f"### 🎯 {content['topic']}\n\n{content['response']}\n\n"
+    
+    # Add signature
+    signatures = [
+        "---\n*This comes from my 17+ years as a gym owner, personal trainer, and former competitive lifter. Every piece of advice is battle-tested with real clients.*",
+        "---\n*Hope this helps! This approach has worked for thousands of my clients at Wisconsin Barbell Gym.*",
+        "---\n*These insights combine my competition experience, training expertise, and 25+ years of understanding what motivates people.*"
+    ]
+    
+    response += random.choice(signatures)
+    
+    # Add strategic follow-up
+    response = add_strategic_followup(response, query)
+    
+    return response
     """Format the search results as if Glen is personally responding"""
     
     # First check for quick answers to common questions
@@ -1183,27 +1243,25 @@ def main():
             if st.button(label, key=f"quick_{label}"):
                 # Clear previous messages for fresh start
                 st.session_state.messages = []
-                
-                # Reset calculator for new topics
                 st.session_state.show_calculator = False
                 
-                # Simple tracking: increment counter for this button
-                button_counter_key = f"counter_{label}"
-                if button_counter_key not in st.session_state:
-                    st.session_state[button_counter_key] = 0
-                st.session_state[button_counter_key] += 1
+                # Simple counter for this specific button
+                counter_key = f"button_clicks_{label}"
+                if counter_key not in st.session_state:
+                    st.session_state[counter_key] = 0
+                st.session_state[counter_key] += 1
                 
-                # Add counter to query to make it unique
-                modified_query = f"{query} [click_{st.session_state[button_counter_key]}]"
+                # Get content based on click number
+                click_number = st.session_state[counter_key]
+                content = get_content_for_topic(query, data, click_number)
+                response = format_glen_response(content, query)
                 
-                st.session_state.messages.append({"role": "user", "content": query})
-                results = search_all_knowledge_bases(modified_query, data)
-                response = format_glen_response(results, query)
-                
-                # Check if response mentions calculator and set flag
+                # Check if response mentions calculator
                 if "calculator below" in response.lower() or "use the calculator" in response.lower():
                     st.session_state.show_calculator = True
                 
+                # Add to messages
+                st.session_state.messages.append({"role": "user", "content": query})
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
     
