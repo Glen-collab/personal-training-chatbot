@@ -537,7 +537,7 @@ def main():
     st.markdown("### 💡 Popular Questions")
     example_questions = [
         "How much protein should I eat daily?",
-        "What's the theory of planned behavior?", 
+        "How do I connect and thrive in my fitness journey?", 
         "How do I overcome weight loss barriers?",
         "What's your training philosophy?",
         "How do I stay motivated for 12 weeks?",
