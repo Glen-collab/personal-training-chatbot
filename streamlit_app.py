@@ -794,7 +794,7 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 
 **My experience:** After 25+ years, I have seen clients thrive on this carb range. It is enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy - do not fall for it!
 
-**Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
+**Pro tip:** Time carbs around workouts - 50% of daily carbs pre/post-workout for max performance.
 
 **Let me ask you:** Are you struggling with energy crashes, or is carb confusion (what to eat, when) your biggest issue? I've got strategies for both!
 
