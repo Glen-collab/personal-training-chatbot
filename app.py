@@ -654,10 +654,9 @@ Here’s the deal:
 
     return responses[strike]
 
-
-    # Water/hydration questions - simplified
-    if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
-        return """**My simple hydration rule: At least 1 gallon of water daily.**
+# Water/hydration questions - simplified
+if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
+    return """**My simple hydration rule: At least 1 gallon of water daily.**
 
 **Easy to remember:**
 • **1 gallon = 128 ounces = 16 cups**
