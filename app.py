@@ -1291,11 +1291,102 @@ def main():
                 st.session_state.calculated_results = None
                 st.rerun()
             
+            with col2:
+        # Show sticky calculator results if available
+        if st.session_state.calculated_results:
+            results = st.session_state.calculated_results
+            
+            st.markdown("### 📊 **Your Numbers**")
+            st.markdown(f"*{results['weight']} lbs, {results['height_ft']}'{results['height_in']}\", {results['age']}yr, {results['gender'].lower()}*")
+            
+            # Compact metrics in sidebar
+            st.metric("🔥 BMR", f"{results['bmr']:,}")
+            st.metric("⚡ TDEE", f"{results['tdee']:,}")
+            st.metric("🎯 Target", f"{results['weight_loss']:,}")
+            st.metric("🍖 Protein", f"{results['protein_grams']}g")
+            
+            if st.button("🗑️ Clear Results", key="clear_calc"):
+                st.session_state.calculated_results = None
+                st.rerun()
+            
             st.markdown("---")
         
         st.markdown("### 🚀 Quick Start")
         st.markdown("**New here? Try these:**")
         
-        quick_buttons = []
+        quick_buttons = [
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
-            ("🧠 Motivation", "How can you help me stay motivated?")
+            ("🧠 Motivation", "How can you help me stay motivated?"),
+            ("🥗 Nutrition", "What should I know about protein and nutrition?"),
+            ("🔥 Get Moving", "I need to stop analyzing and start doing!")
+        ]
+        
+        for label, query in quick_buttons:
+            if st.button(label, key=f"quick_{label}"):
+                # Clear previous messages for fresh start
+                st.session_state.messages = []
+                st.session_state.show_calculator = False
+                
+                # Simple counter for this specific button
+                counter_key = f"button_clicks_{label}"
+                if counter_key not in st.session_state:
+                    st.session_state[counter_key] = 0
+                st.session_state[counter_key] += 1
+                click_number = st.session_state[counter_key]
+                
+                # Log button click
+                logger.debug(f"Button clicked: {label}, Query: {query}, Click number: {click_number}")
+                
+                # Get content using search_all_knowledge_bases
+                results = search_all_knowledge_bases(query, data, click_number)
+                
+                if results:
+                    logger.debug(f"Found content - Topic: {results[0].get('topic', 'NONE')}, Section: {results[0].get('section', 'NONE')}, Response ID: {results[0].get('response_id', 'NONE')}")
+                else:
+                    logger.debug("NO CONTENT RETURNED!")
+                
+                response = format_glen_response(results, query)
+                
+                # Check if response mentions calculator
+                if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                    st.session_state.show_calculator = True
+                
+                # Add to messages
+                st.session_state.messages.append({"role": "user", "content": query})
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()
+    
+    # Example questions section
+    st.markdown("### 💡 Popular Questions")
+    example_questions = [
+        "How many calories should I eat daily?",
+        "How much protein do I need?", 
+        "How often should I exercise?",
+        "How much water should I drink?",
+        "How fast can I lose weight?",
+        "When should I eat and plan my meals?"
+    ]
+    
+    cols = st.columns(3)
+    for i, question in enumerate(example_questions):
+        col = cols[i % 3]
+        if col.button(question, key=f"example_{i}"):
+            # Clear previous messages for fresh start
+            st.session_state.messages = []
+            
+            # Reset calculator for new topics
+            st.session_state.show_calculator = False
+            
+            st.session_state.messages.append({"role": "user", "content": question})
+            results = search_all_knowledge_bases(question, data)
+            response = format_glen_response(results, question)
+            
+            # Check if response mentions calculator and set flag
+            if "calculator below" in response.lower() or "use the calculator" in response.lower():
+                st.session_state.show_calculator = True
+            
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            st.rerun()
+
+if __name__ == "__main__":
+    main()
