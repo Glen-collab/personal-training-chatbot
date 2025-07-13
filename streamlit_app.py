@@ -1326,7 +1326,7 @@ def add_strategic_followup(response_text: str, query: str) -> str:
     return f"{response_text}\n\n**Let me ask you this:** {followup} I've got specific strategies for whatever you're dealing with!"
 
 def add_glen_personality(response_text: str) -> str:
-    """Add Glen's personal touch to responses - but avoid repetition"""
+    """Add Glen personal touch to responses - but avoid repetition"""
     
     # Only add personality if response doesn't already have Glen's voice
     if "glen" in response_text.lower() or "my" in response_text.lower() or "i've" in response_text.lower():
