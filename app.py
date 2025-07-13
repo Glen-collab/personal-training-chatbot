@@ -788,33 +788,22 @@ def add_strategic_followup(response_text: str, query: str) -> str:
     return f"{response_text}\n\n**Let me ask you this:** {followup} I've got specific strategies for whatever you're dealing with!"
 
 def add_glen_personality(response_text: str) -> str:
-    """Add Glen's personal touch to responses"""
-    personal_intros = [
-        "In my 17 years as a trainer and gym owner, ",
-        "From my experience coaching thousands of clients, ",
-        "As a former powerlifter and strongman competitor, ",
-        "At Wisconsin Barbell Gym, I've learned that ",
-        "After 25 years of working with clients, I've learned that ",
-        "From my experience understanding what motivates people, "
-    ]
+    """Add Glen's personal touch to responses - but avoid repetition"""
     
-    personal_connectors = [
-        "\n\nI've seen this pattern with many of my clients at the gym. ",
-        "\n\nThis reminds me of when I was competing - ",
-        "\n\nI always tell my clients: ",
-        "\n\nFrom my psychology studies, I know that ",
-        "\n\nOne thing I've learned after all these years: "
-    ]
+    # Only add personality if response doesn't already have Glen's voice
+    if "glen" in response_text.lower() or "my" in response_text.lower() or "i've" in response_text.lower():
+        return response_text  # Already has personality, don't add more
     
-    # Add personality based on content
-    if "protein" in response_text.lower():
-        response_text += "\n\n*I've personally tested this approach and even had blood work done to verify it's safe and effective.*"
+    # Add personality based on content - but keep it unique
+    if "protein" in response_text.lower() and "blood work" not in response_text.lower():
+        response_text += "\n\n*In my experience, this protein approach has been safe and effective for thousands of clients.*"
     
-    if any(word in response_text.lower() for word in ["stress", "motivation", "mindset"]):
-        response_text += "\n\n*This is where my 25+ years of client experience really helps people break through mental barriers.*"
+    elif any(word in response_text.lower() for word in ["stress", "motivation", "mindset"]) and "client experience" not in response_text.lower():
+        response_text += "\n\n*From my 25+ years of working with people, I've learned that mindset is often the missing piece.*"
     
-    if "training" in response_text.lower() or "exercise" in response_text.lower():
-        response_text += "\n\n*Remember, I train at 3:30am because consistency builds habits, and habits build character. Find what works for YOUR schedule.*"
+    elif "training" in response_text.lower() or "exercise" in response_text.lower():
+        if "3:30am" not in response_text.lower():
+            response_text += "\n\n*The key is finding a routine that works for YOUR life and schedule.*"
     
     return response_text
 
@@ -874,11 +863,11 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     
     # Start with a personal greeting
     personal_openings = [
-        "Great question! Let me share what I know about this...",
-        "I'm glad you asked about this - it's something I work with clients on regularly.",
-        "This is exactly the kind of thing I help people with at the gym. Here's my take:",
-        "Perfect timing on this question! This comes up a lot in my coaching practice.",
-        "I love talking about this topic - it's core to what I do. Let me break it down:"
+        "In my experience working with thousands of clients...",
+        "From my 25+ years in this field, here's what I know...",
+        "Based on my background as a trainer and former competitor...",
+        "After helping people transform for over two decades...",
+        "From my time owning Wisconsin Barbell Gym, I've learned..."
     ]
     
     response = f"**{random.choice(personal_openings)}**\n\n"
@@ -988,6 +977,9 @@ def main():
         
         # Chat input
         if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, psychology, or motivation..."):
+            # Clear previous messages for fresh start
+            st.session_state.messages = []
+            
             # Reset calculator flag for new questions
             st.session_state.show_calculator = False
             
@@ -1045,6 +1037,9 @@ def main():
         
         for label, query in quick_buttons:
             if st.button(label, key=f"quick_{label}"):
+                # Clear previous messages for fresh start
+                st.session_state.messages = []
+                
                 # Reset calculator for new topics
                 st.session_state.show_calculator = False
                 
@@ -1074,6 +1069,9 @@ def main():
     for i, question in enumerate(example_questions):
         col = cols[i % 3]
         if col.button(question, key=f"example_{i}"):
+            # Clear previous messages for fresh start
+            st.session_state.messages = []
+            
             # Reset calculator for new topics
             st.session_state.show_calculator = False
             
