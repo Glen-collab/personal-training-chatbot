@@ -138,9 +138,9 @@
     },
 
     "age_and_metabolism": {
-      "tags": ["age", "metabolism", "aging", "older-adults", "self-care", "muscle-mass", "hormone-health", "life-changes", "starting-over", "never-too-late"],
-      "keywords": ["metabolism_slowing", "getting_older", "age_40_50_60", "muscle_is_metabolism", "self_care_priority", "starting_late", "hormone_changes", "energy_levels", "taking_care_of_others"],
-      "content": [
+  "tags": ["age", "metabolism", "aging", "older-adults", "self-care", "muscle-mass", "hormone-health", "life-changes", "starting-over", "never-too-late", "getting-older", "age-related", "metabolism-slowing"],
+  "keywords": ["metabolism_slowing", "getting_older", "age_40_50_60", "muscle_is_metabolism", "self_care_priority", "starting_late", "hormone_changes", "energy_levels", "taking_care_of_others", "what_age", "how_old", "old_people", "older_adults", "aging_process", "slow_metabolism", "metabolism_myths", "age_questions", "getting_old", "too_old", "age_concerns"],
+  "content": [
         {
           "topic": "Metabolism is Muscle - It's Never Too Late",
           "response": "Here's the truth about metabolism and age: metabolism IS muscle. When people say their metabolism slowed down, what really happened is they lost muscle mass. The good news? You can build muscle at ANY age. I've trained people in their 60s and 70s who got stronger than they were in their 40s. It's never too late to start something new and transform your body."
