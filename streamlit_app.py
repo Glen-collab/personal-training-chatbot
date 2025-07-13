@@ -1251,9 +1251,20 @@ def main():
                     st.session_state[counter_key] = 0
                 st.session_state[counter_key] += 1
                 
-                # Get content based on click number
+                # Show debug info temporarily
                 click_number = st.session_state[counter_key]
+                st.write(f"🔍 DEBUG: Button '{label}' clicked {click_number} times")
+                st.write(f"🔍 DEBUG: Query = '{query}'")
+                
+                # Get content based on click number
                 content = get_content_for_topic(query, data, click_number)
+                
+                if content:
+                    st.write(f"🔍 DEBUG: Found content - Topic: {content.get('topic', 'NONE')}")
+                    st.write(f"🔍 DEBUG: Section: {content.get('section', 'NONE')}")
+                else:
+                    st.write("🔍 DEBUG: NO CONTENT RETURNED!")
+                
                 response = format_glen_response(content, query)
                 
                 # Check if response mentions calculator
