@@ -309,26 +309,56 @@ def calculate_bmr_tdee(weight_lbs: float, height_inches: float, age: int, gender
     }
 
 def show_calorie_calculator():
-    """Display interactive calorie calculator"""
+    """Display interactive calorie calculator with Glen's explanations"""
     st.markdown("### 🧮 **Glen's Personal Calorie Calculator**")
+    
+    # Add Glen's explanations for BMR and TDEE
+    with st.expander("📚 **What are BMR and TDEE? (Click to learn)**", expanded=False):
+        st.markdown("""
+        ### 🔥 **BMR (Basal Metabolic Rate)**
+        Your BMR is the number of calories your body burns just to stay alive - breathing, heart beating, brain functioning, cell repair. Think of it as your body's "idle speed."
+        
+        **Glen's take:** "Even if you laid in bed all day, you'd still burn your BMR calories. It's usually 60-70% of your total daily burn. This is why crash diets are stupid - you can't go below your BMR for long without your body fighting back."
+        
+        ### ⚡ **TDEE (Total Daily Energy Expenditure)**
+        Your TDEE is your BMR PLUS all the calories you burn through activity - walking, working out, even fidgeting. This is your true daily calorie burn.
+        
+        **Glen's experience:** "After 25+ years of coaching, I've learned that most people underestimate their activity level. Be honest about your real lifestyle, not what you wish it was. That's how you get accurate numbers that actually work."
+        
+        ### 🎯 **Why This Matters for Weight Loss**
+        - **Eat above TDEE = Weight gain**
+        - **Eat at TDEE = Weight maintenance** 
+        - **Eat below TDEE = Weight loss**
+        
+        **My recommendation:** Start 500 calories below your TDEE for steady 1 lb/week loss. It's sustainable and you won't feel like you're starving.
+        """)
+    
     st.markdown("*Get your exact numbers based on your stats!*")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        weight = st.number_input("Weight (lbs)", min_value=80, max_value=400, value=180, step=1)
-        height_ft = st.number_input("Height (feet)", min_value=4, max_value=7, value=5, step=1)
-        height_in = st.number_input("Height (inches)", min_value=0, max_value=11, value=10, step=1)
+        st.markdown("#### 📏 **Physical Stats**")
+        weight = st.number_input("Weight (pounds)", min_value=80, max_value=400, value=180, step=1)
+        
+        # Separate feet and inches for height
+        height_ft = st.number_input("Height - Feet", min_value=4, max_value=7, value=5, step=1)
+        height_in = st.number_input("Height - Inches", min_value=0, max_value=11, value=10, step=1)
+        
+        st.info(f"Your height: {height_ft}'{height_in}\"")
         
     with col2:
+        st.markdown("#### 👤 **Personal Info**")
         age = st.number_input("Age", min_value=18, max_value=80, value=35, step=1)
         gender = st.selectbox("Gender", ["Male", "Female"])
-        activity = st.selectbox("Activity Level", [
+        
+        st.markdown("#### 🏃 **Activity Level**")
+        activity = st.selectbox("Choose your HONEST activity level:", [
             "Sedentary (desk job, no exercise)",
             "Lightly Active (light exercise 1-3 days/week)", 
             "Moderately Active (moderate exercise 3-5 days/week)",
             "Very Active (hard exercise 6-7 days/week)",
-            "Extra Active (very hard exercise, physical job)"
+            "Extra Active (very hard exercise + physical job)"
         ])
     
     # Map activity selection to key
@@ -337,72 +367,86 @@ def show_calorie_calculator():
         "Lightly Active (light exercise 1-3 days/week)": "lightly_active",
         "Moderately Active (moderate exercise 3-5 days/week)": "moderately_active", 
         "Very Active (hard exercise 6-7 days/week)": "very_active",
-        "Extra Active (very hard exercise, physical job)": "extra_active"
+        "Extra Active (very hard exercise + physical job)": "extra_active"
     }
     
-    if st.button("🔥 Calculate My Numbers", type="primary"):
+    if st.button("🔥 Calculate My Numbers", type="primary", use_container_width=True):
         total_height = (height_ft * 12) + height_in
         results = calculate_bmr_tdee(weight, total_height, age, gender, activity_map[activity])
         
         st.markdown("---")
         st.markdown("### 🎯 **Your Personal Numbers:**")
+        st.markdown(f"*Based on: {weight} lbs, {height_ft}'{height_in}\", {age} years old, {gender.lower()}, {activity.split('(')[0].strip()}*")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.metric("🔥 BMR (Base Metabolic Rate)", f"{results['bmr']:,} calories", 
-                     help="Calories burned at rest")
+            st.metric("🔥 BMR", f"{results['bmr']:,} cal/day", 
+                     help="Calories burned just staying alive")
             
         with col2:
-            st.metric("⚡ TDEE (Total Daily Energy)", f"{results['tdee']:,} calories",
-                     help="Total calories burned daily")
+            st.metric("⚡ TDEE", f"{results['tdee']:,} cal/day",
+                     help="Total calories burned daily with activity")
             
         with col3:
-            st.metric("🍖 Daily Protein Target", f"{results['protein_grams']}g",
-                     help="1g per pound bodyweight")
+            st.metric("🍖 Protein Target", f"{results['protein_grams']}g/day",
+                     help="Glen's rule: 1g per pound bodyweight")
         
-        st.markdown("### 📊 **Glen's Weight Loss Recommendations:**")
+        st.markdown("---")
+        st.markdown("### 📊 **Glen's Weight Loss Plan for You:**")
         
         loss_col1, loss_col2 = st.columns(2)
         
         with loss_col1:
-            st.info(f"""
-            **🎯 Steady Weight Loss (1 lb/week)**
+            st.success(f"""
+            #### 🎯 **Recommended: Steady Loss**
             
-            **{results['weight_loss']:,} calories daily**
+            **{results['weight_loss']:,} calories per day**
             
-            *This is my recommended starting point for sustainable results.*
+            *500 calorie deficit = 1 lb/week*
+            
+            **Glen says:** "This is my sweet spot. You'll lose weight consistently without feeling deprived. Most of my successful clients start here."
             """)
             
         with loss_col2:
             st.warning(f"""
-            **🚀 Aggressive Loss (1.5 lbs/week)**
+            #### 🚀 **Aggressive: Fast Loss**
             
-            **{results['aggressive_loss']:,} calories daily**
+            **{results['aggressive_loss']:,} calories per day**
             
-            *Only if you're highly motivated and can stick to it.*
+            *750 calorie deficit = 1.5 lbs/week*
+            
+            **Glen's warning:** "Only do this if you're highly motivated and can stick to it. Most people burn out on aggressive cuts."
             """)
         
-        st.success(f"""
-        ### 💪 **Glen's Personal Recommendations for You:**
+        st.markdown("---")
+        st.info(f"""
+        ### 💪 **Glen's Complete Plan for You:**
         
-        • **Start with {results['weight_loss']:,} calories daily** for steady progress
-        • **Eat {results['protein_grams']}g protein every day** (non-negotiable!)
-        • **Track your food for the first week** to learn your patterns
-        • **Weigh yourself weekly, same day/time** for accurate progress
+        **🥘 Daily Targets:**
+        • **{results['weight_loss']:,} calories** (for steady 1 lb/week loss)
+        • **{results['protein_grams']}g protein** (non-negotiable!)
+        • **{round(results['protein_grams'] * 1.2)}g carbs** (for energy)
+        • **{round(results['weight_loss'] * 0.25 / 9)}g healthy fats** (for hormones)
         
-        **Remember:** These are starting points. Adjust based on your results after 2-3 weeks!
+        **📈 Tracking Tips:**
+        • Weigh yourself same day/time weekly
+        • Take progress photos every 2 weeks
+        • Track food for first 2 weeks to learn portions
+        • Adjust calories if no progress after 3 weeks
+        
+        **Glen's reality check:** "These numbers are your starting point. Every body responds differently. Give it 2-3 weeks, then adjust based on your results. I've been doing this for 25+ years - trust the process!"
         """)
         
         st.markdown("---")
         st.markdown("""
-        ### 🗓️ **Want a Complete Weekly Plan?**
+        ### 🗓️ **Ready for Your Complete Transformation Plan?**
         
-        Get a detailed meal plan, workout schedule, and shopping list customized to your exact calories and goals:
+        These numbers are just the foundation. Get your personalized meal plans, workout schedules, and shopping lists:
         
-        👉 **[Visit bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for the full planning system!
+        👉 **[Visit bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)**
         
-        *This calculator gives you the foundation - my planning page builds your complete transformation roadmap.*
+        *Turn these calories into a complete 12-week transformation system!*
         """)
 
 def get_quick_answer(query: str) -> str:
@@ -411,9 +455,12 @@ def get_quick_answer(query: str) -> str:
     
     # Calorie questions - now with calculator
     if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "bmr", "tdee"]):
+        # Set a flag to show calculator
+        st.session_state.show_calculator = True
+        
         return """**Let me give you YOUR exact calorie numbers!**
 
-Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Scroll down to use my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
+Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Check out my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
 
 **My quick guidelines while you calculate:**
 • **Men:** Usually 2,200-2,800 calories for weight loss
@@ -425,8 +472,6 @@ Instead of generic advice, let's calculate your personal BMR and TDEE based on y
 Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for a complete meal plan built around your specific calorie target.
 
 *After 25+ years of coaching, I've learned that personalized numbers get personalized results!*
-
----
 
 **👇 Use the calculator below to get your exact numbers! 👇**"""
 
@@ -743,6 +788,8 @@ def main():
     # Initialize session state early
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    if "show_calculator" not in st.session_state:
+        st.session_state.show_calculator = False
     
     # Sidebar with enhanced program info
     with st.sidebar:
@@ -782,16 +829,8 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # Show calorie calculator if calories mentioned in recent messages
-        show_calculator = False
-        if st.session_state.messages:  # This is now safe since we initialized it above
-            recent_messages = st.session_state.messages[-2:]  # Check last 2 messages
-            for msg in recent_messages:
-                if any(word in msg["content"].lower() for word in ["calories", "calorie", "bmr", "tdee", "how much eat", "how many eat"]):
-                    show_calculator = True
-                    break
-        
-        if show_calculator:
+        # Show calorie calculator if triggered
+        if st.session_state.show_calculator:
             show_calorie_calculator()
             st.markdown("---")
         
