@@ -1,0 +1,108 @@
+[TPB_WEIGHT_LOSS]
+Ajzen’s Theory of Planned Behavior shows weight loss depends on intentions, driven by attitudes (liking healthy habits), subjective norms (support from others), and perceived behavioral control (feeling capable). Stressors like caregiving or divorce can lower control and weaken intentions. Small steps like quick meals and AdvoCare Spark build confidence. Contact Glen or Ali at www.advocare.com/11057354 for a TPB-based plan—it’s like having a fitness coach!
+
+[SUPPLEMENTS_WEIGHT_LOSS]
+AdvoCare Spark and Rehydrate support weight loss despite stress. Spark, a zero-sugar energy drink with 120 mg caffeine and 20 nutrients, boosts focus for meal prep and workouts. Rehydrate, an electrolyte drink, aids recovery and prevents fatigue. Use Spark before exercise and Rehydrate after, but consult a doctor if sensitive to caffeine or electrolytes. Contact Glen or Ali at www.advocare.com/11057354 for supplement guidance—it’s like having a fitness coach!
+
+[AGING_PARENTS_BARRIER]
+Excuse: Caring for aging parents leaves me too stressed to focus on weight loss. This ties to low perceived behavioral control in TPB, as stress reduces confidence in managing health. Quick meals and short walks, boosted by AdvoCare Spark, make it doable. Contact Glen or Ali at www.advocare.com/11057354 for a stress-busting plan—it’s like having a fitness coach!
+
+[AGING_PARENTS_Q1A]
+Q: How can I lose weight when I’m stressed about caring for my aging parents? You can manage stress and weight! Sip one glass of wine and prep quick salads, boosted by AdvoCare Spark for energy. A 15-minute walk lifts your mood. You’ll shed pounds and feel in control—contact Glen or Ali at www.advocare.com/11057354 for tailored tips—it’s like having a fitness coach!
+
+[AGING_PARENTS_Q1B]
+Q: Isn’t weight loss impossible with the stress of looking after my parents? Stress doesn’t stop you! Choose low-calorie drinks and protein snacks, paired with AdvoCare Rehydrate for recovery. Short workouts lift your spirits. You’ll lose weight and handle caregiving—contact Glen or Ali at www.advocare.com/11057354 for a custom plan—it’s like having a fitness coach!
+
+[AGING_PARENTS_Q1C]
+Q: Don’t my aging parents’ needs make weight loss too hard? You’re stronger than stress! Enjoy one drink and eat balanced meals like chicken and veggies with AdvoCare Spark for focus. Quick exercise recharges you. You’ll slim down and thrive—contact Glen or Ali at www.advocare.com/11057354 for personalized strategies—it’s like having a fitness coach!
+
+[KIDS_EXHAUSTING_BARRIER]
+Excuse: Raising young kids is too exhausting to focus on healthy eating. TPB links this to negative attitudes, where exhaustion makes healthy eating seem unappealing. Simple meals and AdvoCare Rehydrate keep you energized. Contact Glen or Ali at www.advocare.com/11057354 for an easy plan—it’s like having a fitness coach!
+
+[KIDS_EXHAUSTING_Q2A]
+Q: How do I eat healthy when raising young kids wears me out? Kids keep you busy, but you’ve got this! Prep simple wraps and sip one drink, using AdvoCare Spark for energy. A walk with kids burns calories. You’ll slim down and feel energized—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[KIDS_EXHAUSTING_Q2B]
+Q: Isn’t healthy eating too hard when I’m exhausted from parenting? Parenting is tough, but health is simple! Make quick smoothies with AdvoCare Rehydrate for recovery, limiting to one glass of wine. Playtime with kids doubles as exercise. You’ll lose weight and shine—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[KIDS_EXHAUSTING_Q2C]
+Q: Don’t young kids make it impossible to focus on weight loss? You can do both! Batch-cook healthy meals and use AdvoCare Spark for motivation, enjoying one drink. Active play with kids keeps you fit. You’ll drop pounds and thrive—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[KIDS_ACTIVITIES_BARRIER]
+Excuse: Driving kids to sports and activities leaves no time for weight loss. TPB ties this to low perceived behavioral control due to time constraints. Use downtime for quick workouts and AdvoCare Spark for energy. Contact Glen or Ali at www.advocare.com/11057354 for a time-saving plan—it’s like having a fitness coach!
+
+[KIDS_ACTIVITIES_Q3A]
+Q: How can I lose weight when I’m always driving kids to activities? Turn drive time into health time! Pack nuts and sip one low-calorie drink with AdvoCare Rehydrate for recovery. Walk during practice. You’ll slim down while cheering them on—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[KIDS_ACTIVITIES_Q3B]
+Q: Isn’t weight loss tough when I’m stuck driving kids to sports? You’re not stuck! Prep quick salads and use AdvoCare Spark for energy, enjoying one drink. Use practice time for a brisk walk. You’ll lose weight and stay active—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[KIDS_ACTIVITIES_Q3C]
+Q: Don’t kids’ activities take up all my time for healthy habits? Make it work! Keep healthy snacks and limit booze to one glass with AdvoCare Rehydrate for recovery. Exercise while kids train. You’ll feel fit and keep up—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[SPOUSAL_STRESS_BARRIER]
+Excuse: Spousal stress makes it hard to focus on losing weight. TPB links this to negative attitudes from emotional strain. Quick meals and AdvoCare Spark help you stay focused. Contact Glen or Ali at www.advocare.com/11057354 for a stress-relief plan—it’s like having a fitness coach!
+
+[SPOUSAL_STRESS_Q4A]
+Q: How do I lose weight when spousal stress overwhelms me? Stress less with healthy habits! Sip one drink and eat protein-packed meals with AdvoCare Rehydrate for recovery. A quick workout clears your mind. You’ll shed pounds and feel stronger—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[SPOUSAL_STRESS_Q4B]
+Q: Isn’t weight loss impossible with all my spousal tension? You can rise above! Enjoy one glass of wine and focus on veggies with AdvoCare Spark for energy. Short walks reduce stress. You’ll lose weight and find calm—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[SPOUSAL_STRESS_Q4C]
+Q: Don’t relationship issues make healthy eating too hard? You’re in control! Pair one drink with balanced meals and use AdvoCare Rehydrate for recovery. Light exercise empowers you. You’ll slim down despite stress—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[DIVORCE_STRESS_BARRIER]
+Excuse: Going through a divorce is too stressful to focus on weight loss. TPB connects this to low perceived control from emotional turmoil. AdvoCare Spark and quick workouts rebuild confidence. Contact Glen or Ali at www.advocare.com/11057354 for a resilience plan—it’s like having a fitness coach!
+
+[DIVORCE_STRESS_Q5A]
+Q: How can I lose weight during the stress of a divorce? Divorce is tough, but you’re tougher! Sip one drink and prep simple eggs with AdvoCare Rehydrate for recovery. A short walk lifts your mood. You’ll lose weight and reclaim strength—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[DIVORCE_STRESS_Q5B]
+Q: Isn’t weight loss impossible while dealing with a divorce? You’ve got the power! Limit to one glass and eat nutrient-rich foods with AdvoCare Spark for energy. Exercise boosts confidence. You’ll shed pounds and feel unstoppable—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[DIVORCE_STRESS_Q5C]
+Q: Don’t divorce stresses make healthy habits too hard? You can thrive! Enjoy one drink and focus on healthy fish with AdvoCare Rehydrate for recovery. Quick workouts empower you. You’ll lose weight and shine—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[... Additional excuses and questions follow the same structure, e.g., WORK_STRESS_BARRIER, FINANCIAL_STRESS_BARRIER, etc., up to 25 excuses with 75 questions ...]
+
+[EXPENSIVE_TIME_BARRIER]
+Excuse: Healthy eating is too expensive and time-consuming. TPB ties this to negative attitudes and low perceived control, as cost and time deter healthy habits. Affordable staples and AdvoCare Spark simplify it. Contact Glen or Ali at www.advocare.com/11057354 for a budget-friendly plan—it’s like having a fitness coach!
+
+[EXPENSIVE_TIME_Q26A]
+Q: Isn’t healthy eating too expensive and time-consuming? Healthy eating is simpler than you think! Buy affordable eggs and frozen veggies with AdvoCare Rehydrate for recovery. Batch-cook weekly to save time. You’ll slim down and save—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[EXPENSIVE_TIME_Q26B]
+Q: Doesn’t eating healthy cost too much and take too long to prepare? You don’t need a big budget! Shop for bulk grains and use AdvoCare Spark for energy to prep in under an hour. You’ll lose weight and fit it in—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[EXPENSIVE_TIME_Q26C]
+Q: Why bother with healthy food when it’s so costly and time-intensive? Healthy eating is an investment! Simple lentils and AdvoCare Rehydrate take minutes to prep. You’ll transform your health—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[NO_TIME_COOK_BARRIER]
+Excuse: I don’t have time to cook healthy meals every day. TPB links this to low perceived control due to time constraints. Quick recipes and AdvoCare Spark make it manageable. Contact Glen or Ali at www.advocare.com/11057354 for a time-saving plan—it’s like having a fitness coach!
+
+[NO_TIME_COOK_Q27A]
+Q: Don’t I need a lot of time to cook healthy meals daily? You don’t need hours! Batch-cook chicken and veggies with AdvoCare Rehydrate for recovery on weekends. You’ll stay fueled and slim down—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[NO_TIME_COOK_Q27B]
+Q: Isn’t cooking healthy food every day too time-consuming? Healthy meals are quick! Prep a week’s worth with AdvoCare Spark for energy. You’ll save time and lose weight—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[NO_TIME_COOK_Q27C]
+Q: How can I cook healthy when I’m too busy every day? Busy schedule? Make grab-and-go salads with AdvoCare Rehydrate for recovery. You’ll stay fit and thrive—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[TASTE_JUNK_BARRIER]
+Excuse: Healthy food doesn’t taste as good as junk food. TPB connects this to negative attitudes toward healthy eating. Flavorful recipes and AdvoCare Spark make it enjoyable. Contact Glen or Ali at www.advocare.com/11057354 for tasty plans—it’s like having a fitness coach!
+
+[TASTE_JUNK_Q28A]
+Q: Doesn’t healthy food taste worse than junk food? Healthy food can be delicious! Spice up veggies with AdvoCare Rehydrate for hydration. You’ll love every bite—contact Glen or Ali at www.advocare.com/11057354 for tips—it’s like having a fitness coach!
+
+[TASTE_JUNK_Q28B]
+Q: Why eat healthy when junk food is so much tastier? You can love healthy food! Use herbs and AdvoCare Spark for energy to cook crave-worthy meals. You’ll feel great—contact Glen or Ali at www.advocare.com/11057354 for a plan—it’s like having a fitness coach!
+
+[TASTE_JUNK_Q28C]
+Q: Isn’t healthy eating less enjoyable than fast food? Healthy eating is a flavor adventure! Grill proteins with AdvoCare Rehydrate for recovery. You’ll enjoy meals and slim down—contact Glen or Ali at www.advocare.com/11057354 for strategies—it’s like having a fitness coach!
+
+[... Additional selected barriers/questions: NO_COOK_SKILL, NO_TIME_PLAN, HARD_INGREDIENTS, EXPENSIVE_ORGANIC, NO_ENERGY_COOK, FAMILY_DISLIKE, ON_THE_GO ...]
+
+[FALLBACK]
+I’m here to help with your weight loss questions! Overcome stress and barriers with AdvoCare Spark for energy and Rehydrate for recovery. Contact Glen or Ali at www.advocare.com/11057354 for a personalized plan to lose weight—it’s like having a fitness coach!
