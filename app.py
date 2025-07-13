@@ -273,6 +273,286 @@ def load_all_knowledge_data():
     
     return all_data
 
+def calculate_bmr_tdee(weight_lbs: float, height_inches: float, age: int, gender: str, activity_level: str) -> dict:
+    """Calculate BMR and TDEE using Mifflin-St Jeor equation"""
+    # Convert to metric
+    weight_kg = weight_lbs * 0.453592
+    height_cm = height_inches * 2.54
+    
+    # Calculate BMR
+    if gender.lower() == 'male':
+        bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) + 5
+    else:
+        bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161
+    
+    # Activity multipliers
+    activity_multipliers = {
+        'sedentary': 1.2,
+        'lightly_active': 1.375,
+        'moderately_active': 1.55,
+        'very_active': 1.725,
+        'extra_active': 1.9
+    }
+    
+    tdee = bmr * activity_multipliers.get(activity_level, 1.375)
+    
+    # Weight loss calories (deficit of 500-750 for 1-1.5 lbs/week)
+    weight_loss_calories = tdee - 500
+    aggressive_loss_calories = tdee - 750
+    
+    return {
+        'bmr': round(bmr),
+        'tdee': round(tdee),
+        'weight_loss': round(weight_loss_calories),
+        'aggressive_loss': round(aggressive_loss_calories),
+        'protein_grams': round(weight_lbs * 1.0)  # 1g per lb
+    }
+
+def show_calorie_calculator():
+    """Display interactive calorie calculator"""
+    st.markdown("### 🧮 **Glen's Personal Calorie Calculator**")
+    st.markdown("*Get your exact numbers based on your stats!*")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        weight = st.number_input("Weight (lbs)", min_value=80, max_value=400, value=180, step=1)
+        height_ft = st.number_input("Height (feet)", min_value=4, max_value=7, value=5, step=1)
+        height_in = st.number_input("Height (inches)", min_value=0, max_value=11, value=10, step=1)
+        
+    with col2:
+        age = st.number_input("Age", min_value=18, max_value=80, value=35, step=1)
+        gender = st.selectbox("Gender", ["Male", "Female"])
+        activity = st.selectbox("Activity Level", [
+            "Sedentary (desk job, no exercise)",
+            "Lightly Active (light exercise 1-3 days/week)", 
+            "Moderately Active (moderate exercise 3-5 days/week)",
+            "Very Active (hard exercise 6-7 days/week)",
+            "Extra Active (very hard exercise, physical job)"
+        ])
+    
+    # Map activity selection to key
+    activity_map = {
+        "Sedentary (desk job, no exercise)": "sedentary",
+        "Lightly Active (light exercise 1-3 days/week)": "lightly_active",
+        "Moderately Active (moderate exercise 3-5 days/week)": "moderately_active", 
+        "Very Active (hard exercise 6-7 days/week)": "very_active",
+        "Extra Active (very hard exercise, physical job)": "extra_active"
+    }
+    
+    if st.button("🔥 Calculate My Numbers", type="primary"):
+        total_height = (height_ft * 12) + height_in
+        results = calculate_bmr_tdee(weight, total_height, age, gender, activity_map[activity])
+        
+        st.markdown("---")
+        st.markdown("### 🎯 **Your Personal Numbers:**")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("🔥 BMR (Base Metabolic Rate)", f"{results['bmr']:,} calories", 
+                     help="Calories burned at rest")
+            
+        with col2:
+            st.metric("⚡ TDEE (Total Daily Energy)", f"{results['tdee']:,} calories",
+                     help="Total calories burned daily")
+            
+        with col3:
+            st.metric("🍖 Daily Protein Target", f"{results['protein_grams']}g",
+                     help="1g per pound bodyweight")
+        
+        st.markdown("### 📊 **Glen's Weight Loss Recommendations:**")
+        
+        loss_col1, loss_col2 = st.columns(2)
+        
+        with loss_col1:
+            st.info(f"""
+            **🎯 Steady Weight Loss (1 lb/week)**
+            
+            **{results['weight_loss']:,} calories daily**
+            
+            *This is my recommended starting point for sustainable results.*
+            """)
+            
+        with loss_col2:
+            st.warning(f"""
+            **🚀 Aggressive Loss (1.5 lbs/week)**
+            
+            **{results['aggressive_loss']:,} calories daily**
+            
+            *Only if you're highly motivated and can stick to it.*
+            """)
+        
+        st.success(f"""
+        ### 💪 **Glen's Personal Recommendations for You:**
+        
+        • **Start with {results['weight_loss']:,} calories daily** for steady progress
+        • **Eat {results['protein_grams']}g protein every day** (non-negotiable!)
+        • **Track your food for the first week** to learn your patterns
+        • **Weigh yourself weekly, same day/time** for accurate progress
+        
+        **Remember:** These are starting points. Adjust based on your results after 2-3 weeks!
+        """)
+        
+        st.markdown("---")
+        st.markdown("""
+        ### 🗓️ **Want a Complete Weekly Plan?**
+        
+        Get a detailed meal plan, workout schedule, and shopping list customized to your exact calories and goals:
+        
+        👉 **[Visit bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for the full planning system!
+        
+        *This calculator gives you the foundation - my planning page builds your complete transformation roadmap.*
+        """)
+
+def get_quick_answer(query: str) -> str:
+    """Handle common softball questions with direct, practical answers"""
+    query_lower = query.lower()
+    
+    # Calorie questions - now with calculator
+    if any(word in query_lower for word in ["calories", "calorie", "how much eat", "how many eat", "bmr", "tdee"]):
+        return """**Let me give you YOUR exact calorie numbers!**
+
+Instead of generic advice, let's calculate your personal BMR and TDEE based on your stats. Scroll down to use my **Calorie Calculator** below - it'll give you precise numbers for your body and activity level.
+
+**My quick guidelines while you calculate:**
+• **Men:** Usually 2,200-2,800 calories for weight loss
+• **Women:** Usually 1,800-2,200 calories for weight loss  
+• **Protein:** Always 1g per pound bodyweight
+
+**But your EXACT numbers matter more than averages!**
+
+Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https://bestrongagain.com/plan-my-week/)** for a complete meal plan built around your specific calorie target.
+
+*After 25+ years of coaching, I've learned that personalized numbers get personalized results!*
+
+---
+
+**👇 Use the calculator below to get your exact numbers! 👇**"""
+
+    # Protein questions
+    if any(word in query_lower for word in ["protein", "how much protein"]):
+        return """**My protein rule is simple: 1 gram per pound of body weight.**
+
+**So if you weigh 180 pounds = 180g protein daily**
+
+**Why protein is king:**
+• Builds and maintains muscle
+• Boosts metabolism (burns calories to digest)
+• Keeps you full longer
+• Prevents blood sugar crashes
+
+**Easy protein sources:**
+• **Chicken breast:** 25g per 4oz
+• **Eggs:** 6g per egg
+• **Greek yogurt:** 15-20g per cup
+• **Protein powder:** 20-30g per scoop
+• **Ground turkey:** 22g per 4oz
+
+**My personal take:** I've had blood work done multiple times - high protein is safe and effective. Don't let anyone scare you away from adequate protein!
+
+*This approach has worked for thousands of my clients over 25+ years.*"""
+
+    # Water/hydration questions
+    if any(word in query_lower for word in ["water", "hydration", "drink", "fluid"]):
+        return """**My hydration formula: Half your body weight in ounces, minimum.**
+
+**If you weigh 200 pounds = 100 ounces (about 12 cups) daily**
+
+**Simple hydration tips:**
+• **Start your day** with 16-20oz of water
+• **Drink before you're thirsty**
+• **More if you're active** or it's hot
+• **Monitor your urine** - light yellow is perfect
+
+**What counts toward hydration:**
+• Plain water (best choice)
+• Herbal tea
+• Coffee (in moderation)
+• Water-rich foods (fruits, veggies)
+
+**What doesn't help:**
+• Alcohol (actually dehydrates you)
+• High-sugar drinks
+• Excessive caffeine
+
+*Good hydration supports everything - energy, recovery, fat loss, and performance!*"""
+
+    # Exercise/workout frequency
+    if any(word in query_lower for word in ["exercise", "workout", "train", "how often", "how many times"]):
+        return """**My training philosophy: 3-4 days per week, consistently.**
+
+**For beginners:**
+• **3 days/week** - Perfect starting point
+• **Every other day** - Allows recovery
+• **Full body workouts** - Hit everything
+
+**For experienced:**
+• **4-5 days/week** - Upper/lower splits work great
+• **Listen to your body** - Recovery is when you grow
+• **Quality over quantity** - 45 minutes beats 2 hours
+
+**What matters most:**
+• **Show up consistently** (I train at 3:30am!)
+• **Progressive overload** - Gradually increase difficulty
+• **Compound movements** - Squats, deadlifts, rows
+• **Find exercises you enjoy** - You'll stick with them
+
+**My reality check:** The best workout is the one you'll actually do. Start where you are, be consistent, and build from there.
+
+*Consistency beats perfection every single time.*"""
+
+    # Weight loss timeline
+    if any(word in query_lower for word in ["lose weight", "weight loss", "how long", "how fast"]):
+        return """**Realistic weight loss: 1-2 pounds per week.**
+
+**My timeline expectations:**
+• **Week 1-2:** 3-5 pounds (mostly water weight)
+• **Week 3-12:** 1-2 pounds consistently
+• **12 weeks total:** 15-25 pounds realistically
+
+**What affects your rate:**
+• **Starting weight** - Heavier people lose faster initially
+• **Age and gender** - Men typically lose faster
+• **Activity level** - More movement = faster results
+• **Consistency** - This is the biggest factor
+
+**Glen's reality check:**
+Don't chase the scale daily. Focus on:
+• **How your clothes fit**
+• **Energy levels**
+• **Strength improvements**
+• **Progress photos**
+
+**Remember:** You didn't gain it overnight, you won't lose it overnight. But stick with my system for 12 weeks and you'll be amazed at the transformation!
+
+*I've seen this work for thousands of people over 25+ years.*"""
+
+    # Meal timing
+    if any(word in query_lower for word in ["when to eat", "meal timing", "how often eat"]):
+        return """**My meal timing approach: Eat every 3-4 hours.**
+
+**Simple schedule that works:**
+• **Breakfast:** Within 1 hour of waking
+• **Lunch:** 4-5 hours later
+• **Dinner:** 4-5 hours after lunch
+• **Snacks:** If needed between meals
+
+**What matters most:**
+• **Protein at every meal** - Non-negotiable
+• **Don't skip meals** - Leads to overeating later
+• **Last meal 2-3 hours before bed** - Better sleep
+• **Listen to your hunger** - Don't eat just because it's "time"
+
+**My personal approach:**
+I eat 3 main meals + 1-2 protein snacks. Keeps my energy steady and prevents those blood sugar crashes that lead to poor food choices.
+
+**Bottom line:** Consistency with meal timing helps regulate your metabolism and prevents impulsive eating decisions.
+
+*Find a schedule that fits your life and stick with it!*"""
+
+    return None  # No quick answer found
+
 def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
     """Search through ALL knowledge bases for relevant content"""
     if not data:
@@ -386,8 +666,15 @@ def add_glen_personality(response_text: str) -> str:
     
     return response_text
 
-def format_glen_response(results: List[Dict[str, str]]) -> str:
+def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     """Format the search results as if Glen is personally responding"""
+    
+    # First check for quick answers to common questions
+    quick_answer = get_quick_answer(query)
+    if quick_answer:
+        return quick_answer
+    
+    # If no quick answer, proceed with knowledge base search results
     if not results:
         no_answer_responses = [
             "I don't have specific information about that in my knowledge base right now, but I'd love to help! As someone with 17+ years in this field, I'm always learning too.",
@@ -491,6 +778,19 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
+        # Show calorie calculator if calories mentioned in recent messages
+        show_calculator = False
+        if st.session_state.messages:
+            recent_messages = st.session_state.messages[-2:]  # Check last 2 messages
+            for msg in recent_messages:
+                if any(word in msg["content"].lower() for word in ["calories", "calorie", "bmr", "tdee", "how much eat", "how many eat"]):
+                    show_calculator = True
+                    break
+        
+        if show_calculator:
+            show_calorie_calculator()
+            st.markdown("---")
+        
         # Chat interface
         if "messages" not in st.session_state:
             st.session_state.messages = []
@@ -509,7 +809,7 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("🧠 Glen is thinking..."):
                     results = search_all_knowledge_bases(prompt, data)
-                    response = format_glen_response(results)
+                    response = format_glen_response(results, prompt)
                     st.markdown(response)
             
             st.session_state.messages.append({"role": "assistant", "content": response})
@@ -529,19 +829,19 @@ def main():
             if st.button(label, key=f"quick_{label}"):
                 st.session_state.messages.append({"role": "user", "content": query})
                 results = search_all_knowledge_bases(query, data)
-                response = format_glen_response(results)
+                response = format_glen_response(results, query)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
     
     # Example questions section
     st.markdown("### 💡 Popular Questions")
     example_questions = [
-        "How much protein should I eat daily?",
-        "How do I connect and thrive in my fitness journey?", 
-        "How do I overcome weight loss barriers?",
-        "What's your training philosophy?",
-        "How do I stay motivated for 12 weeks?",
-        "Tell me about stress and weight loss"
+        "How many calories should I eat daily?",
+        "How much protein do I need?", 
+        "How often should I exercise?",
+        "How much water should I drink?",
+        "How fast can I lose weight?",
+        "When should I eat my meals?"
     ]
     
     cols = st.columns(3)
@@ -550,7 +850,7 @@ def main():
         if col.button(question, key=f"example_{i}"):
             st.session_state.messages.append({"role": "user", "content": question})
             results = search_all_knowledge_bases(question, data)
-            response = format_glen_response(results)
+            response = format_glen_response(results, question)
             st.session_state.messages.append({"role": "assistant", "content": response})
             st.rerun()
 
