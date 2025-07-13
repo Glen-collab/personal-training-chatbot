@@ -1298,4 +1298,4 @@ def main():
         
         quick_buttons = [
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
-            ("🧠 Motivation
+            ("🧠 Motivation", "How can you help me stay motivated?")
