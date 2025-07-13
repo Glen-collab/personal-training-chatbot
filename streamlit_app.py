@@ -768,8 +768,8 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 
 **Easy to remember:**
 - **1 gallon = 128 ounces = 16 cups**
-- **Or aim for 8-10 glasses of 16oz each**
-- **Start with 16-20oz when you wake up**
+- **Or aim for 8-10 glasses of 16 oz each**
+- **Start with 16-20 oz when you wake up**
 
 **Simple hydration tips:**
 - **Drink before you're thirsty**
