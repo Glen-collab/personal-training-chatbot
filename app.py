@@ -583,7 +583,6 @@ if any(word in query_lower for word in ["protein", "how much protein", "best pro
         st.session_state["protein_strikes"] = 0
 
     responses = [
-        # First response – helpful and loaded with options
         """**My protein rule is simple: 1g per pound of body weight.**  
 That means if you weigh 180 lbs → you need about **180g protein/day**.
 
@@ -605,7 +604,6 @@ That means if you weigh 180 lbs → you need about **180g protein/day**.
 
 Let me ask — do you already eat any of those, or do we need to customize based on your preferences?""",
 
-        # Second time – user says they don’t like some foods
         """Got it — not a fan of chicken or turkey? Totally fine.  
 Let’s try some alternatives:
 
@@ -619,7 +617,6 @@ Let’s try some alternatives:
 Protein isn’t one-size-fits-all. We’ve got options.  
 What *do* you like? Or are we playing the "No, not that either" game? 😉""",
 
-        # Third time – still rejecting food
         """Okay, let’s be honest — you don’t like chicken, turkey, eggs, yogurt, fish, beef, or tofu?  
 At this point, I have to ask... do you like *any* food that isn’t bread or cereal?
 
@@ -636,7 +633,6 @@ And remember — **variety is the spice of life**, but **discipline is what gets
 
 It’s not about loving every meal. It’s about getting results. 💪""",
 
-        # Fourth+ time – full snark
         """Alright, we’ve played the protein elimination game long enough 😂  
 You don’t like anything I’ve listed — so let me flip it:
 
@@ -650,7 +646,6 @@ Here’s the deal:
 **Choose results, not excuses.** I'm here to help when you're ready to commit.""",
     ]
 
-    # Pick the appropriate response level based on how many "protein rejections" have happened
     strike = st.session_state["protein_strikes"]
     st.session_state["protein_strikes"] += 1
 
@@ -658,6 +653,7 @@ Here’s the deal:
         strike = len(responses) - 1  # cap at final snarky response
 
     return responses[strike]
+
 
     # Water/hydration questions - simplified
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
