@@ -1187,6 +1187,16 @@ def main():
                 # Reset calculator for new topics
                 st.session_state.show_calculator = False
                 
+                # Debug: Show what's in tracking
+                intent = analyze_query_intent(query)
+                topic_key = intent["type"]
+                topic_responses_key = f"used_responses_{topic_key}"
+                
+                # For debugging - uncomment these lines to see what's happening
+                # st.write(f"Debug: Topic key = {topic_key}")
+                # st.write(f"Debug: Used responses = {st.session_state.get(topic_responses_key, set())}")
+                # st.write(f"Debug: Exhausted topics = {st.session_state.exhausted_topics}")
+                
                 st.session_state.messages.append({"role": "user", "content": query})
                 results = search_all_knowledge_bases(query, data)
                 response = format_glen_response(results, query)
