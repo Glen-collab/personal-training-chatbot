@@ -374,6 +374,21 @@ def show_calorie_calculator():
         total_height = (height_ft * 12) + height_in
         results = calculate_bmr_tdee(weight, total_height, age, gender, activity_map[activity])
         
+        # Store results in session state for sticky display
+        st.session_state.calculated_results = {
+            'bmr': results['bmr'],
+            'tdee': results['tdee'],
+            'weight_loss': results['weight_loss'],
+            'aggressive_loss': results['aggressive_loss'],
+            'protein_grams': results['protein_grams'],
+            'weight': weight,
+            'height_ft': height_ft,
+            'height_in': height_in,
+            'age': age,
+            'gender': gender,
+            'activity': activity.split('(')[0].strip()
+        }
+        
         st.markdown("---")
         st.markdown("### 🎯 **Your Personal Numbers:**")
         st.markdown(f"*Based on: {weight} lbs, {height_ft}'{height_in}\", {age} years old, {gender.lower()}, {activity.split('(')[0].strip()}*")
@@ -448,6 +463,9 @@ def show_calorie_calculator():
         
         *Turn these calories into a complete 12-week transformation system!*
         """)
+        
+        # Hide calculator after calculation
+        st.session_state.show_calculator = False
 
 def get_quick_answer(query: str) -> str:
     """Handle common softball questions with direct, practical answers"""
@@ -810,14 +828,49 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     
     # If no quick answer, proceed with knowledge base search results
     if not results:
-        no_answer_responses = [
-            "I don't have specific information about that in my knowledge base right now, but I'd love to help! As someone with 17+ years in this field, I'm always learning too.",
-            "That's not something I've covered in my current materials, but it's a great question! With my background in fitness, nutrition, and psychology, I might be able to point you in the right direction.",
-            "Hmm, I don't see that topic in my current resources. But hey, after coaching thousands of clients, I've learned there's always more to discover!"
+        # Instead of "I don't know" - be solution-focused and encouraging
+        encouraging_responses = [
+            "Let's tackle this together! Even if that specific topic isn't in my current materials, I've helped thousands of people with similar challenges.",
+            "Great question! While I might not have that exact info loaded right now, my 25+ years of experience tells me we can definitely figure this out.",
+            "I love that you're asking the tough questions! That's exactly the mindset that leads to real transformation.",
+            "You know what? That's the kind of question that shows you're ready to make real changes. Let's dive deeper into what's really going on."
         ]
-        base_response = random.choice(no_answer_responses)
         
-        return f"{base_response}\n\nTry asking me about:\n• **Fitness & Training** (my powerlifting background)\n• **Nutrition & Weight Loss** (evidence-based approaches)\n• **Psychology & Motivation** (behavioral science)\n• **My 12-Week Program** (proven transformation system)\n\n*Feel free to contact me directly at Wisconsin Barbell Gym for personalized coaching!*"
+        solution_focused_options = [
+            "Here's what I always tell my clients: the best answers come from understanding YOUR specific situation.",
+            "After 25+ years of coaching, I've learned that every person's journey is unique - let's figure out yours.",
+            "The fact that you're asking shows you're ready to take action. That's half the battle right there!",
+            "I've seen this pattern before - when someone asks questions like this, they're usually closer to a breakthrough than they think."
+        ]
+        
+        action_oriented_closers = [
+            "Let's start with what's working and what's not working for you right now.",
+            "Tell me more about your specific situation and I'll give you a roadmap.",
+            "What's your biggest frustration with your current approach? I've got solutions.",
+            "Let's get specific about your goals and obstacles - that's where the magic happens."
+        ]
+        
+        base_response = f"{random.choice(encouraging_responses)} {random.choice(solution_focused_options)}"
+        
+        actionable_topics = [
+            "**🎯 Your Weight Loss Goals** - What's your target and timeline?",
+            "**💪 Your Current Routine** - What's working and what's not?", 
+            "**🍖 Your Nutrition Approach** - Are you tracking anything right now?",
+            "**⚡ Your Energy Levels** - How do you feel throughout the day?",
+            "**🧠 Your Motivation** - What gets you fired up vs what drains you?",
+            "**⏰ Your Schedule** - What does a typical day look like for you?"
+        ]
+        
+        response = f"{base_response}\n\n**Let's dig into what matters most:**\n"
+        for topic in actionable_topics:
+            response += f"• {topic}\n"
+        
+        response += f"\n**Here's what I know for sure:** Every successful transformation starts with understanding where you are right now. {random.choice(action_oriented_closers)}"
+        
+        # Add strategic follow-up
+        response = add_strategic_followup(response, query)
+        
+        return response
     
     # Start with a personal greeting
     personal_openings = [
@@ -882,6 +935,8 @@ def main():
         st.session_state.messages = []
     if "show_calculator" not in st.session_state:
         st.session_state.show_calculator = False
+    if "calculated_results" not in st.session_state:
+        st.session_state.calculated_results = None
     
     # Sidebar with enhanced program info
     with st.sidebar:
@@ -921,18 +976,21 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # Show calorie calculator if triggered
-        if st.session_state.show_calculator:
-            show_calorie_calculator()
-            st.markdown("---")
-        
         # Display chat history
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
         
+        # Show calorie calculator immediately after relevant response
+        if st.session_state.show_calculator:
+            show_calorie_calculator()
+            st.markdown("---")
+        
         # Chat input
         if prompt := st.chat_input("💬 Ask Glen anything about fitness, nutrition, psychology, or motivation..."):
+            # Reset calculator flag for new questions
+            st.session_state.show_calculator = False
+            
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.markdown(prompt)
@@ -949,8 +1007,32 @@ def main():
                     st.markdown(response)
             
             st.session_state.messages.append({"role": "assistant", "content": response})
+            
+            # Show calculator immediately if triggered
+            if st.session_state.show_calculator:
+                show_calorie_calculator()
+                st.markdown("---")
     
     with col2:
+        # Show sticky calculator results if available
+        if st.session_state.calculated_results:
+            results = st.session_state.calculated_results
+            
+            st.markdown("### 📊 **Your Numbers**")
+            st.markdown(f"*{results['weight']} lbs, {results['height_ft']}'{results['height_in']}\", {results['age']}yr, {results['gender'].lower()}*")
+            
+            # Compact metrics in sidebar
+            st.metric("🔥 BMR", f"{results['bmr']:,}")
+            st.metric("⚡ TDEE", f"{results['tdee']:,}")
+            st.metric("🎯 Target", f"{results['weight_loss']:,}")
+            st.metric("🍖 Protein", f"{results['protein_grams']}g")
+            
+            if st.button("🗑️ Clear Results", key="clear_calc"):
+                st.session_state.calculated_results = None
+                st.rerun()
+            
+            st.markdown("---")
+        
         st.markdown("### 🚀 Quick Start")
         st.markdown("**New here? Try these:**")
         
@@ -963,6 +1045,9 @@ def main():
         
         for label, query in quick_buttons:
             if st.button(label, key=f"quick_{label}"):
+                # Reset calculator for new topics
+                st.session_state.show_calculator = False
+                
                 st.session_state.messages.append({"role": "user", "content": query})
                 results = search_all_knowledge_bases(query, data)
                 response = format_glen_response(results, query)
@@ -989,6 +1074,9 @@ def main():
     for i, question in enumerate(example_questions):
         col = cols[i % 3]
         if col.button(question, key=f"example_{i}"):
+            # Reset calculator for new topics
+            st.session_state.show_calculator = False
+            
             st.session_state.messages.append({"role": "user", "content": question})
             results = search_all_knowledge_bases(question, data)
             response = format_glen_response(results, question)
