@@ -931,12 +931,12 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     if quick_answer:
         return quick_answer
     
-    # Check if topic is exhausted
-    query_lower = query.lower()
+    # Check if topic is exhausted (simple approach)
     intent = analyze_query_intent(query)
     topic_key = intent["type"]
+    exhausted_key = f"exhausted_{topic_key}"
     
-    if topic_key in st.session_state.exhausted_topics:
+    if st.session_state.get(exhausted_key, False):
         # Topic exhausted - give Glen's "enough already" message
         exhausted_responses = [
             "Alright, alright! I think you've gotten all my wisdom on this topic. Time to shit or get off the pot - pick a different question or actually DO something with what I've told you!",
@@ -1187,18 +1187,17 @@ def main():
                 # Reset calculator for new topics
                 st.session_state.show_calculator = False
                 
-                # Debug: Show what's in tracking
-                intent = analyze_query_intent(query)
-                topic_key = intent["type"]
-                topic_responses_key = f"used_responses_{topic_key}"
+                # Simple tracking: increment counter for this button
+                button_counter_key = f"counter_{label}"
+                if button_counter_key not in st.session_state:
+                    st.session_state[button_counter_key] = 0
+                st.session_state[button_counter_key] += 1
                 
-                # For debugging - uncomment these lines to see what's happening
-                # st.write(f"Debug: Topic key = {topic_key}")
-                # st.write(f"Debug: Used responses = {st.session_state.get(topic_responses_key, set())}")
-                # st.write(f"Debug: Exhausted topics = {st.session_state.exhausted_topics}")
+                # Add counter to query to make it unique
+                modified_query = f"{query} [click_{st.session_state[button_counter_key]}]"
                 
                 st.session_state.messages.append({"role": "user", "content": query})
-                results = search_all_knowledge_bases(query, data)
+                results = search_all_knowledge_bases(modified_query, data)
                 response = format_glen_response(results, query)
                 
                 # Check if response mentions calculator and set flag
