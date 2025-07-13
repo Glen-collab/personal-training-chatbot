@@ -81,6 +81,31 @@ def load_custom_css():
     .logo:hover {
         transform: scale(1.05);
     }
+
+   /* Fix number input for desktop */
+    .stNumberInput > div > div > input {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+        border-radius: 4px !important;
+        padding: 0.5rem !important;
+        font-size: 16px !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: textfield !important;
+    }
+    
+    .stNumberInput > div > div > input:focus {
+        outline: 2px solid rgb(255, 107, 107) !important;
+        border-color: rgb(255, 107, 107) !important;
+    }
+    
+    /* Ensure number inputs are clickable */
+    .stNumberInput input[type="number"] {
+        pointer-events: auto !important;
+        user-select: text !important;
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+    }
     
     /* Chat message styling */
     .stChatMessage {
