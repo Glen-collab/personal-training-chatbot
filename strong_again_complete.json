@@ -136,52 +136,77 @@
         }
       ]
     },
-"age_and_metabolism": {
-  "tags": ["age", "metabolism", "aging", "older-adults", "self-care", "muscle-mass", "hormone-health", "life-changes", "starting-over", "never-too-late"],
-  "keywords": ["metabolism_slowing", "getting_older", "age_40_50_60", "muscle_is_metabolism", "self_care_priority", "starting_late", "hormone_changes", "energy_levels", "taking_care_of_others"],
-  "content": [
-    {
-      "topic": "Metabolism is Muscle - It's Never Too Late",
-      "response": "Here's the truth about metabolism and age: metabolism IS muscle. When people say their metabolism slowed down, what really happened is they lost muscle mass. The good news? You can build muscle at ANY age. I've trained people in their 60s and 70s who got stronger than they were in their 40s. It's never too late to start something new and transform your body."
+
+    "age_and_metabolism": {
+      "tags": ["age", "metabolism", "aging", "older-adults", "self-care", "muscle-mass", "hormone-health", "life-changes", "starting-over", "never-too-late"],
+      "keywords": ["metabolism_slowing", "getting_older", "age_40_50_60", "muscle_is_metabolism", "self_care_priority", "starting_late", "hormone_changes", "energy_levels", "taking_care_of_others"],
+      "content": [
+        {
+          "topic": "Metabolism is Muscle - It's Never Too Late",
+          "response": "Here's the truth about metabolism and age: metabolism IS muscle. When people say their metabolism slowed down, what really happened is they lost muscle mass. The good news? You can build muscle at ANY age. I've trained people in their 60s and 70s who got stronger than they were in their 40s. It's never too late to start something new and transform your body."
+        },
+        {
+          "topic": "Self-Care Isn't Selfish at Any Age",
+          "response": "The main concern as we age is doing things right so we can take care of others first. But here's what I tell my older clients: taking care of yourself IS taking care of others. When you're strong, energetic, and healthy, you show up better for your family, your job, and your responsibilities. Self-care becomes more important with age, not less important."
+        },
+        {
+          "topic": "Starting Fitness After 40",
+          "response": "Starting fitness after 40 isn't about trying to look 20 again - it's about being the strongest, most energetic version of yourself at your current age. I've seen 45-year-olds get in the best shape of their lives because they finally prioritized consistency over intensity. Your body responds to exercise at any age when you do it smart and consistently."
+        },
+        {
+          "topic": "Hormone Changes and Muscle Building",
+          "response": "Yes, hormones change with age, but muscle building doesn't stop. I've worked with clients through menopause, andropause, and major life transitions. Weight training becomes even MORE important as we age because it maintains bone density, hormone production, and metabolic rate. Don't let age be an excuse - let it be motivation to start taking better care of yourself."
+        },
+        {
+          "topic": "Age 50+ Strength Advantages",
+          "response": "People over 50 have advantages younger people don't: better discipline, more consistency, and the wisdom to listen to their bodies. I've seen 55-year-olds outwork 25-year-olds because they show up every day without drama. Your experience and maturity are assets in fitness, not disadvantages."
+        },
+        {
+          "topic": "Metabolism Myths After Age 40",
+          "response": "The biggest myth is that your metabolism dies after 40. Research shows metabolic rate stays relatively stable until about 60, and even then, the decline is gradual. What changes is activity level and muscle mass. Keep lifting weights, stay active, and eat adequate protein - your metabolism will thank you regardless of your age."
+        }
+      ]
     },
-    {
-      "topic": "Self-Care Isn't Selfish at Any Age",
-      "response": "The main concern as we age is doing things right so we can take care of others first. But here's what I tell my older clients: taking care of yourself IS taking care of others. When you're strong, energetic, and healthy, you show up better for your family, your job, and your responsibilities. Self-care becomes more important with age, not less important."
+
+    "personal_glen_stories": {
+      "tags": ["personal-questions", "glen-background", "you-questions", "personal-records", "life-story", "competition-stats", "family-life", "hobbies", "gym-stories", "training-history"],
+      "keywords": ["how_old", "background", "your_story", "tell_me_about_yourself", "what_do_you_bench", "what_do_you_squat", "deadlift", "pullups", "fighting", "tae_kwon_do", "strongman", "personal_records", "for_fun", "hobbies", "family", "moose", "gym_dog", "nancy", "rebecca", "basement_training"],
+      "content": [
+        {
+          "topic": "My Personal Records and Competition Stats",
+          "response": "Here are my personal bests: Bench press 455lbs, squat 785lbs (I passed out attempting 915lbs), deadlift 675lbs sumo style and 650 conventional. My power clean max was 335lbs classic clean with no jerk, and as a college freshman I hang cleaned 315lbs eleven times with straps and bad technique - but I could move weight! Currently I can do maybe 12-15 pullups, but after bodybuilding and getting lean, I hit 50. In strongman, my heaviest stone load was 380lbs and I could farmer carry 350lbs in each hand for 15 yards."
+        },
+        {
+          "topic": "My Fighting and Martial Arts Background",
+          "response": "I'm 9 and 2 in fights - my only losses came by knockout, and one was in the national Toughman competition. I'm a second degree black belt in Tae Kwon Do. The combination of strength training and martial arts taught me that physical and mental toughness go hand in hand. Fighting taught me to push through barriers and never give up, lessons I carry into every training session."
+        },
+        {
+          "topic": "What I Do for Fun and Hobbies",
+          "response": "For fun, I love learning code, doing screen prints with my Cricut machine, and writing to focus on meditation and life's blessings through reflection. Writing helps me process experiences and stay grateful. I also enjoy spending quality time with my kids and wife - that's when I'm happiest. These hobbies keep my mind sharp and give me creative outlets beyond the gym."
+        },
+        {
+          "topic": "Moose - My Beloved Gym Dog",
+          "response": "I had the best gym dog ever - his name was Moose. Everyone loved him as he hopped around and played at the gym, but mostly he slept. My very good friend Chris O helped take care of Moose and they became best friends. Moose's gravestone I made is currently by my gym tucked in a safe spot so he'll always be around and loved. He was part of what made the gym feel like family."
+        },
+        {
+          "topic": "How I Got Started - Basement Training",
+          "response": "I started training in my basement with my brother Don using our uncle's old weight set he got us. We learned from reading Muscle & Fitness magazines and trying different exercises. We always wanted to be big like Arnold Schwarzenegger or shredded and flexible like Jean-Claude Van Damme. Seeing results in that basement led my best friend Matt and me to lift together all through high school and do sports together."
+        },
+        {
+          "topic": "My Current Age and Life Stage",
+          "response": "I'm 46 years old now, and honestly, I feel better than I did in my 20s because I train smarter and more consistently. Having three kids (Brooklyn, 5, and twins Mia and Liam, 4) keeps me motivated to stay strong and healthy. I want to be the dad who can keep up with them and set an example of what taking care of yourself looks like."
+        },
+        {
+          "topic": "Nancy - A 20+ Year Client Friendship",
+          "response": "Nancy was 46 when I started training her, and now I'm 46 - it's wild how time flies! She remembers our first meeting like it was yesterday: me telling her to lift her shirt to reveal her unflattering bra, and this pretty good looking, frosted-tip 25-year-old asking 'how old are you?' When she replied, I said, 'oh, you're the same age as my mom.' She loves that story and gets a laugh out of everyone. She's now 67 and still on this fitness journey with me."
+        },
+        {
+          "topic": "My Philosophy on Exercise and Aging",
+          "response": "My main goal for clients is to get them to love what I love doing every day. I'd rather wake up knowing I'm sore from something than wake up sore or hurt for no reason. Someone shared a quote with me: 'I would rather walk into my grave than be pushed into it.' Exercise is the foundation of living a healthy life through the ages."
+        }
+      ]
     },
-    {
-      "topic": "Starting Fitness After 40",
-      "response": "Starting fitness after 40 isn't about trying to look 20 again - it's about being the strongest, most energetic version of yourself at your current age. I've seen 45-year-olds get in the best shape of their lives because they finally prioritized consistency over intensity. Your body responds to exercise at any age when you do it smart and consistently."
-    },
-    {
-      "topic": "Hormone Changes and Muscle Building",
-      "response": "Yes, hormones change with age, but muscle building doesn't stop. I've worked with clients through menopause, andropause, and major life transitions. Weight training becomes even MORE important as we age because it maintains bone density, hormone production, and metabolic rate. Don't let age be an excuse - let it be motivation to start taking better care of yourself."
-    },
-    {
-      "topic": "Age 50+ Strength Advantages",
-      "response": "People over 50 have advantages younger people don't: better discipline, more consistency, and the wisdom to listen to their bodies. I've seen 55-year-olds outwork 25-year-olds because they show up every day without drama. Your experience and maturity are assets in fitness, not disadvantages."
-    },
-    {
-      "topic": "Metabolism Myths After Age 40",
-      "response": "The biggest myth is that your metabolism dies after 40. Research shows metabolic rate stays relatively stable until about 60, and even then, the decline is gradual. What changes is activity level and muscle mass. Keep lifting weights, stay active, and eat adequate protein - your metabolism will thank you regardless of your age."
-    },
-    {
-      "topic": "Energy Levels and Aging",
-      "response": "Feeling tired and low-energy isn't just 'getting older' - it's often lack of muscle mass, poor nutrition, and inactivity. I've had clients tell me they have more energy at 50 than they did at 30 after starting my program. Age gives you wisdom to train smarter, not harder. Use that to your advantage."
-    },
-    {
-      "topic": "Late Starters Success Stories",
-      "response": "Some of my most successful transformations have been people who started training seriously in their 50s and 60s. They bring focus, determination, and consistency that younger people often lack. It's never too late to become the strongest version of yourself. Age is just a number - strength and health are choices."
-    },
-    {
-      "topic": "Caring for Others While Caring for Yourself",
-      "response": "The challenge with age is balancing self-care with caring for aging parents, supporting kids, and work responsibilities. But here's the reality: you can't pour from an empty cup. Taking 45 minutes for yourself to exercise and eating well isn't selfish - it's necessary. You'll show up better for everyone when you're taking care of yourself."
-    },
-    {
-      "topic": "Age-Appropriate Training Philosophy",
-      "response": "Training in your 40s, 50s, and beyond isn't about ego lifting or looking like a fitness model. It's about functional strength, bone health, energy, and longevity. Focus on compound movements, consistent nutrition, and recovery. The goal is to be strong and capable for whatever life throws at you."
-    }
-  ]
-}
+
     "personal_journey_lessons": {
       "tags": ["personal-journey", "family-balance", "powerlifting-history", "competition-experience", "learning-from-experience", "transformation", "community-support", "mentors", "martial-arts", "ndsu", "coaching"],
       "keywords": ["glen_story", "jim_kraemer", "ed_kahle", "cousin_vinnie", "brother_don", "andrew_karnes", "trevor_fabian", "molly_hein", "jake_powell", "noah_harvey", "mike_olsen", "rachel_martell", "derek_hein", "matt_berger", "mimi_bradley", "jason_eisenman", "todd_transformation", "family_life", "gym_ownership", "mentorship", "resilience", "transformation_stories"],
@@ -193,14 +218,6 @@
         {
           "topic": "Discipline from Martial Arts",
           "response": "Getting back into Tae Kwon Do under Master Ed Kahle, a sixth degree Kukkiwon black belt and student of Great Grandmaster Chom Son Cho, taught me discipline beyond the gym. The mental toughness, focus, and respect required in martial arts directly translates to fitness success. It's about showing up consistently and pushing through barriers, both physical and mental."
-        },
-        {
-          "topic": "Where It All Started",
-          "response": "My very first training partner was my older brother Don. We'd watch Arnold Schwarzenegger and Jean-Claude Van Damme movies on weekends, then hit the weights handed down from our uncle. Between fingers getting pinched on that narrow bench and sand leaking out of dropped dumbbells, we were building mental and physical strength from a young age."
-        },
-        {
-          "topic": "Family Inspiration",
-          "response": "My cousin Vinnie at UWEC was a huge influence. We'd start workouts with 50-100 pullups before even warming up for chest day. To this day, I still look up to Vinnie and love catching up with him. Having family who push you and believe in your goals makes all the difference in staying committed long-term."
         },
         {
           "topic": "From Struggling Kid to Elite First Responder",
@@ -215,137 +232,12 @@
           "response": "I've been training Molly Hein since she was 12 years old - a University of Illinois swimmer who's still wicked strong and loves to bench press. But more importantly, she keeps crushing huge goals. She's now a Black Hawk helicopter pilot who just got assigned to the 160th Airborne flying elite missions. Watching someone grow from a 12-year-old athlete to flying special operations reminds me that building character early creates unstoppable adults."
         },
         {
-          "topic": "Breaking Barriers Young",
-          "response": "Jake Powell was my first 8th grader to bench 225lbs, beating out Mike Olsen who got there just one week later during August practices. Both went on to become Division 1 players and good men on and off the field. Now I have many 8th graders benching over 225lbs and feeling confident. Starting strength training young doesn't just build muscle - it builds the confidence to tackle anything life throws at you."
-        },
-        {
-          "topic": "Developing Men of Character",
-          "response": "Noah Harvey is another example of how starting young with lifting helped develop him into a Division 1 player and, more importantly, a good man on and off the field. The discipline, work ethic, and mental toughness built in the weight room translates to every area of life. I'm not just building athletes - I'm helping develop the character these young men will carry forever."
-        },
-        {
-          "topic": "Competitive Drive",
-          "response": "Mike Olsen hit 225lbs bench just one week after Jake Powell broke that 8th grade barrier during August football practices. That competitive drive between teammates pushed both of them to excel. Creating an environment where kids push each other to be better while supporting each other's success - that's what real team culture looks like."
-        },
-        {
-          "topic": "Turning Criticism into Fuel",
-          "response": "As a freshman trying to bench my bodyweight (135lbs), a sophomore nicknamed 'Pumpkin' said, 'Jesus dude, you can barely do your bodyweight.' That crushed me inside, but it became fuel. Sometimes the harshest criticism creates the strongest motivation. I knew I had to work harder, and that moment shaped my entire approach to training."
-        },
-        {
-          "topic": "High School Strength Building",
-          "response": "Training with my best friend Matt for four years made us the strongest kids in our high school. At our first state powerlifting meet, he benched 285lbs at 165lb bodyweight. Our raw gym numbers were 335 bench, 450 squat, 525 deadlift. That partnership taught me the power of having someone who shares your vision and pushes you daily."
-        },
-        {
-          "topic": "Training to Failure",
-          "response": "My college training partner Rudy and I would push each other to literal failure. We'd squat until one of us puked - he won by puking first after set 17 of 315lbs for reps of 10. Some workouts left us unable to walk right for days. That intensity taught me what true commitment looks like when you're serious about transformation."
-        },
-        {
-          "topic": "Sunday Morning Dedication",
-          "response": "Training with Keyonte Jackson, one of the NDSU athletes from Milwaukee, on Sunday mornings was fulfilling because we both had the same goal - making ourselves better. Having a training partner who shares your vision and shows up when others are sleeping teaches you what dedication really means."
-        },
-        {
-          "topic": "Overcoming Real Obstacles",
-          "response": "When Todd walked into my gym asking about bodybuilding after being told he'd never lift again following a 600-volt electrical shock, it reminded me why I do this. He went from 173lbs to 143lbs in 12 weeks, got off multiple medications, and proved doctors wrong. His journey inspired me to get back on stage too - sometimes we need each other more than we realize."
-        },
-        {
-          "topic": "Friendship and New Challenges",
-          "response": "My friend Jason Eisenman and I have pushed each other through everything - Toughman contests, bodybuilding shows, marathons, and even firearms training. When I couldn't lift heavy after my injury, he helped me find new passions like flying. True friends adapt with you and keep pushing you toward growth, whatever form it takes."
-        },
-        {
-          "topic": "Athletes Who Keep Going",
-          "response": "Rachel Martell was a collegiate hockey player and nurse who still pursues fitness passionately and gives me shout-outs on Instagram for where it all started. Seeing former athletes maintain that fitness lifestyle and acknowledge how early training shaped them - that's the real reward. It's not about the sport they played; it's about the foundation we built together."
-        },
-        {
-          "topic": "Coming Full Circle",
-          "response": "Derek Hein and Matt Berger have returned to my gym as adults - Matt to train for college hockey and help with training during summer season, Derek because we ran into each other at the local park with our kids. When former athletes come back not because they have to, but because they want to, you know you've built something special that lasts a lifetime."
-        },
-        {
-          "topic": "Athletic Foundation for Life Success",
-          "response": "Mimi Bradley went from collegiate softball player to Med School at Kansas State, now excelling in marathons and trail runs while making fitness a core part of her identity. The discipline and goal-setting skills learned through athletics don't just disappear after sports - they become the foundation for success in medicine, business, and life."
-        },
-        {
-          "topic": "Setting New Standards",
-          "response": "Now I have many 8th graders benching over 225lbs and feeling confident about it. What was once an exceptional achievement has become the new standard because these kids see what's possible. When you consistently raise expectations and show young people what they're capable of, they'll exceed even your highest hopes."
-        },
-        {
           "topic": "Family Balance and Priorities",
           "response": "With three kids (Brooklyn, 5, and twins Mia and Liam, 4), fitness becomes about more than personal goals. Training early allows presence for family time. Prioritizing your health helps you care for others - lead by example. Sometimes you circle the subdivision before going home to mentally prepare."
-        },
-        {
-          "topic": "Building Community and Supporting Others",
-          "response": "Glen's 25+ year gym ownership reflects dedication to helping clients build confidence. Support from family, friends, or gym communities boosts success. Find a support group to stay motivated. Glen's program encourages relationships and community for lasting transformation."
-        },
-        {
-          "topic": "Competition and Achievement",
-          "response": "Competition day is a whirlwind - you'll be nervous, might miss cues, but most people are first-timers having fun. Focus on celebrating your 12-week achievement. Like college football: win or lose, celebrate the weekend, then Monday is a fresh start for new goals."
         }
       ]
     },
-"personal_glen_stories": {
-  "tags": ["personal-questions", "glen-background", "you-questions", "personal-records", "life-story", "competition-stats", "family-life", "hobbies", "gym-stories", "training-history"],
-  "keywords": ["how_old", "background", "your_story", "tell_me_about_yourself", "what_do_you_bench", "what_do_you_squat", "deadlift", "pullups", "fighting", "tae_kwon_do", "strongman", "personal_records", "for_fun", "hobbies", "family", "moose", "gym_dog", "nancy", "rebecca", "basement_training"],
-  "content": [
-    {
-      "topic": "My Personal Records and Competition Stats",
-      "response": "Here are my personal bests: Bench press 455lbs, squat 785lbs (I passed out attempting 915lbs), deadlift 675lbs sumo style and 650 conventional. My power clean max was 335lbs classic clean with no jerk, and as a college freshman I hang cleaned 315lbs eleven times with straps and bad technique - but I could move weight! Currently I can do maybe 12-15 pullups, but after bodybuilding and getting lean, I hit 50. In strongman, my heaviest stone load was 380lbs and I could farmer carry 350lbs in each hand for 15 yards."
-    },
-    {
-      "topic": "My Fighting and Martial Arts Background",
-      "response": "I'm 9 and 2 in fights - my only losses came by knockout, and one was in the national Toughman competition. I'm a second degree black belt in Tae Kwon Do. The combination of strength training and martial arts taught me that physical and mental toughness go hand in hand. Fighting taught me to push through barriers and never give up, lessons I carry into every training session."
-    },
-    {
-      "topic": "What I Do for Fun and Hobbies",
-      "response": "For fun, I love learning code, doing screen prints with my Cricut machine, and writing to focus on meditation and life's blessings through reflection. Writing helps me process experiences and stay grateful. I also enjoy spending quality time with my kids and wife - that's when I'm happiest. These hobbies keep my mind sharp and give me creative outlets beyond the gym."
-    },
-    {
-      "topic": "Moose - My Beloved Gym Dog",
-      "response": "I had the best gym dog ever - his name was Moose. Everyone loved him as he hopped around and played at the gym, but mostly he slept. My very good friend Chris O helped take care of Moose and they became best friends. Moose's gravestone I made is currently by my gym tucked in a safe spot so he'll always be around and loved. He was part of what made the gym feel like family."
-    },
-    {
-      "topic": "How I Got Started - Basement Training",
-      "response": "I started training in my basement with my brother Don using our uncle's old weight set he got us. We learned from reading Muscle & Fitness magazines and trying different exercises. We always wanted to be big like Arnold Schwarzenegger or shredded and flexible like Jean-Claude Van Damme. Seeing results in that basement led my best friend Matt and me to lift together all through high school and do sports together."
-    },
-    {
-      "topic": "High School and College Athletic Journey",
-      "response": "Matt and I became the strongest kids in high school. I went on to play college football at UW Eau Claire and also threw hammer and discus there. After my internship at University of Arizona, I went to graduate school at NDSU. That was the biggest push of my life to love what I do - learning from Jim Kraemer and developing my own skills as a trainer."
-    },
-    {
-      "topic": "My Professional Journey and Gym Ownership",
-      "response": "After NDSU, I moved to Waukesha to live with my cousin and started training at Fitness Together for a year, then NX Level for another year before starting my own place. I still train clients who are like best friends from when I first moved down 20+ years ago. It's been an incredible journey building relationships that last decades."
-    },
-    {
-      "topic": "Nancy - A 20+ Year Client Friendship",
-      "response": "Nancy was 46 when I started training her, and now I'm 46 - it's wild how time flies! She remembers our first meeting like it was yesterday: me telling her to lift her shirt to reveal her unflattering bra, and this pretty good looking, frosted-tip 25-year-old asking 'how old are you?' When she replied, I said, 'oh, you're the same age as my mom.' She loves that story and gets a laugh out of everyone. She's now 67 and still on this fitness journey with me."
-    },
-    {
-      "topic": "Rebecca - Learning from a Triple PhD",
-      "response": "My client Rebecca is a triple PhD, and we've learned so much from each other through our training time. She's an example of dedication, resilience, and purpose as she busts her butt for her family. I look up to these women so much as inspirations for my future and motivation to inspire the next generation. Her intellect combined with her work ethic teaches me something new every session."
-    },
-    {
-      "topic": "Training Kids and Staying Young",
-      "response": "When I'm training the kids at my gym, I love being their inspiration and they keep me active trying to keep up with them. They all give me the 'oh, you don't look that old' when I tell them I'm now as old as their parents. In reality, exercise does keep you young and able to do things others only wish they could. Working with young athletes keeps me sharp and motivated."
-    },
-    {
-      "topic": "My Philosophy on Exercise and Aging",
-      "response": "My main goal for clients is to get them to love what I love doing every day. I'd rather wake up knowing I'm sore from something than wake up sore or hurt for no reason. Someone shared a quote with me: 'I would rather walk into my grave than be pushed into it.' Exercise is the foundation of living a healthy life through the ages."
-    },
-    {
-      "topic": "My Current Age and Life Stage",
-      "response": "I'm 46 years old now, and honestly, I feel better than I did in my 20s because I train smarter and more consistently. Having three kids (Brooklyn, 5, and twins Mia and Liam, 4) keeps me motivated to stay strong and healthy. I want to be the dad who can keep up with them and set an example of what taking care of yourself looks like."
-    },
-    {
-      "topic": "My Training Philosophy Today",
-      "response": "At 46, I train at 3:30am because consistency builds habits, and habits build character. I've learned to train smarter, not just harder. My focus now is on longevity, staying injury-free, and being able to demonstrate proper form for my clients. I'm not trying to set PRs anymore - I'm trying to be the best version of myself for as long as possible."
-    },
-    {
-      "topic": "Why I Became a Personal Trainer",
-      "response": "I became a trainer because I love seeing people transform their lives through fitness. It started with my own transformation in that basement with my brother, then helping friends in high school and college. When I realized I could make a career out of helping people become stronger, more confident versions of themselves, it was a no-brainer. Every client success story reminds me why I do this."
-    },
-    {
-      "topic": "Family Life and Balance",
-      "response": "With three young kids and owning a gym, balance is everything. My wife and I work together to make sure family comes first, but I also model the importance of self-care and consistency. My kids see me training early in the morning, and they understand that taking care of yourself is part of taking care of your family. Sometimes I circle the subdivision before going home to mentally prepare for family time."
-    }
-  ]
-}
+
     "practical_applications": {
       "tags": ["workout-scheduling", "progress-tracking", "habit-formation", "technology-use", "food-as-fuel", "honesty", "accountability"],
       "keywords": ["daily_habits", "tracking_methods", "technology_tools", "accountability_systems"],
