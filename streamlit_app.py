@@ -636,16 +636,19 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
     return None  # No quick answer found
 
 def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[str, str]]:
-    """Search through ALL knowledge bases for relevant content with mentor story rotation"""
+    """Search through ALL knowledge bases for relevant content with smart response tracking"""
     if not data:
         return []
     
     query_lower = query.lower()
-    results = []
+    all_results = []
     
     # Check if this is a motivation/mentor related query
     motivation_keywords = ['motivation', 'motivate', 'inspire', 'mentor', 'story', 'background', 'journey', 'experience']
     is_motivation_query = any(keyword in query_lower for keyword in motivation_keywords)
+    
+    # Create a unique topic key for tracking
+    topic_key = query_lower.strip()
     
     # Search through all book categories
     for book_category, book_data in data.items():
@@ -679,31 +682,53 @@ def search_all_knowledge_bases(query: str, data: Dict[str, Any]) -> List[Dict[st
                 response_match = query_lower in response.lower() or any(word in response.lower() for word in query_lower.split())
                 
                 if tag_match or keyword_match or topic_match or response_match:
-                    results.append({
+                    # Create unique identifier for this response
+                    response_id = f"{section_name}_{topic}_{response[:50]}"
+                    
+                    all_results.append({
                         'book_category': book_category.replace('_book_data', '').replace('_', ' ').title(),
                         'section': section_name.replace('_', ' ').title(),
                         'topic': topic,
                         'response': response,
                         'relevance_score': calculate_relevance(query_lower, topic, response, tags, keywords),
-                        'is_personal_story': section_name == 'personal_journey_lessons'
+                        'is_personal_story': section_name == 'personal_journey_lessons',
+                        'response_id': response_id,
+                        'topic_key': topic_key
                     })
     
     # Sort by relevance
-    results.sort(key=lambda x: x['relevance_score'], reverse=True)
+    all_results.sort(key=lambda x: x['relevance_score'], reverse=True)
     
-    # If this is a motivation query, randomize the personal stories
+    # Filter out already used responses for this topic
+    if topic_key not in st.session_state.exhausted_topics:
+        unused_results = [r for r in all_results if r['response_id'] not in st.session_state.used_responses]
+        
+        if unused_results:
+            # Use unused results
+            results = unused_results
+        else:
+            # All responses used for this topic - mark as exhausted
+            st.session_state.exhausted_topics.add(topic_key)
+            results = []
+    else:
+        # Topic exhausted - return empty to trigger special message
+        results = []
+    
+    # If this is a motivation query and we have results, randomize personal stories
     if is_motivation_query and results:
         personal_stories = [r for r in results if r.get('is_personal_story', False)]
         other_results = [r for r in results if not r.get('is_personal_story', False)]
         
         if personal_stories:
-            # Randomly shuffle personal stories to get variety
             import random
             random.shuffle(personal_stories)
-            # Combine shuffled personal stories with other results
             results = personal_stories + other_results
     
-    return results[:5]  # Return top 5 results from across all books
+    # Track used responses
+    for result in results[:5]:
+        st.session_state.used_responses.add(result['response_id'])
+    
+    return results[:5]
 
 def calculate_relevance(query: str, topic: str, response: str, tags: List[str], keywords: List[str]) -> float:
     """Enhanced relevance calculation"""
@@ -841,7 +866,22 @@ def format_glen_response(results: List[Dict[str, str]], query: str = "") -> str:
     
     # If no quick answer, proceed with knowledge base search results
     if not results:
-        # Instead of "I don't know" - be solution-focused and encouraging
+        # Check if this topic has been exhausted
+        topic_key = query.lower().strip()
+        if topic_key in st.session_state.exhausted_topics:
+            # Topic exhausted - give Glen's "enough already" message
+            exhausted_responses = [
+                "Alright, alright! I think you've gotten all my wisdom on this topic. Time to shit or get off the pot - pick a different question or actually DO something with what I've told you!",
+                "Hey, we've covered this ground pretty thoroughly! How about we talk about something else, or better yet, go apply what you've learned? Action beats analysis paralysis every time!",
+                "I've given you everything I've got on this one! Time to stop clicking buttons and start lifting weights. What else can I help you with?",
+                "You've officially exhausted my knowledge bank on this topic! That means it's time to stop researching and start doing. What's your next move going to be?",
+                "Okay, you've definitely gotten your money's worth on this subject! Time to take action instead of asking the same question fifty different ways. What else is on your mind?"
+            ]
+            
+            import random
+            return f"{random.choice(exhausted_responses)}\n\n**Let me ask you this:** What's holding you back from actually implementing what you've learned? I've got strategies to get you moving!"
+        
+        # Standard "let's tackle this" response for new topics
         encouraging_responses = [
             "Let's tackle this together! Even if that specific topic isn't in my current materials, I've helped thousands of people with similar challenges.",
             "Great question! While I might not have that exact info loaded right now, my 25+ years of experience tells me we can definitely figure this out.",
@@ -950,6 +990,10 @@ def main():
         st.session_state.show_calculator = False
     if "calculated_results" not in st.session_state:
         st.session_state.calculated_results = None
+    if "used_responses" not in st.session_state:
+        st.session_state.used_responses = set()
+    if "exhausted_topics" not in st.session_state:
+        st.session_state.exhausted_topics = set()
     
     # Sidebar with enhanced program info
     with st.sidebar:
@@ -1052,7 +1096,7 @@ def main():
             ("💪 Master Plan", "Tell me about the 12-week master plan"),
             ("🧠 Motivation", "How can you help me stay motivated?"),
             ("🥗 Nutrition", "What should I know about protein and nutrition?"),
-            ("😤 Motivation", "I'm struggling with motivation - help!")
+            ("🔥 Get Moving", "I need to stop analyzing and start doing!")
         ]
         
         for label, query in quick_buttons:
