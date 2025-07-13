@@ -216,7 +216,7 @@ def display_program_stats():
         <div class="stat-item">🏆 17+ Years Training Experience</div>
         <div class="stat-item">📚 Multiple Expert Certifications</div>
         <div class="stat-item">💪 Thousands Transformed</div>
-        <div class="stat-item">🧠 Psychology + Fitness Integration</div>
+        <div class="stat-item">🧠 25+ Years Client Experience</div>
         <div class="stat-item">🥇 Former Powerlifter/Strongman</div>
         <div class="stat-item">🏢 Wisconsin Barbell Gym Owner</div>
     </div>
@@ -231,7 +231,7 @@ def display_glen_quote():
         "Small goals prevent burnout and build momentum. I learned this from my powerlifting days.",
         "Food is fuel, not comfort. This mindset shift changed everything for my clients.",
         "I train at 3:30am because consistency builds habits, and habits build character.",
-        "Your mind is your most powerful muscle. That's why I study behavioral psychology."
+        "Your mind is your most powerful muscle. That's what 25 years of client work has taught me."
     ]
     quote = random.choice(quotes)
     
@@ -362,8 +362,8 @@ def add_glen_personality(response_text: str) -> str:
         "From my experience coaching thousands of clients, ",
         "As a former powerlifter and strongman competitor, ",
         "At Wisconsin Barbell Gym, I've learned that ",
-        "After studying behavioral psychology and fitness, ",
-        "In my journey from competitive lifting to coaching, "
+        "After 25 years of working with clients, I've learned that ",
+        "From my experience understanding what motivates people, "
     ]
     
     personal_connectors = [
@@ -379,7 +379,7 @@ def add_glen_personality(response_text: str) -> str:
         response_text += "\n\n*I've personally tested this approach and even had blood work done to verify it's safe and effective.*"
     
     if any(word in response_text.lower() for word in ["stress", "motivation", "mindset"]):
-        response_text += "\n\n*This is where my background in behavioral psychology really helps my clients break through mental barriers.*"
+        response_text += "\n\n*This is where my 25+ years of client experience really helps people break through mental barriers.*"
     
     if "training" in response_text.lower() or "exercise" in response_text.lower():
         response_text += "\n\n*Remember, I train at 3:30am because consistency builds habits, and habits build character. Find what works for YOUR schedule.*"
@@ -427,7 +427,7 @@ def format_glen_response(results: List[Dict[str, str]]) -> str:
     signatures = [
         "---\n*This comes from my 17+ years as a gym owner, personal trainer, and former competitive lifter. Every piece of advice is battle-tested with real clients.*",
         "---\n*Hope this helps! This approach has worked for thousands of my clients at Wisconsin Barbell Gym.*",
-        "---\n*These insights combine my competition experience, training expertise, and studies in behavioral psychology.*"
+        "---\n*These insights combine my competition experience, training expertise, and 25+ years of understanding what motivates people.*"
     ]
     
     response += random.choice(signatures)
@@ -465,7 +465,7 @@ def main():
             "🍖 Protein and nutrition science",
             "🏋️ Training methodology", 
             "📋 Meal planning strategies",
-            "🧠 Psychology & motivation",
+            "🧠 Understanding client motivation",
             "⏰ Time management for busy people",
             "🎯 SMART goal setting",
             "💧 Hydration protocols",
@@ -485,7 +485,7 @@ def main():
         st.markdown("### 📞 Connect with Glen")
         st.markdown("🏢 **Wisconsin Barbell Gym**")
         st.markdown("📧 Personal training & coaching")
-        st.markdown("🎓 Certified in fitness & psychology")
+        st.markdown("🎓 **25+ years client experience**")
     
     # Main chat interface
     col1, col2 = st.columns([3, 1])
