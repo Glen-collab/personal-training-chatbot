@@ -648,7 +648,6 @@ Here’s the deal:
 
     if strike >= len(responses):
         strike = len(responses) - 1  # cap at final snarky response
-
     return responses[strike]
 
 # Water/hydration questions - simplified
