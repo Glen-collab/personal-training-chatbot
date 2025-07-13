@@ -1,0 +1,5 @@
+openai
+langchain
+langchain-community
+chromadb
+tiktoken
