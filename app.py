@@ -577,30 +577,87 @@ Use the calculator below, then visit **[bestrongagain.com/plan-my-week/](https:/
 
 **One more thing:** Are you dealing with any specific challenges like busy work schedules, family stress, or past diet failures? I've got targeted solutions for real-life obstacles!"""
 
-    # Protein questions
-    if any(word in query_lower for word in ["protein", "how much protein"]):
-        return """**My protein rule is simple: 1 gram per pound of body weight.**
+# Protein questions
+if any(word in query_lower for word in ["protein", "how much protein", "best protein", "high protein", "what protein", "good protein"]):
+    if not st.session_state.get("protein_strikes"):
+        st.session_state["protein_strikes"] = 0
 
-**So if you weigh 180 pounds = 180g protein daily**
+    responses = [
+        # First response – helpful and loaded with options
+        """**My protein rule is simple: 1g per pound of body weight.**  
+That means if you weigh 180 lbs → you need about **180g protein/day**.
 
-**Why protein is king:**
-• Builds and maintains muscle
-• Boosts metabolism (burns calories to digest)
-• Keeps you full longer
-• Prevents blood sugar crashes
+**Top protein sources I recommend:**  
+• Chicken breast (25g per 4oz)  
+• Greek yogurt (15–20g per cup)  
+• Protein powder (20–30g per scoop)  
+• Eggs (6g each)  
+• Ground turkey (22g per 4oz)  
+• Cottage cheese, tuna, lean beef, shrimp — take your pick.
 
-**Easy protein sources:**
-• **Chicken breast:** 25g per 4oz
-• **Eggs:** 6g per egg
-• **Greek yogurt:** 15-20g per cup
-• **Protein powder:** 20-30g per scoop
-• **Ground turkey:** 22g per 4oz
+**Why it matters:**  
+• Builds and maintains lean muscle  
+• Keeps you full  
+• Boosts your metabolism  
+• Supports recovery
 
-**My personal take:** I've had blood work done multiple times - high protein is safe and effective. Don't let anyone scare you away from adequate protein!
+**Glen’s personal take:** I rotate between grilled chicken, 93% lean ground turkey, protein shakes, and eggs. Simple, clean, and works like a charm.
 
-*This approach has worked for thousands of my clients over 25+ years.*
+Let me ask — do you already eat any of those, or do we need to customize based on your preferences?""",
 
-**Quick question for you:** What's your biggest challenge with getting enough protein - is it meal prep time, cost, or just not knowing what to eat? I've got specific solutions for each!"""
+        # Second time – user says they don’t like some foods
+        """Got it — not a fan of chicken or turkey? Totally fine.  
+Let’s try some alternatives:
+
+• Greek yogurt (plain or flavored)  
+• Whey or plant-based protein shakes  
+• Lean beef (90%+ lean)  
+• Eggs and egg whites  
+• Seafood — salmon, tuna, shrimp  
+• Tempeh or tofu if you’re plant-based
+
+Protein isn’t one-size-fits-all. We’ve got options.  
+What *do* you like? Or are we playing the "No, not that either" game? 😉""",
+
+        # Third time – still rejecting food
+        """Okay, let’s be honest — you don’t like chicken, turkey, eggs, yogurt, fish, beef, or tofu?  
+At this point, I have to ask... do you like *any* food that isn’t bread or cereal?
+
+Let’s try this:  
+**Make a list of 3 foods you DO like**, and I’ll tell you how to make them higher in protein.
+
+And remember — **variety is the spice of life**, but **discipline is what gets you results**. When I’m focused on a goal, I rotate between:
+
+• Grilled chicken  
+• Ground turkey  
+• Egg whites  
+• Lean steak  
+• Vanilla whey isolate shakes (easy, zero prep)
+
+It’s not about loving every meal. It’s about getting results. 💪""",
+
+        # Fourth+ time – full snark
+        """Alright, we’ve played the protein elimination game long enough 😂  
+You don’t like anything I’ve listed — so let me flip it:
+
+**What *do* you like that has more than 10g of protein per serving?**  
+No, cereal and peanut butter don’t count.
+
+Here’s the deal:  
+• If you're serious about your goals, you'll find 2–3 protein sources and lock in.  
+• If you're just window shopping fitness, keep playing the "not that one" game. 😏
+
+**Choose results, not excuses.** I'm here to help when you're ready to commit.""",
+    ]
+
+    # Pick the appropriate response level based on how many "protein rejections" have happened
+    strike = st.session_state["protein_strikes"]
+    st.session_state["protein_strikes"] += 1
+
+    if strike >= len(responses):
+        strike = len(responses) - 1  # cap at final snarky response
+
+    return responses[strike]
 
     # Water/hydration questions - simplified
     if any(word in query_lower for word in ["water", "hydration", "drink", "fluid", "how much water"]):
