@@ -1420,6 +1420,7 @@ def main():
         st.markdown("**New here? Try these:**")
         
         quick_buttons = [
+            ("💪 Master Plan", "Tell me about the 12-week master plan"),
             ("🧠 Motivation", "How can you help me stay motivated?"),
             ("🥗 Nutrition", "What should I know about protein and nutrition?"),
             ("🔥 Get Moving", "I need to stop analyzing and start doing!")
