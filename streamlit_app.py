@@ -792,9 +792,9 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 - **Vegetables**: 5-10 g per cup (micronutrients, low calorie)
 - **Fruit**: 15-20 g per piece (natural sugars, vitamins)
 
-**My experience:** After 25+ years, I have seen clients thrive on this carb range. It is enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy - do not fall for it!
+**My experience:** After 25+ years, I've seen clients thrive on this carb range. It's enough to crush workouts without feeling sluggish or bloated. Low-carb fads can tank your energy—don't fall for it!
 
-**Pro tip:** Time carbs around workouts - 50% of daily carbs pre/post-workout for max performance.
+**Pro tip:** Time carbs around workouts—50% of daily carbs pre/post-workout for max performance.
 
 **Let me ask you:** Are you struggling with energy crashes, or is carb confusion (what to eat, when) your biggest issue? I've got strategies for both!
 
@@ -820,7 +820,7 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 - Vegetables like broccoli, spinach (low-calorie, nutrient-dense).
 - Fruits like bananas, apples (natural sugars).
 
-**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters-eat most carbs around workouts.
+**Glen's take:** I've coached thousands to balance carbs for energy without fat gain. Low-carb diets can work short-term but often leave you drained. Timing matters—eat most carbs around workouts.
 
 **Next step:** Use my **Calorie Calculator** below to get your exact carb target based on your weight and activity level. It'll give you a precise number!
 
@@ -1040,6 +1040,10 @@ I eat 3 main meals + 1-2 protein snacks. This keeps my energy steady and prevent
 **Let me ask you this:** Do you struggle more with planning your meals for the week, or actually sticking to the plan once you make it? I've got specific solutions for both challenges!"""
 
     # Check if we have any answers to return
+    if 'carb_answer' in locals():
+        return carb_answer
+    if 'calorie_answer' in locals():
+        return calorie_answer
     if 'protein_answer' in locals():
         return protein_answer
     if 'water_answer' in locals():
